@@ -1,0 +1,257 @@
+@font-face {
+  font-family: "Circular Bold";
+  src: image-url('CircularStd-Bold.otf');
+}
+
+@font-face {
+  font-family: "Circular";
+  src: image-url('CircularStd-Book.otf');
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.splash-main {
+  height: 100vh;
+  background: image-url('splash-bg.jpg') center center no-repeat;
+  background-size: cover;
+}
+
+.splash-nav {
+  height: 70px;
+  background-color: rgba(1, 1, 1, 0.7);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 50px;
+  padding-left: 35px;
+  min-width: 600px;
+}
+
+/* .splash-nav {
+  height: 70px;
+  background-color: rgba(1, 1, 1, 0.7);
+  display: grid;
+  grid-template-columns: 20% 30% 50%;
+} */
+
+.white-logo {
+  color: white;
+  font-size: 2.5em;
+  display: flex;
+  align-items: center;
+}
+
+.white-logo-name {
+  color: white;
+  font-family: Circular Bold;
+  font-size: 20px;
+  padding-left: 15px;
+}
+
+/* .logo {
+  color: white;
+  font-size: 2.5em;
+  display: flex;
+  align-items: center
+} */
+
+
+.splash-nav-links-container {
+  min-width: 400px;
+  display: flex;
+  align-items: center;
+}
+
+.splash-nav-links {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  float: right;
+}
+
+/* .splash-nav-links {
+  display: grid;
+  grid-template-columns: 20% 20% 60%;
+  min-width: 375px;
+} */
+
+/* .splash-nav-links div {
+  width: 100%;
+} */
+
+.linkedin-logo {
+  color: white;
+  font-size: 2.5em;
+}
+
+.linkedin-logo:hover {
+  cursor: pointer;
+  color: #1ed760;
+}
+
+/* .linkedin-logo {
+  color: white;
+  font-size: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.github-logo {
+  color: white;
+  font-size: 2.5em;
+}
+
+.github-logo:hover {
+  cursor: pointer;
+  color: #1ed760;
+}
+
+/* .github-logo {
+  color: white;
+  font-size: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+
+.session-links {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+}
+
+/* .session-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+
+.session-links a {
+  text-decoration: none;
+  font-family: Circular Bold;
+  color: white;
+}
+
+.session-links a:hover {
+  color: #1ed760;
+}
+
+
+@media (max-width: 700px) {
+  .splash-nav-links {
+    width: 90%
+  }
+}
+
+@media (max-width: 695px) {
+  .splash-nav-links {
+    width: 88%
+  }
+}
+
+@media (max-width: 690px) {
+  .splash-na-links {
+    width: 86%
+  }
+}
+
+@media (max-width: 675px) {
+  .splash-nav-links {
+    width: 84%
+  }
+}
+
+@media (max-width: 660px) {
+  .splash-nav-links {
+    width: 82%
+  }
+}
+
+@media (max-width: 645px) {
+  .splash-nav-links {
+    width: 80%
+  }
+}
+
+@media (max-width: 630px) {
+  .splash-nav-links {
+    width: 78%
+  }
+}
+
+.splash-banner-container {
+  display: flex;
+  height: calc(100vh - 130px);
+  justify-content: center;
+}
+
+.splash-banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.splash-banner-header {
+  font-family: "Circular Bold";
+  font-size: 80px;
+  color: white;
+  letter-spacing: -0.04em;
+  font-weight: 900;
+  text-align: center;
+}
+
+.splash-banner-subheader {
+  font-family: "Circular";
+  color: white;
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 9px;
+  margin-bottom: 18px;
+}
+
+.splash-banner-button {
+  font-family: "Circular Bold";
+  font-size: 15px;
+  text-align: center;
+  letter-spacing: 2px;
+  color: white;
+  background-color: #1DB954;
+  border: #1DB954;
+  padding: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 25px;
+  transition: .5s;
+  outline: none;
+  margin-top: 20px;
+}
+
+.splash-banner-button:hover {
+  background-color: #1ed760;
+}
+
+@media (max-width: 980px) {
+  .splash-banner-header {
+    font-size: 64px;
+  }
+}
+
+@media (max-width: 736px) {
+  .splash-banner-header {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .splash-banner-header {
+    font-size: 32px;
+  }
+}

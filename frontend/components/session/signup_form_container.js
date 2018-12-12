@@ -4,13 +4,14 @@ import {
 } from 'react-redux';
 import {
   signup,
-  receiveErrors
+  receiveErrors,
+  clearErrors
 } from '../../actions/session_actions';
 
 const mapStateToProps = (state) => {
   return {
     fields: ["username", "email", "password"],
-    formType: "Sign Up",
+    formType: "SIGN UP",
     currentUserId: state.session.id,
     errors: state.errors.session
   };
@@ -19,7 +20,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     processForm: (user) => dispatch(signup(user)),
-    receiveErrors: errors => dispatch(receiveErrors(errors))
+    receiveErrors: errors => dispatch(receiveErrors(errors)),
+    clearErrors: () => dispatch(clearErrors())
   };
 };
 

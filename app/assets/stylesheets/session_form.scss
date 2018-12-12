@@ -1,0 +1,200 @@
+.session-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.session-nav {
+  padding: 30px 0px 30px 0px;
+  border-bottom: 1px solid lightgrey;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.black-logo {
+  color: black;
+  font-size: 3.5em;
+  display: flex;
+  align-items: center;
+}
+
+.black-logo:hover {
+  color: darkgray;
+}
+
+.black-logo-name {
+  color: black;
+  font-family: Circular Bold;
+  font-size: 40px;
+  padding-left: 15px;
+  letter-spacing: -1px;
+}
+
+.black-logo-name:hover {
+  color: darkgray;
+}
+
+.session-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // width: 33%;
+  min-width: 450px;
+  padding-bottom: 60px;
+}
+
+.session-tagline {
+  color: black;
+  font-family: Circular Bold;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  padding-top: 40px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.session-input input {
+  font-family: "Circular";
+  border: 1px solid lightgray;
+  border-radius: 2px;
+  width: 425px;
+  height: 50px;
+  margin: 10px;
+  font-size: 17px;
+  padding-left: 10px;
+}
+
+.session-button {
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: #1DB954;
+  border: #1DB954;
+  font-family: "Circular Bold";
+  font-size: 16px;
+  text-decoration: none;
+  text-align: center;
+  letter-spacing: 2px;
+  background-color: #1DB954;
+  border: #1DB954;
+  padding: 12px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 70px;
+  padding-right: 70px;
+  border-radius: 25px;
+  color: white;
+  transition: .5s;
+  outline: none;
+}
+
+.session-button:hover {
+  background-color: #1ed760;
+}
+
+.signup-section {
+  font-family: Circular Bold;
+  text-align: center;
+  padding-top: 50px;
+  border-top: 1px solid lightgrey;
+}
+
+.signup-section-header {
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  font-weight: bolder;
+}
+
+.signup-section Link {
+  border: rgb(112, 114, 113);
+}
+
+.signup-section-button {
+  margin-top: 20px;
+  font-family: "Circular Bold";
+  font-size: 15px;
+  text-decoration: none;
+  text-align: center;
+  letter-spacing: 2px;
+  background-color: white;
+  border: 2px solid rgb(112, 114, 113);
+  padding: 12px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 100px;
+  padding-right: 100px;
+  border-radius: 25px;
+  color: rgb(112, 114, 113);
+  transition: .5s;
+}
+
+.signup-section-button:hover {
+  background-color: rgb(112, 114, 113);
+  color: white;
+}
+
+.login-section {
+  font-family: Circular;
+  font-size: 15px;
+  display: flex;
+  margin: -40px;
+}
+
+.login-section-header {
+  padding-right: 5px;
+  color: black;
+}
+
+.login-section-link {
+  color: #1DB954;
+}
+
+.login-section-link:hover {
+  color: #1ed760;
+}
+
+.session-form-errors {
+  font-family: Circular;
+  padding: 10px 50px 10px 50px;
+  background-color: rgb(255, 196, 0);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.session-demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.session-demo-button {
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: #3b5998;
+  border: #3b5998;
+  font-family: "Circular Bold";
+  font-size: 16px;
+  text-decoration: none;
+  text-align: center;
+  letter-spacing: 2px;
+  padding: 12px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 70px;
+  padding-right: 70px;
+  border-radius: 25px;
+  color: white;
+  transition: .5s;
+  outline: none;
+  margin-top: 0;
+}
+
+.or-divider {
+  font-family: Circular Bold;
+  font-size: 15px;
+  color: rgb(112, 114, 113);
+  padding: 30px 0px 30px 0px;
+  font-weight: 900;
+}
