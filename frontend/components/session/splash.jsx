@@ -20,10 +20,12 @@ class Splash extends React.Component {
 		return (
 			<div className="splash-main">
 				<div className="splash-nav">
-					<div className="white-logo">
-						<i className="fab fa-spotify" />
-						<div className="white-logo-name">Ghiblify</div>
-					</div>
+					<Link to="/" style={{ textDecoration: "none" }}>
+						<div className="white-logo">
+							<i className="fab fa-spotify" />
+							<div className="white-logo-name">Ghiblify</div>
+						</div>
+					</Link>
 
 					<div className="splash-nav-links-container">
 						<div className="splash-nav-links">

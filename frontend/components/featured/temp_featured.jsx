@@ -14,14 +14,9 @@ class TempFeatured extends React.Component {
 			<div className="temp-browse-page">
 				<div className="temp-browse-main">
 					<div className="temp-browse-header">Welcome to Ghiblify!!</div>
-					<div className="temp-browse-logout">
+					<div className="temp-browse-logout" onClick={this.handleClick()}>
 						<Link to="/signup" style={{ textDecoration: "none" }}>
-							<div
-								className="temp-browse-logout-text"
-								onClick={this.handleClick()}
-							>
-								Logout
-							</div>
+							<div className="temp-browse-logout-text">Logout</div>
 						</Link>
 					</div>
 				</div>

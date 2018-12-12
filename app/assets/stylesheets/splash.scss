@@ -45,12 +45,18 @@ body {
   align-items: center;
 }
 
+.white-logo:hover {
+  cursor: pointer;
+  color: #1ed760;
+}
+
 .white-logo-name {
-  color: white;
+  // color: white;
   font-family: Circular Bold;
   font-size: 20px;
   padding-left: 15px;
 }
+
 
 /* .logo {
   color: white;

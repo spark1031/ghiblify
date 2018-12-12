@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
+#  id              :bigint(8)        not null, primary key
 #  username        :string           not null
 #  email           :string           not null
 #  password_digest :string           not null
@@ -17,6 +17,8 @@ class User < ApplicationRecord
   validates :password, length: {minimum: 6, allow_nil: true}
 
   attr_reader :password
+
+  before_validation :normalize_email
 
   after_initialize :ensure_session_token
 
@@ -43,6 +45,11 @@ class User < ApplicationRecord
     user = User.find_by(username: username)
     return nil unless user
     user.is_password?(password) ? user : nil
+  end
+
+  private 
+  def normalize_email
+    self.email = self.email.downcase.strip
   end
   
 end
