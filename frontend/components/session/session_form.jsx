@@ -110,7 +110,9 @@ class SessionForm extends React.Component {
 						<div className="session-demo-button" onClick={this.handleClick()}>
 							DEMO USER
 						</div>
-						<div className="or-divider">OR</div>
+						<fieldset className="hr-line">
+							<legend className="or-divider">OR</legend>
+						</fieldset>
 					</div>
 			  ))
 			: (demoUserButton = null);

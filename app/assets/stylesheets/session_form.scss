@@ -202,4 +202,14 @@
   color: rgb(112, 114, 113);
   padding: 20px 0px 15px 0px;
   font-weight: 900;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.hr-line {
+  border: none;
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid transparent;
+  text-align: center;
+  width: 100%;
 }
