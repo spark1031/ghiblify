@@ -14,6 +14,8 @@
 class Song < ApplicationRecord
   validates :title, :duration, presence: true
 
+  has_one_attached :song_url
+
   belongs_to :artist,
     foreign_key: :artist_id,
     class_name: 'Artist'

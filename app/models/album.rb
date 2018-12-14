@@ -14,6 +14,8 @@
 class Album < ApplicationRecord
   validates :title, :year, :genre, presence: true
 
+  has_one_attached :cover_url
+
   belongs_to :artist,
     foreign_key: :artist_id,
     class_name: 'Artist'
