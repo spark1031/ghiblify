@@ -1,0 +1,30 @@
+.temp-browse-logout {
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: #1DB954;
+  border: #1DB954;
+  font-family: "Circular Bold";
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+  letter-spacing: 2px;
+  background-color: #1DB954;
+  border: #1DB954;
+  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+  border-radius: 25px;
+  color: white;
+  transition: .5s;
+  outline: none;
+}
+
+.temp-browse-logout:hover {
+  background-color: #1ed760;
+}
+
+.temp-browse-logout-text {
+  color: white;
+}

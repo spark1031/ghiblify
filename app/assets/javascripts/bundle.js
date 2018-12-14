@@ -761,7 +761,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _player_player__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./player/player */ "./frontend/components/player/player.jsx");
 /* harmony import */ var _browse_browse__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./browse/browse */ "./frontend/components/browse/browse.jsx");
 /* harmony import */ var _library_library__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./library/library */ "./frontend/components/library/library.jsx");
-/* harmony import */ var _search_search__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./search/search */ "./frontend/components/search/search.jsx");
+/* harmony import */ var _search_search__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./search/search */ "./frontend/components/search/search.jsx");
 
 
 
@@ -778,15 +778,15 @@ var MainPage = function MainPage() {
   var sidebarItemInfos = [{
     to: "/search",
     iconClassName: "fas fa-search",
-    displayText: "search"
+    displayText: "Search"
   }, {
     to: "/browse",
     iconClassName: "fas fa-home",
-    displayText: "home"
+    displayText: "Home"
   }, {
     to: "/library",
     iconClassName: "fas fa-headphones",
-    displayText: "library"
+    displayText: "Your Library"
   }];
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "main-nav-content"
@@ -800,7 +800,7 @@ var MainPage = function MainPage() {
     component: _library_library__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/search",
-    component: _search_search__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _search_search__WEBPACK_IMPORTED_MODULE_7__["default"]
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_player_player__WEBPACK_IMPORTED_MODULE_4__["default"], null));
 };
 
@@ -811,6 +811,36 @@ var MainPage = function MainPage() {
   		<Route path="/library" component={Library} />
   	</Switch> */
 }
+
+/***/ }),
+
+/***/ "./frontend/components/navigation/search_icon.jsx":
+/*!********************************************************!*\
+  !*** ./frontend/components/navigation/search_icon.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var SearchIcon = function SearchIcon() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    viewBox: "0 0 512 512",
+    width: "24",
+    height: "24",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M349.714 347.937l93.714 109.969-16.254 13.969-93.969-109.969q-48.508 36.825-109.207 36.825-36.826 0-70.476-14.349t-57.905-38.603-38.603-57.905-14.349-70.476 14.349-70.476 38.603-57.905 57.905-38.603 70.476-14.349 70.476 14.349 57.905 38.603 38.603 57.905 14.349 70.476q0 37.841-14.73 71.619t-40.889 58.921zM224 377.397q43.428 0 80.254-21.461t58.286-58.286 21.461-80.254-21.461-80.254-58.286-58.285-80.254-21.46-80.254 21.46-58.285 58.285-21.46 80.254 21.46 80.254 58.285 58.286 80.254 21.461z",
+    fill: "currentColor",
+    "fill-rule": "evenodd"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (SearchIcon);
 
 /***/ }),
 
@@ -827,6 +857,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _logout_logout_button_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../logout/logout_button_container */ "./frontend/components/logout/logout_button_container.js");
+/* harmony import */ var _search_icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./search_icon */ "./frontend/components/navigation/search_icon.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -844,6 +875,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -889,7 +921,20 @@ function (_React$Component) {
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidebar-main"
-      }, links, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_logout_logout_button_container__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-main-links"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/",
+        style: {
+          textDecoration: "none"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-main-logo"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-spotify"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-main-logo-name"
+      }, "Ghiblify"))), links, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_logout_logout_button_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
     }
   }]);
 
@@ -908,9 +953,9 @@ var SidebarItem = function SidebarItem(props) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "sidebar-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: iconClassName
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, displayText)));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_search_icon__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "sidebar-item-text"
+  }, displayText)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Sidebar);

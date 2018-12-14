@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LogoutButtonContainer from "../logout/logout_button_container";
+import SearchIcon from "./search_icon";
 
 // sampleProps: {
 //   sidebarItemInfos: [
@@ -30,8 +31,16 @@ class Sidebar extends React.Component {
 
 		return (
 			<div className="sidebar-main">
-				{links}
-				<LogoutButtonContainer />
+				<div className="sidebar-main-links">
+					<Link to="/" style={{ textDecoration: "none" }}>
+						<div className="sidebar-main-logo">
+							<i className="fab fa-spotify" />
+							<div className="sidebar-main-logo-name">Ghiblify</div>
+						</div>
+					</Link>
+					{links}
+					<LogoutButtonContainer />
+				</div>
 			</div>
 		);
 	}
@@ -43,8 +52,9 @@ const SidebarItem = props => {
 	return (
 		<Link to={to} style={{ textDecoration: "none" }}>
 			<div className="sidebar-item">
-				<i className={iconClassName} />
-				<div>{displayText}</div>
+				{/* <i className={iconClassName} /> */}
+				<SearchIcon />
+				<div className="sidebar-item-text">{displayText}</div>
 			</div>
 		</Link>
 	);

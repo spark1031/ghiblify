@@ -1,13 +1,37 @@
 .sidebar-main {
-  max-width: 230px;
+  min-width: 230px;
   height: 100vh;
   background-color: black;
   display: flex;
   flex-direction: column;
-  color: white;
-  font-family: Circular Bold;
+  color: #b3b3b3;
+  font-family: Circular;
+  align-items: center;
+  letter-spacing: 0.5px;
+  font-size: 15px;
+}
+
+.sidebar-main-links {
+  width: 70%;
+  height: 100%;
 }
 
 .sidebar-item {
-  color: white;
+  display: flex;
+  color: #b3b3b3;
+  padding-bottom: 20px;
 }
+
+.sidebar-item i {
+  font-size: 20px;
+}
+
+.sidebar-item-text {
+  padding-left: 20px;
+}
+
+.sidebar-main-logo {
+  color: white
+}
+
+.sidebar-main-logo-name {}

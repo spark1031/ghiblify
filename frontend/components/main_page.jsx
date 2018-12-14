@@ -17,17 +17,17 @@ const MainPage = () => {
 		{
 			to: "/search",
 			iconClassName: "fas fa-search",
-			displayText: "search"
+			displayText: "Search"
 		},
 		{
 			to: "/browse",
 			iconClassName: "fas fa-home",
-			displayText: "home"
+			displayText: "Home"
 		},
 		{
 			to: "/library",
 			iconClassName: "fas fa-headphones",
-			displayText: "library"
+			displayText: "Your Library"
 		}
 	];
 	return (
