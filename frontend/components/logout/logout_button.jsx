@@ -21,3 +21,7 @@ class LogoutButton extends React.Component {
 }
 
 export default LogoutButton;
+
+// for createPlaylist:
+// playlist MUST be sent in this format:
+// let playlist = { name: "Worst of 2018", creatorId: 1 };

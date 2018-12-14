@@ -1,3 +1,15 @@
+@import './splash.scss';
+@import './session_form.scss';
+@import './main.scss';
+
+@import './main_content/browse.scss';
+@import './main_content/library.scss';
+@import './main_content/search.scss';
+
+@import './navigation/sidebar.scss';
+
+@import './player/player.scss';
+
 @font-face {
   font-family: "Circular Bold";
   src: image-url('CircularStd-Bold.otf');

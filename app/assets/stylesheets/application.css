@@ -14,4 +14,4 @@
  *= require_self
  */
 
-@import "application.scss";
+@import "./application.scss";

@@ -3,7 +3,7 @@ class Api::PlaylistSongsController < ApplicationController
   #adding a song to a playlist
   def create
     @playlist_song = PlaylistSong.new(playlist_songs_params)
-    if @playlist_song && @playlist_song.playlist.include?(@playlist_song.song)
+    if @playlist_song && @playlist_song.playlist.songs.include?(@playlist_song.song)
       render json: ["Song already exists in playlist."]
     elsif current_user.playlists.include?(@playlist_song.playlist) && @playlist_song.save
       render 'api/playlist_songs/show'

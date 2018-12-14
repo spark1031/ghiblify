@@ -9,9 +9,10 @@ const songsReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_ALL_SONGS:
-      //do I need to return an array of song objects? currently returning an object of song objects..
+      if (action.songs === undefined) return null;
       return action.songs;
     case RECEIVE_ONE_SONG:
+      if (action.song === undefined) return state;
       return _.merge({}, state, action.song);
     default:
       return state;
