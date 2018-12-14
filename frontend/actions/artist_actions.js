@@ -1,5 +1,12 @@
 import * as ArtistApiUtil from '../util/artist_api_util';
 
+import {
+  receiveAllAlbums
+} from './album_actions';
+import {
+  receiveAllSongs
+} from './song_actions';
+
 export const RECEIVE_ALL_ARTISTS = 'RECEIVE_ALL_ARTISTS';
 export const RECEIVE_ONE_ARTIST = 'RECEIVE_ONE_ARTIST';
 
@@ -13,7 +20,7 @@ export const receiveOneArtist = (artist) => ({
   artist
 });
 
-export const fetchAllArtists = dispatch => (
+export const fetchAllArtists = () => dispatch => (
   ArtistApiUtil.fetchAllArtists()
   .then(payload => {
     dispatch(receiveAllArtists(payload.artists));
@@ -22,8 +29,8 @@ export const fetchAllArtists = dispatch => (
   })
 );
 
-export const fetchOneArtist = dispatch => (
-  ArtistApiUtil.fetchOneArtist()
+export const fetchOneArtist = (id) => dispatch => (
+  ArtistApiUtil.fetchOneArtist(id)
   .then(payload => {
     dispatch(receiveOneArtist(payload.artists));
     dispatch(receiveAllAlbums(payload.albums));

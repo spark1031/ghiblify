@@ -6,6 +6,7 @@ import {
 } from '../../actions/session_actions';
 import LogoutButton from './logout_button';
 
+
 const mapDispatchToProps = dispatch => {
   return {
     logout: () => dispatch(logout())

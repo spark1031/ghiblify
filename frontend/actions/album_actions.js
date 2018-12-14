@@ -22,7 +22,7 @@ export const receiveOneAlbum = (album) => ({
 
 //necessary for frontend route: "browse/albums"
 //fetchAllAlbums returns all albums AND their respective songs and artists (aka payload)
-export const fetchAllAlbums = dispatch => (
+export const fetchAllAlbums = () => dispatch => (
   AlbumApiUtil.fetchAllAlbums()
   .then(payload => {
     dispatch(receiveAllAlbums(payload.albums));
@@ -31,8 +31,8 @@ export const fetchAllAlbums = dispatch => (
   })
 );
 
-export const fetchOneAlbum = dispatch => (
-  AlbumApiUtil.fetchOneAlbum()
+export const fetchOneAlbum = (id) => dispatch => (
+  AlbumApiUtil.fetchOneAlbum(id)
   .then(payload => {
     dispatch(receiveOneAlbum(payload.albums));
     dispatch(receiveOneArtist(payload.artists));

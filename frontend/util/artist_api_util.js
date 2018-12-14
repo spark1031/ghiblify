@@ -1,9 +1,13 @@
-export const fetchAllArtists = () => ({
-  method: 'GET',
-  url: 'api/artists'
-});
+export const fetchAllArtists = () => (
+  $.ajax({
+    method: 'GET',
+    url: 'api/artists'
+  })
+);
 
-export const fetchOneArtist = (id) => ({
-  method: 'GET',
-  url: `api/artists/${id}`
-});
+export const fetchOneArtist = (id) => (
+  $.ajax({
+    method: 'GET',
+    url: `api/artists/${id}`
+  })
+);

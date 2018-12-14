@@ -39,6 +39,21 @@ export const ProtectedRoute = withRouter(
 	)(Protected)
 );
 
+export const AutoRedirect = ({
+	component: Component,
+	path,
+	loggedIn,
+	exact
+}) => (
+	<Route
+		path={path}
+		exact={exact}
+		render={props =>
+			loggedIn ? <Redirect to="/browse" /> : <Component {...props} />
+		}
+	/>
+);
+
 // export const AuthRoute = connect(
 // 	mapStateToProps,
 // 	null,

@@ -1,4 +1,4 @@
-class Api::AlbumsController < ApplicationController
+class Api::PlaylistsController < ApplicationController
 
   def create
     @playlist = Playlist.new(playlist_params)
@@ -11,7 +11,7 @@ class Api::AlbumsController < ApplicationController
   end
 
   def index
-    @playlists = Playlist.all.includes(:songs, :artist)
+    @playlists = Playlist.all.includes(:songs, :artists)
     render :index
   end
 
@@ -25,7 +25,7 @@ class Api::AlbumsController < ApplicationController
     if @playlist.update_attributes(playlist_params)
       render 'api/playlists/show'
     else
-      render json: @playlist.errors.full_messages, status 422
+      render json: @playlist.errors.full_messages, status: 422
     end
   end
 

@@ -1,12 +1,12 @@
 json.songs do
-  json.partial! 'api/songs/song', song_id: @song.id
+  json.partial! 'api/songs/song', song: @song
 end
 
 json.artists do
-  json.partial! 'api/artists/artist', artist_id: @song.artist.id
+  json.partial! 'api/artists/artist', artist: @song.artist
 end
 
 json.albums do
-  json.partial! 'api/albums/album', album_id: @song.album.id
+  json.partial! 'api/albums/album', album: @song.album
 end
 
