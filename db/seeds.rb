@@ -10,7 +10,6 @@ User.destroy_all
 Artist.destroy_all
 Album.destroy_all
 Song.destroy_all
-
 Playlist.destroy_all
 
 User.create!(username: "sparky", email: "sujinpark1031@gmail.com", password: "password")
