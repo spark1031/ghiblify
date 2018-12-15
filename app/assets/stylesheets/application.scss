@@ -11,13 +11,25 @@
 @import './player/player.scss';
 
 @font-face {
+  font-family: "Circular Bolder";
+  src: image-url('CircularStd-Black.otf');
+}
+
+@font-face {
   font-family: "Circular Bold";
   src: image-url('CircularStd-Bold.otf');
+}
+
+@font-face {
+  font-family: "Circular Medium";
+  src: image-url('CircularStd-Medium.otf');
 }
 
 @font-face {
   font-family: "Circular";
   src: image-url('CircularStd-Book.otf');
 }
+
+
 
 $green: #1DB954;

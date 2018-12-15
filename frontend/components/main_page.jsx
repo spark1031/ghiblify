@@ -6,6 +6,9 @@ import Player from "./player/player";
 import Browse from "./browse/browse";
 import Library from "./library/library";
 import Search from "./search/search";
+import SearchIcon from "./navigation/search_icon";
+import HomeIcon from "./navigation/home_icon";
+import LibraryIcon from "./navigation/library_icon";
 
 // components to import:
 //  Sidebar
@@ -16,17 +19,17 @@ const MainPage = () => {
 	const sidebarItemInfos = [
 		{
 			to: "/search",
-			iconClassName: "fas fa-search",
+			icon: <SearchIcon />,
 			displayText: "Search"
 		},
 		{
 			to: "/browse",
-			iconClassName: "fas fa-home",
+			icon: <HomeIcon />,
 			displayText: "Home"
 		},
 		{
 			to: "/library",
-			iconClassName: "fas fa-headphones",
+			icon: <LibraryIcon />,
 			displayText: "Your Library"
 		}
 	];

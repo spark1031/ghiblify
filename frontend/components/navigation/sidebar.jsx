@@ -1,23 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import LogoutButtonContainer from "../logout/logout_button_container";
+import LogoutButtonContainer from "../_button/logout_button_container";
 import SearchIcon from "./search_icon";
 
 // sampleProps: {
 //   sidebarItemInfos: [
 //     {
 //       to: "/search",
-//       iconClassName: string ("house"),
+//       icon: component (SearchIcon),
 //       displayText: string ("browse")
 //     },
 //     {
 //       to: "/browse",
-//       iconClassName: string ("house"),
+//       icon: component (HomeIcon),
 //       displayText: string ("browse")
 //     },
 //     {
-//       to: "/browse",
-//       iconClassName: string ("house"),
+//       to: "/library",
+//       icon: component (LibraryIcon),
 //       displayText: string ("browse")
 //     }
 //   ]
@@ -48,12 +48,11 @@ class Sidebar extends React.Component {
 
 const SidebarItem = props => {
 	const { itemInfo } = props;
-	const { to, iconClassName, displayText } = itemInfo;
+	const { to, icon, displayText } = itemInfo;
 	return (
 		<Link to={to} style={{ textDecoration: "none" }}>
 			<div className="sidebar-item">
-				{/* <i className={iconClassName} /> */}
-				<SearchIcon />
+				{icon}
 				<div className="sidebar-item-text">{displayText}</div>
 			</div>
 		</Link>

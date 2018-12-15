@@ -1,0 +1,40 @@
+.topbar-main {
+  min-height: 78px;
+  width: 100%;
+  align-items: center;
+  background-color: transparent;
+}
+
+.topbar-inner {
+  margin-top: 30px;
+  background-color: transparent;
+  font-family: Circular Bold;
+  display: flex;
+  color: white;
+}
+
+.category-selector-main {
+  flex: 4;
+  display: inblock;
+  margin-left: 50px;
+  // justify-content: space-evenly;
+}
+
+.category-item {
+  color: #A8A2A3;
+  font-size: 12px;
+  letter-spacing: 2px;
+  // padding: 0px 10px 0px 10px;
+  -webkit-transition: color 0.3s ease-out;
+  -moz-transition: color 0.3s ease-out;
+  -o-transition: color 0.3s ease-out;
+  transition: color 0.3s ease;
+}
+
+.category-item:hover {
+  color: white;
+}
+
+.topbar-button {
+  flex: 1;
+}
