@@ -3,21 +3,32 @@ import CategorySelector from "./category_selector";
 
 // import Button from '../_button/_button';
 
-const Topbar = props => {
-	let { categoryItemInfos, button } = props;
-	let playlistButton;
-	if (props.button) {
-		playlistButton = "new playlist";
-		// playlistButton = <NewPlaylistButtonContainer />;
+class Topbar extends React.Component {
+	handleClick() {
+		return e => {
+			this.props.buttonAction("newPlaylist");
+		};
 	}
-	return (
-		<div className="topbar-main">
-			<div className="topbar-inner">
-				<CategorySelector categoryItemInfos={categoryItemInfos} />
-				<div className="topbar-button">{playlistButton}</div>
+
+	render() {
+		let { categoryItemInfos, buttonText } = this.props;
+		let playlistButton = null;
+		if (buttonText) {
+			playlistButton = (
+				<div className="topbar-button" onClick={this.handleClick()}>
+					{buttonText}
+				</div>
+			);
+		}
+		return (
+			<div className="topbar-main">
+				<div className="topbar-inner">
+					<CategorySelector categoryItemInfos={categoryItemInfos} />
+					{playlistButton}
+				</div>
 			</div>
-		</div>
-	);
-};
+		);
+	}
+}
 
 export default Topbar;

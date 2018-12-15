@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Topbar from "../navigation/topbar";
-import Modal from "../modal/modal";
 // import { AuthRoute, ProtectedRoute } from "../../util/route_util";
 
 class Library extends React.Component {
@@ -24,11 +23,15 @@ class Library extends React.Component {
 				displayText: "ARTISTS"
 			}
 		];
-		const button = true;
+		const buttonText = "NEW PLAYLIST";
+		const buttonAction = this.props.openModal;
 		return (
 			<div className="library">
-				<Topbar categoryItemInfos={categoryItemInfos} button={button} />
-				<Modal />
+				<Topbar
+					categoryItemInfos={categoryItemInfos}
+					buttonText={buttonText}
+					buttonAction={buttonAction}
+				/>
 			</div>
 		);
 	}
