@@ -1,6 +1,6 @@
 import React from "react";
 import CategorySelector from "./category_selector";
-import NewPlaylistButtonContainer from "../_button/new_playlist_button_container";
+
 // import Button from '../_button/_button';
 
 const Topbar = props => {

@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Topbar from "../navigation/topbar";
+import Modal from "../modal/modal";
 // import { AuthRoute, ProtectedRoute } from "../../util/route_util";
 
 class Library extends React.Component {
@@ -27,6 +28,7 @@ class Library extends React.Component {
 		return (
 			<div className="library">
 				<Topbar categoryItemInfos={categoryItemInfos} button={button} />
+				<Modal />
 			</div>
 		);
 	}
