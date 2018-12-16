@@ -9,10 +9,11 @@
 #  artist_id  :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  cover_url  :string
 #
 
 class Album < ApplicationRecord
-  validates :title, :year, :genre, presence: true
+  validates :title, :year, :genre, :cover_url, presence: true
 
   has_one_attached :cover_url
 

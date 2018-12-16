@@ -6,6 +6,7 @@ import {
 } from '../../actions/session_actions';
 import Button from './_button';
 
+
 const mapStateToProps = (state) => {
   return {
     buttonType: "LOG OUT",

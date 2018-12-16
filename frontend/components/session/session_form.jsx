@@ -25,7 +25,7 @@ class SessionForm extends React.Component {
 	handleClick() {
 		return e => {
 			e.preventDefault();
-			this.props.login({ username: "sparky", password: "password" });
+			this.props.login({ username: "totoro", password: "password" });
 		};
 	}
 

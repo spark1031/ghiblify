@@ -6,10 +6,11 @@
 #  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  photo_url  :string
 #
 
 class Artist < ApplicationRecord
-  validates :name, presence: true
+  validates :name, :photo_url, presence: true
 
   has_one_attached :photo_url
 

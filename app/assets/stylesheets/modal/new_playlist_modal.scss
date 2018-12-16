@@ -1,0 +1,150 @@
+.new-playlist-form-main {
+  position: absolute;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, .7);
+  background-attachment: scroll !important;
+
+  .new-playlist-form-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+
+    .close-button {
+      font-size: 40px;
+      font-family: Arial, Helvetica, sans-serif;
+      padding-bottom: 35px;
+    }
+
+    .header {
+      height: 56px;
+      text-align: center;
+      font-size: 48px;
+      font-family: Circular Bolder;
+      letter-spacing: -0.005em;
+      line-height: 56px;
+      color: white;
+      padding-bottom: 25px;
+    }
+
+    .form {
+      height: 258px;
+      width: 100vw;
+      padding-top: 10px;
+
+      .input-section {
+        height: 83px;
+        max-width: 1480px;
+        padding-top: 32px;
+        padding-bottom: 40px;
+        padding-left: 40px;
+        padding-right: 40px;
+        align-items: center;
+        background-color: #282828;
+
+        .form-tagline {
+          font-size: 14px;
+          letter-spacing: 0.015em;
+          color: white;
+          margin-bottom: 0.3em;
+          font-family: Circular Medium;
+        }
+
+        .input {
+          height: 70px;
+          width: 100%;
+          background-color: transparent;
+          border: none;
+          outline: none;
+          caret-color: #1DB954;
+          font-size: 48px;
+          color: #535353;
+          font-family: Circular Bolder;
+        }
+      }
+
+      .form-buttons-wrapper {
+        padding-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .form-buttons {
+          height: 40px;
+          width: 325px;
+          display: flex;
+          justify-content: space-between;
+          padding-left: 10px;
+          padding-right: 10px;
+
+
+          .new-playlist-cancel {
+            background: rgba(50, 50, 50, .3);
+            border: 2px solid #bbb;
+            border-radius: 20px;
+            width: 150px;
+            font-size: 11px;
+            color: #bbb;
+            letter-spacing: 2px;
+            font-family: Circular Bold;
+            padding: 11px 18px;
+          }
+
+          .new-playlist-cancel:hover {
+            cursor: default;
+            transform: scale(1.05);
+            border: 2px solid white;
+            color: white;
+          }
+
+          .create-button:active {
+            transform: scale(1);
+          }
+
+          .create-button {
+            border: 0;
+            outline: 0;
+            padding: 11px 18px;
+            background-color: #1DB954;
+            border-radius: 20px;
+            text-transform: uppercase;
+            transition: .05s ease;
+            transform: scale(1);
+            white-space: nowrap;
+            width: 150px;
+            font-size: 11px;
+            color: #fff;
+            letter-spacing: 2px;
+            font-family: Circular Bold;
+          }
+
+          .create-button:hover {
+            cursor: default;
+            transform: scale(1.05);
+            background-color: #1ed760;
+          }
+
+          .create-button:active {
+            transform: scale(1);
+          }
+        }
+      }
+
+    }
+  }
+
+
+}
+
+.close-button {
+  color: white;
+}

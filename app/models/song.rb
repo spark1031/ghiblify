@@ -9,10 +9,11 @@
 #  album_id   :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  song_url   :string
 #
 
 class Song < ApplicationRecord
-  validates :title, :duration, presence: true
+  validates :title, :duration, :song_url, presence: true
 
   has_one_attached :song_url
 

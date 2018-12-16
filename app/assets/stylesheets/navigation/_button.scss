@@ -11,18 +11,25 @@
   background-color: #1DB954;
   border: #1DB954;
   padding: 5px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 11px;
+  padding-bottom: 11px;
   padding-left: 30px;
   padding-right: 30px;
   border-radius: 25px;
   color: white;
   transition: .5s;
   outline: none;
+  transform: scale(1);
 }
 
 ._button:hover {
+  cursor: default;
+  transform: scale(1.05);
   background-color: #1ed760;
+}
+
+._button:active {
+  transform: scale(1);
 }
 
 ._button-text {

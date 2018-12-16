@@ -9,6 +9,7 @@
 #  album_id   :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  song_url   :string
 #
 
 require 'test_helper'

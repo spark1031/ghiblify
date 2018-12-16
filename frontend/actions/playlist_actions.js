@@ -9,6 +9,10 @@ import {
   receiveAllArtists
 } from './artist_actions';
 
+import {
+  receiveErrors
+} from './session_actions';
+
 export const RECEIVE_ALL_PLAYLISTS = 'RECEIVE_ALL_PLAYLISTS';
 export const RECEIVE_ONE_PLAYLIST = 'RECEIVE_ONE_PLAYLIST';
 export const REMOVE_PLAYLIST = 'REMOVE_PLAYLIST';
@@ -48,11 +52,15 @@ export const fetchOnePlaylist = (id) => dispatch => (
   })
 );
 
-export const createPlaylist = (playlist) => dispatch => (
+export const createPlaylist = (playlist, history) => dispatch => (
   PlaylistApiUtil.createPlaylist(playlist)
   .then(payload => {
     dispatch(receiveOnePlaylist(payload.playlists));
-  })
+    //change to history.push('/library/playlists/{Object.keys(payload.playlists)[0]}')
+    history.push('/search');
+  }, err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
 );
 
 export const updatePlaylistName = (playlist) => dispatch => (
@@ -66,5 +74,7 @@ export const deletePlaylist = (id) => dispatch => (
   PlaylistApiUtil.deletePlaylist(id)
   .then(payload => {
     dispatch(removePlaylist(id));
-  })
+  }, err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
 );

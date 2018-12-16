@@ -11,10 +11,11 @@
   font-family: Circular Bold;
   display: flex;
   color: white;
+  align-items: center;
 }
 
 .category-selector-main {
-  flex: 4;
+  flex: 3;
   display: inblock;
   margin-left: 50px;
   // justify-content: space-evenly;
@@ -35,6 +36,42 @@
   color: white;
 }
 
-.topbar-button {
+.topbar-button-wrapper {
   flex: 1;
+  margin-top: -20px;
+
+  .topbar-button {
+    max-width: 150px;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: #1DB954;
+    border: #1DB954;
+    font-family: "Circular Bold";
+    font-size: 11px;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: 2px;
+    background-color: #1DB954;
+    border: #1DB954;
+    // padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    // padding-left: 30px;
+    // padding-right: 30px;
+    border-radius: 25px;
+    color: white;
+    transition: .5s;
+    outline: none;
+    transform: scale(1);
+  }
+
+  .topbar-button:hover {
+    cursor: default;
+    transform: scale(1.05);
+    background-color: #1ed760;
+  }
+
+  .topbar-button:active {
+    transform: scale(1);
+  }
 }

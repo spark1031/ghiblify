@@ -15,8 +15,10 @@ class Topbar extends React.Component {
 		let playlistButton = null;
 		if (buttonText) {
 			playlistButton = (
-				<div className="topbar-button" onClick={this.handleClick()}>
-					{buttonText}
+				<div className="topbar-button-wrapper">
+					<div className="topbar-button" onClick={this.handleClick()}>
+						{buttonText}
+					</div>
 				</div>
 			);
 		}

@@ -2,6 +2,7 @@ import React from "react";
 import { closeModal } from "../../actions/modal_actions";
 import { connect } from "react-redux";
 import NewPlaylistFormContainer from "./new_playlist_form_container";
+//import AddToPlaylistFormContainer
 
 function Modal({ modal, closeModal }) {
 	if (!modal) {
@@ -10,6 +11,9 @@ function Modal({ modal, closeModal }) {
 	let component;
 	switch (modal) {
 		case "newPlaylist":
+			component = <NewPlaylistFormContainer closeModal={closeModal} />;
+			break;
+		case "addToPlaylist":
 			component = <NewPlaylistFormContainer closeModal={closeModal} />;
 			break;
 		default:
