@@ -18,6 +18,26 @@ export const hydratedAlbumsSelector = (entities) => {
   return result;
 }
 
+//converts creator_id to user's name
+export const hydratedPlaylistsSelector = (entities) => {
+  const playlists = entities.playlists;
+  const users = entities.users;
+
+  if (_.isEmpty(playlists) || _.isEmpty(users)) {
+    return undefined;
+  }
+  const result = Object.values(playlists).map(playlist => {
+    const creator = users[playlist.creatorId];
+
+    return {
+      ...playlist,
+      creatorId: undefined,
+      creator
+    };
+  });
+  return result;
+}
+
 // const playlistSongSelector = (targetPlaylistId, entities) => {
 //   const songs = [];
 //   const keys = _.keys(entities.playlistSongs);

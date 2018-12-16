@@ -28,4 +28,10 @@ json.artists do
   end
 end
 
+json.users do
+  @playlists.each do |playlist|
+    json.partial! 'api/users/user', user: playlist.creator
+  end
+end
+
 # need to also have songs, albums, artists associated with each playlist!!!

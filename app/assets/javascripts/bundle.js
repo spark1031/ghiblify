@@ -437,8 +437,8 @@ var clearErrors = function clearErrors() {
 };
 var signup = function signup(user) {
   return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["signup"](user).then(function (user) {
-      return dispatch(receiveCurrentUser(user));
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["signup"](user).then(function (payload) {
+      return dispatch(receiveCurrentUser(payload.users));
     }, function (err) {
       return dispatch(receiveErrors(err.responseJSON));
     });
@@ -446,8 +446,8 @@ var signup = function signup(user) {
 };
 var login = function login(user) {
   return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (user) {
-      return dispatch(receiveCurrentUser(user));
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["login"](user).then(function (payload) {
+      return dispatch(receiveCurrentUser(payload.users));
     }, function (err) {
       return dispatch(receiveErrors(err.responseJSON));
     });
@@ -455,7 +455,7 @@ var login = function login(user) {
 };
 var logout = function logout() {
   return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["logout"]().then(function (user) {
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["logout"]().then(function (payload) {
       return dispatch(logoutCurrentUser());
     });
   };
@@ -756,6 +756,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _navigation_topbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../navigation/topbar */ "./frontend/components/navigation/topbar.jsx");
 /* harmony import */ var _album_albums_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../album/albums_container */ "./frontend/components/album/albums_container.js");
+/* harmony import */ var _playlist_playlist_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../playlist/playlist_container */ "./frontend/components/playlist/playlist_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -775,6 +776,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -824,6 +826,13 @@ function (_React$Component) {
         path: "/browse/albums",
         render: function render(routeProps) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_albums_container__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({}, routeProps, {
+            type: "all"
+          }));
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/browse/playlists",
+        render: function render(routeProps) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_playlist_playlist_container__WEBPACK_IMPORTED_MODULE_4__["default"], _extends({}, routeProps, {
             type: "all"
           }));
         }
@@ -2152,6 +2161,72 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/components/playlist/playlist_container.js":
+/*!************************************************************!*\
+  !*** ./frontend/components/playlist/playlist_container.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _collection_collection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../collection/collection */ "./frontend/components/collection/collection.jsx");
+/* harmony import */ var _hocs_loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../hocs/loader */ "./frontend/components/hocs/loader.jsx");
+/* harmony import */ var _actions_playlist_actions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/playlist_actions.js */ "./frontend/actions/playlist_actions.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    playlists: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["hydratedPlaylistsSelector"])(state.entities) || []
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    wrappedPropsLoader: function wrappedPropsLoader() {
+      return dispatch(Object(_actions_playlist_actions_js__WEBPACK_IMPORTED_MODULE_3__["fetchAllPlaylists"])());
+    } // playSongs: (arrayOfSongObjects) => dispatch(playSongs(arrayOfSongObjects))
+
+  };
+};
+
+var mergeProps = function mergeProps(connectedState, connectedDispatch) {
+  return {
+    initialWrappedProps: {
+      collectionItemInfos: connectedState.playlists.map(convertPlaylistToCollectionItemInfo)
+    },
+    wrappedPropsLoader: function wrappedPropsLoader() {
+      return connectedDispatch.wrappedPropsLoader();
+    }
+  };
+};
+
+var convertPlaylistToCollectionItemInfo = function convertPlaylistToCollectionItemInfo(playlist) {
+  return {
+    imageUrl: playlist.coverUrl,
+    title: playlist.name,
+    subTitle: playlist.creator.username,
+    primaryTo: '/search',
+    secondaryTo: '/search' // primaryTo: `/browse/playlists/${album.id}`
+    // secondaryTo:
+
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps, mergeProps)(Object(_hocs_loader__WEBPACK_IMPORTED_MODULE_2__["default"])(_collection_collection__WEBPACK_IMPORTED_MODULE_1__["default"]))); // depending on ownProps.type,
+// we want to get all albums OR albums we follow
+//in library:
+// wrappedPropsLoader: () => dispatch(fetchSavedAlbums())
+//playSongs(arrayOfSongObjects) action creator that comes from music_player_actions; -> updates the current array of songs that are playing
+
+/***/ }),
+
 /***/ "./frontend/components/root.jsx":
 /*!**************************************!*\
   !*** ./frontend/components/root.jsx ***!
@@ -2716,8 +2791,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _store_store_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store.js */ "./frontend/store/store.js");
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -2728,10 +2801,10 @@ document.addEventListener("DOMContentLoaded", function () {
   if (window.currentUser) {
     var preloadedState = {
       entities: {
-        users: _defineProperty({}, window.currentUser.id, window.currentUser)
+        users: window.currentUser
       },
       session: {
-        id: window.currentUser.id
+        id: Object.keys(window.currentUser)[0]
       }
     };
     store = Object(_store_store_js__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState);
@@ -3026,12 +3099,13 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: hydratedAlbumsSelector */
+/*! exports provided: hydratedAlbumsSelector, hydratedPlaylistsSelector */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hydratedAlbumsSelector", function() { return hydratedAlbumsSelector; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hydratedPlaylistsSelector", function() { return hydratedPlaylistsSelector; });
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -3052,6 +3126,24 @@ var hydratedAlbumsSelector = function hydratedAlbumsSelector(entities) {
     return _objectSpread({}, album, {
       artistId: undefined,
       artist: artist
+    });
+  });
+  return result;
+}; //converts creator_id to user's name
+
+var hydratedPlaylistsSelector = function hydratedPlaylistsSelector(entities) {
+  var playlists = entities.playlists;
+  var users = entities.users;
+
+  if (lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"](playlists) || lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"](users)) {
+    return undefined;
+  }
+
+  var result = Object.values(playlists).map(function (playlist) {
+    var creator = users[playlist.creatorId];
+    return _objectSpread({}, playlist, {
+      creatorId: undefined,
+      creator: creator
     });
   });
   return result;
@@ -3135,7 +3227,7 @@ var sessionReducer = function sessionReducer() {
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return {
-        id: action.currentUser.id
+        id: Object.keys(action.currentUser)[0]
       };
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_CURRENT_USER"]:
@@ -3221,8 +3313,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -3233,7 +3323,7 @@ var usersReducer = function usersReducer() {
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CURRENT_USER"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.currentUser.id, action.currentUser));
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, action.currentUser);
 
     default:
       return state;

@@ -29,3 +29,7 @@ json.artists do
     json.partial! 'api/artists/artist', artist: artist
   end
 end
+
+json.users do
+  json.partial! 'api/users/user', user: @playlist.creator
+end
