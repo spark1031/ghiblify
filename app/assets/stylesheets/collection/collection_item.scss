@@ -1,0 +1,30 @@
+.collection-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 5px;
+  text-align: center;
+
+  .title {
+    font-family: Circular Bold;
+    font-size: 14px;
+    color: white;
+    padding-bottom: 5px;
+  }
+
+  .sub-title {
+    font-family: Circular Medium;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    color: #fff;
+    opacity: 0.6;
+    text-decoration: none;
+  }
+
+  .sub-title:hover {
+    // text-decoration-line: underline;
+    border-bottom: 1px solid white;
+    color: white;
+    opacity: 1;
+  }
+}

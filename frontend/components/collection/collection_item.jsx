@@ -13,7 +13,7 @@ const CollectionItem = props => {
 	let optional;
 	if (subTitle && secondaryTo) {
 		optional = (
-			<Link className="subTitle" to={secondaryTo}>
+			<Link className="sub-title" to={secondaryTo}>
 				<div>{subTitle}</div>
 			</Link>
 		);
@@ -24,11 +24,11 @@ const CollectionItem = props => {
 	}
 	return (
 		<div className="collection-item">
-			<Link className="image" to={primaryTo}>
-				<img src={imageUrl} />
+			<Link className="image" to={primaryTo} style={{ textDecoration: "none" }}>
+				<img src={imageUrl} height="200px" width="200px" />
 			</Link>
 
-			<Link className="title" to={primaryTo}>
+			<Link className="title" to={primaryTo} style={{ textDecoration: "none" }}>
 				<div>{title}</div>
 			</Link>
 

@@ -1,0 +1,17 @@
+.collection-items-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 70px;
+
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    grid-gap: 1rem;
+    justify-content: center;
+    list-style: none;
+    padding: 1rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+}

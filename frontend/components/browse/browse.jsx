@@ -27,19 +27,21 @@ class Browse extends React.Component {
 		];
 		return (
 			<div className="browse">
-				<Topbar
-					categoryItemInfos={categoryItemInfos}
-					// buttonText={buttonText}
-					// buttonAction={buttonAction}
-				/>
-				<Switch>
-					<Route
-						path="/browse/albums"
-						render={routeProps => (
-							<AlbumsContainer {...routeProps} type="all" />
-						)}
+				<div style={{ overflow: "auto", height: "100%", width: "100%" }}>
+					<Topbar
+						categoryItemInfos={categoryItemInfos}
+						// buttonText={buttonText}
+						// buttonAction={buttonAction}
 					/>
-				</Switch>
+					<Switch>
+						<Route
+							path="/browse/albums"
+							render={routeProps => (
+								<AlbumsContainer {...routeProps} type="all" />
+							)}
+						/>
+					</Switch>
+				</div>
 			</div>
 		);
 	}

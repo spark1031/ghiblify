@@ -34,7 +34,9 @@ class Collection extends React.Component {
 		return (
 			<div className="collection">
 				{collectionTitle}
-				<div className="item-grid">{items}</div>
+				<div className="collection-items-wrapper">
+					<div className="item-grid">{items}</div>
+				</div>
 			</div>
 		);
 	}

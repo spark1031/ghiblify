@@ -727,7 +727,8 @@ var convertAlbumToCollectionItemInfo = function convertAlbumToCollectionItemInfo
     imageUrl: album.coverUrl,
     title: album.title,
     subTitle: album.artist.name,
-    primaryTo: '/search' // primaryTo: `/browse/albums/${album.id}`
+    primaryTo: '/search',
+    secondaryTo: '/search' // primaryTo: `/browse/albums/${album.id}`
     // secondaryTo:
 
   };
@@ -809,6 +810,12 @@ function (_React$Component) {
       }];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "browse"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          overflow: "auto",
+          height: "100%",
+          width: "100%"
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navigation_topbar__WEBPACK_IMPORTED_MODULE_2__["default"], {
         categoryItemInfos: categoryItemInfos // buttonText={buttonText}
         // buttonAction={buttonAction}
@@ -820,7 +827,7 @@ function (_React$Component) {
             type: "all"
           }));
         }
-      })));
+      }))));
     }
   }]);
 
@@ -916,8 +923,10 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "collection"
       }, collectionTitle, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "collection-items-wrapper"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "item-grid"
-      }, items));
+      }, items)));
     }
   }]);
 
@@ -960,7 +969,7 @@ var CollectionItem = function CollectionItem(props) {
 
   if (subTitle && secondaryTo) {
     optional = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      className: "subTitle",
+      className: "sub-title",
       to: secondaryTo
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, subTitle));
   } else if (subTitle) {
@@ -973,12 +982,20 @@ var CollectionItem = function CollectionItem(props) {
     className: "collection-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "image",
-    to: primaryTo
+    to: primaryTo,
+    style: {
+      textDecoration: "none"
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: imageUrl
+    src: imageUrl,
+    height: "200px",
+    width: "200px"
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "title",
-    to: primaryTo
+    to: primaryTo,
+    style: {
+      textDecoration: "none"
+    }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, title)), optional);
 };
 
