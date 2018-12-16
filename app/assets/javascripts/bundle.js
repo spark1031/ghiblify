@@ -949,6 +949,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _play_button_overlay__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./play_button_overlay */ "./frontend/components/collection/play_button_overlay.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
 
  // props: {
 //    primaryTo: string path
@@ -958,48 +978,161 @@ __webpack_require__.r(__webpack_exports__);
 //   subTitle: string (optional)
 // }
 
-var CollectionItem = function CollectionItem(props) {
-  var _props$itemInfo = props.itemInfo,
-      primaryTo = _props$itemInfo.primaryTo,
-      secondaryTo = _props$itemInfo.secondaryTo,
-      imageUrl = _props$itemInfo.imageUrl,
-      title = _props$itemInfo.title,
-      subTitle = _props$itemInfo.subTitle;
-  var optional;
+var CollectionItem =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(CollectionItem, _React$Component);
 
-  if (subTitle && secondaryTo) {
-    optional = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-      className: "sub-title",
-      to: secondaryTo
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, subTitle));
-  } else if (subTitle) {
-    optional = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, subTitle);
-  } else {
-    optional = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
-  }
+  function CollectionItem(props) {
+    var _this;
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "collection-item"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    className: "image",
-    to: primaryTo,
-    style: {
-      textDecoration: "none"
+    _classCallCheck(this, CollectionItem);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CollectionItem).call(this, props));
+    _this.state = {
+      isHovering: false
+    };
+    return _this;
+  } // componentDidMount() {
+  // 	const imageTitle = document.getElementsByClassName(
+  // 		"collection-image-title"
+  // 	);
+  // 	imageTitle.addEventListener(
+  // 		"mouseover",
+  // 		() => {
+  // 			this.setState({ isHovering: true });
+  // 		}
+  // 	);
+  // }
+
+
+  _createClass(CollectionItem, [{
+    key: "toggleHover",
+    value: function toggleHover(isHovering) {
+      var _this2 = this;
+
+      return function () {
+        _this2.setState({
+          isHovering: isHovering
+        });
+      };
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: imageUrl,
-    height: "200px",
-    width: "200px"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    className: "title",
-    to: primaryTo,
-    style: {
-      textDecoration: "none"
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props$itemInfo = this.props.itemInfo,
+          primaryTo = _this$props$itemInfo.primaryTo,
+          secondaryTo = _this$props$itemInfo.secondaryTo,
+          imageUrl = _this$props$itemInfo.imageUrl,
+          title = _this$props$itemInfo.title,
+          subTitle = _this$props$itemInfo.subTitle;
+      var optional;
+
+      if (subTitle && secondaryTo) {
+        optional = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          className: "sub-title",
+          to: secondaryTo
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, subTitle));
+      } else if (subTitle) {
+        optional = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, subTitle);
+      } else {
+        optional = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      }
+
+      var overlay = this.state.isHovering ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_play_button_overlay__WEBPACK_IMPORTED_MODULE_2__["default"], null) : null;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "collection-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "collection-image-title",
+        onMouseEnter: this.toggleHover(true),
+        onMouseLeave: this.toggleHover(false)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: primaryTo,
+        style: {
+          textDecoration: "none"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: imageUrl,
+        height: "200px",
+        width: "200px"
+      }), overlay)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "title",
+        to: primaryTo,
+        style: {
+          textDecoration: "none"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, title))), optional);
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, title)), optional);
-};
+  }]);
+
+  return CollectionItem;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (CollectionItem);
+
+/***/ }),
+
+/***/ "./frontend/components/collection/play_button_overlay.jsx":
+/*!****************************************************************!*\
+  !*** ./frontend/components/collection/play_button_overlay.jsx ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+ // import PlayIcon from "./play_icon";
+
+var PlayButtonOverlay =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(PlayButtonOverlay, _React$Component);
+
+  function PlayButtonOverlay() {
+    _classCallCheck(this, PlayButtonOverlay);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(PlayButtonOverlay).apply(this, arguments));
+  }
+
+  _createClass(PlayButtonOverlay, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "play-button-overlay"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "play-button"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-play-circle"
+      })));
+    }
+  }]);
+
+  return PlayButtonOverlay;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (PlayButtonOverlay);
 
 /***/ }),
 

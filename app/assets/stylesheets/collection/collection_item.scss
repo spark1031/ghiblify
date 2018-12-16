@@ -2,17 +2,34 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
   text-align: center;
 
-  .title {
-    font-family: Circular Bold;
-    font-size: 14px;
-    color: white;
-    padding-bottom: 5px;
+  .collection-image-title {
+    display: flex;
+    flex-direction: column;
+
+    .image {
+      position: relative;
+      height: 200px;
+      width: 200px;
+    }
+
+    .title {
+      font-family: Circular Bold;
+      font-size: 14px;
+      color: white;
+      // padding-top: 20px;
+      // padding-bottom: 5px;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
   }
 
+
+
   .sub-title {
+    // padding-top: 5px;
     font-family: Circular Medium;
     font-size: 13px;
     letter-spacing: 0.5px;
