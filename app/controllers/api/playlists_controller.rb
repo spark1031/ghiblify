@@ -3,7 +3,10 @@ class Api::PlaylistsController < ApplicationController
   def create
     playlist_covers = [
       'https://s3.amazonaws.com/ghiblify-resources/Other/48365122_1820833841353979_6382637554398658560_n.jpg',
-      "https://s3.amazonaws.com/ghiblify-resources/Other/pink_playlist_default.jpg"
+      "https://s3.amazonaws.com/ghiblify-resources/Other/pink_playlist_default.jpg".
+      "https://s3.amazonaws.com/ghiblify-resources/Other/green_playlist_default.jpg",
+      "https://s3.amazonaws.com/ghiblify-resources/Other/grey_playlist_default.jpg",
+      "https://s3.amazonaws.com/ghiblify-resources/Other/red_playlist_default.jpg"
     ]
     index = rand(0...playlist_covers.length)
     cover_file = playlist_covers[index]
