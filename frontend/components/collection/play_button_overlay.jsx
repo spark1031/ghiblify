@@ -3,11 +3,13 @@ import React from "react";
 
 class PlayButtonOverlay extends React.Component {
 	render() {
+		let icon;
+		this.props.overlayIcon
+			? (icon = <i className="fas fa-plus" />)
+			: (icon = <i className="far fa-play-circle" />);
 		return (
 			<div className="play-button-overlay">
-				<div className="play-button">
-					<i className="far fa-play-circle" />
-				</div>
+				<div className="play-button">{icon}</div>
 			</div>
 		);
 	}

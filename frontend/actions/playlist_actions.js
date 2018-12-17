@@ -13,6 +13,10 @@ import {
   receiveErrors
 } from './session_actions';
 
+import {
+  receiveAllPlaylistSongs
+} from './playlist_song_actions';
+
 export const RECEIVE_ALL_PLAYLISTS = 'RECEIVE_ALL_PLAYLISTS';
 export const RECEIVE_ONE_PLAYLIST = 'RECEIVE_ONE_PLAYLIST';
 export const REMOVE_PLAYLIST = 'REMOVE_PLAYLIST';
@@ -39,6 +43,7 @@ export const fetchAllPlaylists = () => dispatch => (
     dispatch(receiveAllArtists(payload.artists));
     dispatch(receiveAllAlbums(payload.albums));
     dispatch(receiveAllSongs(payload.songs));
+    dispatch(receiveAllPlaylistSongs(payload.playlistSongs));
   })
 );
 
@@ -49,6 +54,7 @@ export const fetchOnePlaylist = (id) => dispatch => (
     dispatch(receiveAllSongs(payload.songs));
     dispatch(receiveAllAlbums(payload.albums));
     dispatch(receiveAllArtists(payload.artists));
+    dispatch(receiveAllPlaylistSongs(payload.playlistSongs));
   })
 );
 
@@ -67,7 +73,7 @@ export const createPlaylist = (playlist, history) => dispatch => (
   .then(payload => {
     dispatch(receiveOnePlaylist(payload.playlists));
     //change to history.push('/library/playlists/{Object.keys(payload.playlists)[0]}')
-    history.push('/search');
+    history.push(`/playlists/${Object.keys(payload.playlists)[0]}`);
   }, err => (
     dispatch(receiveErrors(err.responseJSON))
   ))

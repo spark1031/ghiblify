@@ -28,11 +28,13 @@ const mapStateToProps = (state, ownProps) => {
   }
   return {
     initialWrappedProps: {
+      typeObject: state.entities.albums[albumId],
       imageUrl: album.coverUrl,
       title: album.title,
       subTitle: album.artist.name,
       songsArr: album.albumSongs,
-      detailsText: `${album.year} • ${album.albumSongs.length} SONGS`
+      detailsText: `${album.year} • ${album.albumSongs.length} SONGS`,
+      type: "album"
     }
   };
 };

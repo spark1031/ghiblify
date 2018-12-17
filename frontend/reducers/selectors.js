@@ -44,7 +44,36 @@ export const hydratedSingleAlbumSelector = (entities, albumId) => {
     artist: artists[artist.id],
     albumSongs
   };
+}
 
+export const hydratedSinglePlaylistSelector = (entities, playlistId) => {
+  const playlist = entities.playlists[playlistId];
+  const users = entities.users;
+  const playlistSongsJoins = entities.playlistSongs;
+  const songs = entities.songs;
+  if (_.isUndefined(playlist) || _.isEmpty(users) || _.isEmpty(playlistSongsJoins) || _.isEmpty(songs)) {
+    return undefined;
+  }
+
+  const songsArr = [];
+  Object.values(playlistSongsJoins).forEach(association => {
+    if (association.playlistId === playlistId) {
+      const songId = association.songId;
+      let songObject = songs[songId];
+      let playlistSongsKey = "playlistSongsKey"
+      songObject[playlistSongsKey] = association.id;
+      songsArr.push(songObject)
+    }
+  });
+
+  const user = users[playlist.creatorId];
+  if (_.isUndefined(user)) return undefined;
+  return {
+    ...playlist,
+    creatorId: undefined,
+    creator: users[user.id],
+    playlistSongs: songsArr
+  };
 }
 
 //converts creator_id to user's name

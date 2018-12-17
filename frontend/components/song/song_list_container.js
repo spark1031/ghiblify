@@ -13,6 +13,9 @@ import {
 const mapStateToProps = (state, ownProps) => {
   return {
     songsArr: ownProps.songsArr,
+    typeObject: ownProps.typeObject, //playlist or album object, non-hydrated, for SongListItem
+    type: ownProps.type,
+    currentUserId: state.session.id
     // playlistSongs: state.entities.playlistSongs
   };
 };

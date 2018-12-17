@@ -39,10 +39,9 @@ const convertPlaylistToCollectionItemInfo = (playlist) => {
     imageUrl: coverUrl,
     title: playlist.name,
     subTitle: playlist.creator.username,
-    primaryTo: '/search',
+    primaryTo: `/playlists/${playlist.id}`,
     secondaryTo: '/search'
-    // primaryTo: `/browse/playlists/${album.id}`
-    // secondaryTo:
+    // secondaryTo: to creator/user's page
   };
 };
 

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import LogoutButtonContainer from "../_button/logout_button_container";
 import SearchIcon from "./search_icon";
+// import TotoroLogo from "../navigation/totoro_logo";
 
 // sampleProps: {
 //   sidebarItemInfos: [
@@ -34,6 +35,15 @@ class Sidebar extends React.Component {
 				<div className="sidebar-main-links">
 					<Link to="/" style={{ textDecoration: "none" }}>
 						<div className="sidebar-main-logo">
+							{/* <img
+								height="50px"
+								width="50px"
+								className="totoro-logo"
+								src="/../ghiblify_app/app/assets/images/totoroForChip.svg"
+								alt=""
+							/>
+							<div className="totoro-logo" />
+							<TotoroLogo className="totoro-logo" /> */}
 							<i className="fab fa-spotify" />
 							<div className="sidebar-main-logo-name">Ghiblify</div>
 						</div>

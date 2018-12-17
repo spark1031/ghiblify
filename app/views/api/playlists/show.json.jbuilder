@@ -33,3 +33,9 @@ end
 json.users do
   json.partial! 'api/users/user', user: @playlist.creator
 end
+
+json.playlistSongs do
+  @playlist.playlist_songs.each do |playlist_song|
+    json.partial! 'api/playlist_songs/ps', playlist_song: playlist_song
+  end
+end

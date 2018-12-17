@@ -2,22 +2,23 @@
   margin-top: 35px;
 
   .song-list-item {
-    height: 56px;
+    height: 45px;
     width: 100%;
     background-color: transparent;
-    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
-    font-family: Circular Medium;
-    font-size: 16px;
+    font-family: Circular;
+    font-size: 14px;
+    letter-spacing: 0.5px;
 
     .icon-title {
       display: flex;
 
       .musical-note-icon {
-        margin-left: 15px;
+        margin-left: 10px;
+        color: rgba(247, 244, 244, 0.637);
       }
 
       .title {
@@ -29,7 +30,7 @@
       margin-right: 15px;
       display: flex;
       align-items: center;
-      color: white;
+      color: rgba(247, 244, 244, 0.637);
 
       .more {
         margin-right: 15px;

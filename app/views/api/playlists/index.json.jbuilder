@@ -34,4 +34,12 @@ json.users do
   end
 end
 
+json.playlistSongs do
+  @playlists.each do |playlist|
+    playlist.playlist_songs.each do |playlist_song|
+      json.partial! 'api/playlist_songs/ps', playlist_song: playlist_song
+    end
+  end
+end
+
 # need to also have songs, albums, artists associated with each playlist!!!

@@ -1,8 +1,15 @@
 class Api::PlaylistsController < ApplicationController
 
   def create
+    playlist_covers = [
+      'https://s3.amazonaws.com/ghiblify-resources/Other/48365122_1820833841353979_6382637554398658560_n.jpg',
+      "https://s3.amazonaws.com/ghiblify-resources/Other/pink_playlist_default.jpg"
+    ]
+    index = rand(0...playlist_covers.length)
+    cover_file = playlist_covers[index]
     @playlist = Playlist.new(playlist_params)
     @playlist.creator_id = current_user.id
+    @playlist.cover_url.attach({io: EzDownload.open(cover_file), filename: "playlist.jpg"})
     if @playlist.save
       render 'api/playlists/show'
     else

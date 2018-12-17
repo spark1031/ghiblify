@@ -1,6 +1,7 @@
 import React from "react";
 import Collection from "../collection/collection"; //doesn't show up? something wrong w SVG?
 import CloseModalIcon from "./close_icon"; //doesn't show up? something wrong w SVG?
+import Button from "../_button/_button";
 
 // props: {
 //   closeModal: () => dispatch(closeModal()),
@@ -21,54 +22,54 @@ class AddToPlaylistForm extends React.Component {
 			playlist_id: this.props.currentUserId
 		};
 
-		this.renderErrors = this.renderErrors.bind(this);
+		// this.renderErrors = this.renderErrors.bind(this);
 	}
 
 	//INPUT: playlist name
-	handleInput() {
-		return e => {
-			this.refreshErrors();
-			this.setState({ name: e.target.value });
-		};
-	}
+	// handleInput() {
+	// 	return e => {
+	// 		this.refreshErrors();
+	// 		this.setState({ name: e.target.value });
+	// 	};
+	// }
 
-	//CREATE PLAYLIST BUTTON
-	handleSubmit() {
-		return e => {
-			e.preventDefault();
-			this.props.createPlaylist(this.state, this.props.history);
-			this.props.closeModal();
-		};
-	}
+	// //CREATE PLAYLIST BUTTON
+	// handleSubmit() {
+	// 	return e => {
+	// 		e.preventDefault();
+	// 		this.props.createPlaylist(this.state, this.props.history);
+	// 		this.props.closeModal();
+	// 	};
+	// }
 
-	//if user presses "ENTER" on keyboard to SUBMIT
-	handleEnter() {
-		return e => {
-			if (e.key === "Enter") this.handleSubmit(e);
-		};
-	}
+	// //if user presses "ENTER" on keyboard to SUBMIT
+	// handleEnter() {
+	// 	return e => {
+	// 		if (e.key === "Enter") this.handleSubmit(e);
+	// 	};
+	// }
 
-	handleCancel() {
-		return e => {
-			this.setState({ name: "" });
-			this.props.closeModal();
-		};
-	}
+	// handleCancel() {
+	// 	return e => {
+	// 		this.setState({ name: "" });
+	// 		this.props.closeModal();
+	// 	};
+	// }
 
-	renderErrors() {
-		if (this.props.errors.length === 0) {
-			return <div />;
-		} else {
-			let errors = this.props.errors.map((error, i) => (
-				<div key={i}>{error}</div>
-			));
-			return <div className="session-form-errors">{errors}</div>;
-		}
-	}
+	// renderErrors() {
+	// 	if (this.props.errors.length === 0) {
+	// 		return <div />;
+	// 	} else {
+	// 		let errors = this.props.errors.map((error, i) => (
+	// 			<div key={i}>{error}</div>
+	// 		));
+	// 		return <div className="session-form-errors">{errors}</div>;
+	// 	}
+	// }
 
-	refreshErrors(e) {
-		this.props.clearErrors();
-	}
+	// refreshErrors(e) {
+	// 	this.props.clearErrors();
+	// }
 
 	render() {
 		let {
@@ -81,10 +82,16 @@ class AddToPlaylistForm extends React.Component {
 			return null;
 		}
 
+		let addedMessage = null;
+		const message = (
+			<div className="added-message">Song added to playlist.</div>
+		);
+
 		const handleClick = (songId, playlistId) => {
 			return e => {
 				addSongToPlaylist(songId, playlistId);
-				closeModal();
+				addedMessage = message;
+				setTimeout(() => closeModal(), 100);
 			};
 		};
 		const playlists = currentUserPlaylists.map(playlist => {
@@ -95,17 +102,19 @@ class AddToPlaylistForm extends React.Component {
 			};
 		});
 
-		console.log(playlists);
-
 		return (
-			<div className="new-playlist-form-main">
-				<div className="new-playlist-form-inner">
+			<div className="add-song-playlist-form-main">
+				<div className="add-song-playlist-form-inner">
 					<div className="close-button" onClick={closeModal}>
 						<i className="fas fa-times" />
 					</div>
 					<div className="header">Add to playlist</div>
+
+					{addedMessage}
 					{/* {this.renderErrors()} */}
-					<Collection collectionItemInfos={playlists} />
+					<div className="add-to-playlist-collection">
+						<Collection collectionItemInfos={playlists} />
+					</div>
 				</div>
 			</div>
 		);

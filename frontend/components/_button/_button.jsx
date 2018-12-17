@@ -16,19 +16,29 @@ class Button extends React.Component {
 		};
 	}
 	render() {
-		const { buttonType, to } = this.props;
+		const { buttonType, to, color } = this.props;
+		let buttonTextClass = "_button-text"; //default is white
+		let buttonClass = "_button"; //default is green
+
+		if (color === "white") {
+			buttonTextClass = "_button-text-black";
+			buttonClass = "_button-white";
+		} else if (color === "transparent") {
+			buttonClass = "_button-transparent";
+		}
+
 		let buttonContent;
 		if (to) {
 			buttonContent = (
 				<Link to={to} style={{ textDecoration: "none" }}>
-					<div className="_button-text">{buttonType}</div>
+					<div className={buttonTextClass}>{buttonType}</div>
 				</Link>
 			);
 		} else {
-			buttonContent = <div className="_button-text">{buttonType}</div>;
+			buttonContent = <div className={buttonTextClass}>{buttonType}</div>;
 		}
 		return (
-			<div className="_button" onClick={this.handleClick()}>
+			<div className={buttonClass} onClick={this.handleClick()}>
 				{buttonContent}
 			</div>
 		);

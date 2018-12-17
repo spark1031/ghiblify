@@ -4,6 +4,10 @@ json.playlist_songs do
   end
 end
 
+json.playlists do 
+  json.partial! 'api/playlists/playlist', playlist: @playlist_song.playlist
+end
+
 json.songs do
   json.partial! 'api/songs/song', song: @playlist_song.song
 end

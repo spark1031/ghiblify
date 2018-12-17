@@ -17,11 +17,20 @@ class CollectionImageTitle extends React.Component {
 	}
 
 	render() {
-		let { primaryTo, imageUrl, title, circular, onClick } = this.props;
+		let {
+			primaryTo,
+			imageUrl,
+			title,
+			circular,
+			onClick,
+			overlayIcon
+		} = this.props;
 
 		let imageClass;
 		circular ? (imageClass = "image-circular") : (imageClass = "image");
-		const overlay = this.state.isHovering ? <PlayButtonOverlay /> : null;
+		const overlay = this.state.isHovering ? (
+			<PlayButtonOverlay overlayIcon={overlayIcon} />
+		) : null;
 
 		let imageElement = (
 			<div className={imageClass}>

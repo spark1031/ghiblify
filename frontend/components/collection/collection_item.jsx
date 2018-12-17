@@ -41,6 +41,7 @@ class CollectionItem extends React.Component {
 						imageUrl={imageUrl}
 						title={title}
 						circular={circular}
+						overlayIcon={true}
 					/>
 
 					{optional}

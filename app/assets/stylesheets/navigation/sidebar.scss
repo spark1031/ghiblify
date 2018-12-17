@@ -42,6 +42,16 @@
   align-items: center;
   color: white;
   padding-bottom: 30px;
+
+  .totoro-logo {
+    height: 50px;
+    width: 50px;
+    color: white;
+    // filter: invert(0.9);
+    // filter: brightness(100);
+    // z-index: 10;
+    // background: image-url('totoroForChip.svg') center center no-repeat;
+  }
 }
 
 .sidebar-main-logo i {

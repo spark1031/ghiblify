@@ -4,6 +4,7 @@ import Topbar from "../navigation/topbar";
 import AlbumsContainer from "../album/albums_container";
 import PlaylistsContainer from "../playlist/playlist_container";
 import ArtistsContainer from "../artist/artists_container";
+import SongsContainer from "../song/songs_container";
 // import { AuthRoute, ProtectedRoute } from "../../util/route_util";
 
 class Library extends React.Component {
@@ -55,6 +56,14 @@ class Library extends React.Component {
 							path="/library/artists"
 							render={routeProps => (
 								<ArtistsContainer {...routeProps} type="saved" />
+							)}
+						/>
+						<Route
+							path="/library/songs"
+							render={routeProps => (
+								<div className="songs-container-wrapper">
+									<SongsContainer {...routeProps} type="saved" />
+								</div>
 							)}
 						/>
 					</Switch>

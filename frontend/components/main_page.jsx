@@ -11,6 +11,8 @@ import SearchIcon from "./navigation/search_icon";
 import HomeIcon from "./navigation/home_icon";
 import LibraryIcon from "./navigation/library_icon";
 import AlbumDetailsContainer from "./album/album_details_container";
+import PlaylistDetailsContainer from "./playlist/playlist_details_container";
+// import SongDetailsContainer from "./song/song_all_listings_container";
 
 // components to import:
 //  Sidebar
@@ -45,6 +47,11 @@ const MainPage = () => {
 					<Route path="/library" component={LibraryContainer} />
 					<Route path="/search" component={Search} />
 					<Route path="/albums/:albumId" component={AlbumDetailsContainer} />
+					<Route
+						path="/playlists/:playlistId"
+						component={PlaylistDetailsContainer}
+					/>
+					{/* <Route path="/songs/:songId" component={SongDetailsContainer} /> */}
 				</Switch>
 			</div>
 

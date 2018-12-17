@@ -9,8 +9,6 @@
   text-decoration: none;
   text-align: center;
   letter-spacing: 2px;
-  background-color: #1DB954;
-  border: #1DB954;
   padding: 5px;
   padding-top: 11px;
   padding-bottom: 11px;
@@ -21,6 +19,7 @@
   transition: .5s;
   outline: none;
   transform: scale(1);
+  transition: 0.3s;
 }
 
 ._button:hover {
@@ -35,4 +34,78 @@
 
 ._button-text {
   color: white;
+}
+
+
+//OTHER OPTIONS: black text (white text above), white background, transparent background (green background above)
+._button-text-black {
+  color: black;
+}
+
+._button-white {
+  max-width: 100px;
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.945);
+  border: rgba(255, 255, 255, 0.945);
+  font-family: "Circular Bold";
+  font-size: 12px;
+  text-decoration: none;
+  text-align: center;
+  letter-spacing: 2px;
+  padding: 5px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 25px;
+  color: black;
+  transition: .5s;
+  outline: none;
+  transform: scale(1);
+  transition: 0.3s;
+}
+
+._button-white:hover {
+  cursor: default;
+  transform: scale(1.05);
+  background-color: white;
+}
+
+._button-white:active {
+  transform: scale(1);
+}
+
+._button-transparent {
+  max-width: 100px;
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.671);
+  font-family: "Circular Bold";
+  font-size: 12px;
+  text-decoration: none;
+  text-align: center;
+  letter-spacing: 2px;
+  padding: 5px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 25px;
+  color: rgba(255, 255, 255, 0.671);
+  transition: .5s;
+  outline: none;
+  transform: scale(1);
+  transition: 0.3s;
+}
+
+._button-transparent:hover {
+  cursor: default;
+  transform: scale(1.05);
+  border: 2px solid white;
+}
+
+._button-transparent:active {
+  transform: scale(1);
 }

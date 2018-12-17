@@ -49,18 +49,33 @@ class SongListItem extends React.Component {
 	}
 
 	render() {
-		const { song, removeSongFromPlaylist } = this.props;
-
+		const {
+			song,
+			removeSongFromPlaylist,
+			typeObject,
+			type,
+			currentUserId
+		} = this.props; //typeObject = album/playlist object, non-hydrated; song = array of song objects
+		//song = {
+		// 	id:
+		// 	title:
+		// 	duration:
+		// 	artistId:
+		// 	albumId:
+		// 	playlistSongsKey: (fetched through selector when I hydrate single playlist)
+		// }
 		const songDropdown = (
 			<div className="song-dropdown">
 				<div onClick={this.handleAddToPlaylist()} className="dropdown">
 					Add to Playlist
 				</div>
 
-				{this.props.playlist &&
-				this.props.currentUser.id === this.props.playlist.creator_id ? (
-					<div onClick={e => this.removeFromPlaylist(e)} className="dropdown">
-						Remove from this Playlist
+				{type === "playlist" && currentUserId === typeObject.creator_id ? (
+					<div
+						onClick={e => removeSongFromPlaylist(song.playlistSongsKey)}
+						className="dropdown"
+					>
+						Remove from Playlist
 					</div>
 				) : (
 					""
