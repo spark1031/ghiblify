@@ -1,7 +1,7 @@
 import React from "react";
 import Collection from "../collection/collection"; //doesn't show up? something wrong w SVG?
 import CloseModalIcon from "./close_icon"; //doesn't show up? something wrong w SVG?
-import Button from "../_button/_button";
+import NewPlaylistButtonContainer from "../_button/new_playlist_button_container";
 
 // props: {
 //   closeModal: () => dispatch(closeModal()),
@@ -109,7 +109,7 @@ class AddToPlaylistForm extends React.Component {
 						<i className="fas fa-times" />
 					</div>
 					<div className="header">Add to playlist</div>
-
+					<NewPlaylistButtonContainer />
 					{addedMessage}
 					{/* {this.renderErrors()} */}
 					<div className="add-to-playlist-collection">

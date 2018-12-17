@@ -36,6 +36,40 @@
   color: white;
 }
 
+._button-long {
+  max-width: 150px;
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: #1DB954;
+  border: #1DB954;
+  font-family: "Circular Bold";
+  font-size: 12px;
+  text-decoration: none;
+  text-align: center;
+  letter-spacing: 2px;
+  padding: 5px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 25px;
+  color: white;
+  transition: .5s;
+  outline: none;
+  transform: scale(1);
+  transition: 0.3s;
+}
+
+._button-long:hover {
+  cursor: default;
+  transform: scale(1.05);
+  background-color: #1ed760;
+}
+
+._button-long:active {
+  transform: scale(1);
+}
+
 
 //OTHER OPTIONS: black text (white text above), white background, transparent background (green background above)
 ._button-text-black {
