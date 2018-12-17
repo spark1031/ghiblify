@@ -2296,7 +2296,9 @@ function (_React$Component) {
 
         _this3.props.createPlaylist(_this3.state, _this3.props.history);
 
-        _this3.props.closeModal();
+        if (_this3.state.name.length > 0) {
+          _this3.props.closeModal();
+        }
       };
     } //if user presses "ENTER" on keyboard to SUBMIT
 

@@ -25,7 +25,9 @@ class NewPlaylistForm extends React.Component {
 		return e => {
 			e.preventDefault();
 			this.props.createPlaylist(this.state, this.props.history);
-			this.props.closeModal();
+			if (this.state.name.length > 0) {
+				this.props.closeModal();
+			}
 		};
 	}
 
