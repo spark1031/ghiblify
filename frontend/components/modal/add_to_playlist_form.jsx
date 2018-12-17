@@ -1,12 +1,24 @@
 import React from "react";
+import Collection from "../collection/collection"; //doesn't show up? something wrong w SVG?
 import CloseModalIcon from "./close_icon"; //doesn't show up? something wrong w SVG?
 
-class NewPlaylistForm extends React.Component {
+// props: {
+//   closeModal: () => dispatch(closeModal()),
+//   addSongToPlaylist: (songId, playlistId) => dispatch(addSongToPlaylist(songId, playlistId)),
+//   receiveErrors: errors => dispatch(receiveErrors(errors)),
+//   clearErrors: () => dispatch(clearErrors()),
+//   errors: state.errors.session,
+//   currentUserId: state.session.id,
+//   songId: ownProps.songId,
+//   isLoaded: boolean
+// }
+
+class AddToPlaylistForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: "",
-			creator_id: this.props.currentUserId
+			song_id: this.props.songId,
+			playlist_id: this.props.currentUserId
 		};
 
 		this.renderErrors = this.renderErrors.bind(this);
@@ -59,44 +71,45 @@ class NewPlaylistForm extends React.Component {
 	}
 
 	render() {
-		let { action, closeModal } = this.props;
+		let {
+			addSongToPlaylist,
+			closeModal,
+			currentUserPlaylists,
+			songId
+		} = this.props;
+		if (currentUserPlaylists === undefined) {
+			return null;
+		}
+
+		const handleClick = (songId, playlistId) => {
+			return e => {
+				addSongToPlaylist(songId, playlistId);
+				closeModal();
+			};
+		};
+		const playlists = currentUserPlaylists.map(playlist => {
+			return {
+				onClick: handleClick(songId, playlist.id),
+				imageUrl: playlist.coverUrl,
+				title: playlist.name
+			};
+		});
+
+		console.log(playlists);
+
 		return (
 			<div className="new-playlist-form-main">
 				<div className="new-playlist-form-inner">
 					<div className="close-button" onClick={closeModal}>
 						<i className="fas fa-times" />
 					</div>
-					<div className="header">Create new playlist</div>
-					{this.renderErrors()}
-					<form className="form" onSubmit={this.handleSubmit()}>
-						<div className="input-section">
-							<div className="form-tagline">Playlist Name</div>
-							<input
-								className="input"
-								type="text"
-								placeholder="Start typing..."
-								autoComplete="off"
-								value={this.state.name}
-								onChange={this.handleInput()}
-								onKeyDown={this.handleEnter()}
-							/>
-						</div>
-						<div className="form-buttons-wrapper">
-							<div className="form-buttons">
-								<button
-									className="new-playlist-cancel"
-									onClick={this.handleCancel()}
-								>
-									CANCEL
-								</button>
-								<input className="create-button" type="submit" value="CREATE" />
-							</div>
-						</div>
-					</form>
+					<div className="header">Add to playlist</div>
+					{/* {this.renderErrors()} */}
+					<Collection collectionItemInfos={playlists} />
 				</div>
 			</div>
 		);
 	}
 }
 
-export default NewPlaylistForm;
+export default AddToPlaylistForm;

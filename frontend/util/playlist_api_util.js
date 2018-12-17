@@ -12,6 +12,12 @@ export const fetchOnePlaylist = (id) => (
   })
 );
 
+// export const fetchCurrentUserPlaylists = (currentUserId) => (
+//   $.ajax({
+
+//   })
+// )
+
 export const createPlaylist = (playlist) => (
   $.ajax({
     method: 'POST',

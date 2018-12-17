@@ -20,7 +20,7 @@ import CollectionItem from "./collection_item";
 
 class Collection extends React.Component {
 	render() {
-		let { title, collectionItemInfos } = this.props;
+		let { title, collectionItemInfos, songId } = this.props;
 		let collectionTitle;
 		if (title) {
 			collectionTitle = <div className="title">{title}</div>;
@@ -29,7 +29,7 @@ class Collection extends React.Component {
 		}
 
 		let items = collectionItemInfos.map((itemInfo, i) => (
-			<CollectionItem key={i} itemInfo={itemInfo} />
+			<CollectionItem key={i} {...itemInfo} />
 		));
 		return (
 			<div className="collection">

@@ -1,6 +1,9 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Topbar from "../navigation/topbar";
+import AlbumsContainer from "../album/albums_container";
+import PlaylistsContainer from "../playlist/playlist_container";
+import ArtistsContainer from "../artist/artists_container";
 // import { AuthRoute, ProtectedRoute } from "../../util/route_util";
 
 class Library extends React.Component {
@@ -27,11 +30,35 @@ class Library extends React.Component {
 		const buttonAction = this.props.openModal;
 		return (
 			<div className="library">
-				<Topbar
-					categoryItemInfos={categoryItemInfos}
-					buttonText={buttonText}
-					buttonAction={buttonAction}
-				/>
+				<div style={{ overflow: "auto", height: "100%", width: "100%" }}>
+					<Topbar
+						categoryItemInfos={categoryItemInfos}
+						buttonText={buttonText}
+						buttonAction={buttonAction}
+					/>
+
+					<Switch>
+						<Route
+							path="/library/albums"
+							render={routeProps => (
+								<AlbumsContainer {...routeProps} type="saved" />
+							)}
+						/>
+						<Route
+							path="/library/playlists"
+							render={routeProps => (
+								<PlaylistsContainer {...routeProps} type="saved" />
+							)}
+						/>
+
+						<Route
+							path="/library/artists"
+							render={routeProps => (
+								<ArtistsContainer {...routeProps} type="saved" />
+							)}
+						/>
+					</Switch>
+				</div>
 			</div>
 		);
 	}

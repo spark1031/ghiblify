@@ -8,14 +8,43 @@ export const hydratedAlbumsSelector = (entities) => {
   }
   const result = Object.values(albums).map(album => {
     const artist = artists[album.artistId];
+    if (_.isUndefined(artist)) {
+      return undefined;
+    } else {
+      return {
+        ...album,
+        artistId: undefined,
+        artist
+      };
+    }
+  });
+  return _.compact(result);
+}
 
-    return {
-      ...album,
-      artistId: undefined,
-      artist
+export const hydratedSingleAlbumSelector = (entities, albumId) => {
+  const album = entities.albums[albumId];
+  const artists = entities.artists;
+  const songs = entities.songs;
+  if (_.isUndefined(album) || _.isEmpty(artists)) {
+    return undefined;
+  }
+
+  const albumSongs = [];
+  Object.values(songs).forEach(song => {
+    if (song.albumId === albumId) {
+      albumSongs.push(song)
     };
   });
-  return result;
+
+  const artist = artists[album.artistId];
+  if (_.isUndefined(artist)) return undefined;
+  return {
+    ...album,
+    artistId: undefined,
+    artist: artists[artist.id],
+    albumSongs
+  };
+
 }
 
 //converts creator_id to user's name
@@ -37,6 +66,52 @@ export const hydratedPlaylistsSelector = (entities) => {
   });
   return result;
 }
+
+
+export const currentUserPlaylistsSelector = (entities, currentUserId) => {
+  const playlists = entities.playlists;
+  // const playlistSongs = entities.playlistSongs;
+  // if (_.isEmpty(playlists) || _.isEmpty(playlistSongs)) {
+  //   return undefined;
+  // }
+  if (_.isEmpty(playlists)) {
+    return undefined;
+  }
+
+  const currentUserPlaylists = [];
+  Object.values(playlists).forEach(playlist => {
+    if (`${playlist.creatorId}` === currentUserId) {
+      currentUserPlaylists.push(playlist)
+    };
+  });
+
+  return currentUserPlaylists
+}
+
+
+
+export const albumSongsSelector = (entities, albumId) => {
+  const songs = [];
+  Object.values(songEntities).forEach(song => {
+    if (song.album_id === targetId) {
+      songs.push(song);
+    }
+  });
+  return songs;
+}
+
+
+// export const playlistSongsSelector = (songEntities, targetId) => {
+//   const songs = [];
+//   Object.values(songEntities).forEach(song => {
+//     if (song.album_id === targetId) {
+//       songs.push(song);
+//     }
+//   });
+//   return songs;
+// }
+
+
 
 // const playlistSongSelector = (targetPlaylistId, entities) => {
 //   const songs = [];

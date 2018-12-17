@@ -16,12 +16,20 @@ class Button extends React.Component {
 		};
 	}
 	render() {
-		let { buttonType, to } = this.props;
-		return (
-			<div className="_button" onClick={this.handleClick()}>
+		const { buttonType, to } = this.props;
+		let buttonContent;
+		if (to) {
+			buttonContent = (
 				<Link to={to} style={{ textDecoration: "none" }}>
 					<div className="_button-text">{buttonType}</div>
 				</Link>
+			);
+		} else {
+			buttonContent = <div className="_button-text">{buttonType}</div>;
+		}
+		return (
+			<div className="_button" onClick={this.handleClick()}>
+				{buttonContent}
 			</div>
 		);
 	}

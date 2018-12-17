@@ -1,0 +1,46 @@
+.song-list {
+  margin-top: 35px;
+
+  .song-list-item {
+    height: 56px;
+    width: 100%;
+    background-color: transparent;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-family: Circular Medium;
+    font-size: 16px;
+
+    .icon-title {
+      display: flex;
+
+      .musical-note-icon {
+        margin-left: 15px;
+      }
+
+      .title {
+        padding-left: 10px;
+      }
+    }
+
+    .duration {
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+      color: white;
+
+      .more {
+        margin-right: 15px;
+        font-size: 8px;
+        letter-spacing: 1px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .song-list-item:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}

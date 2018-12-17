@@ -52,6 +52,16 @@ export const fetchOnePlaylist = (id) => dispatch => (
   })
 );
 
+// export const fetchCurrentUserPlaylists = (currentUserId) => dispatch => (
+//   PlaylistApiUtil.fetchCurrentUserPlaylists(currentUserId)
+//   .then(payload => {
+//     dispatch(receiveAllPlaylists(payload.playlists));
+//     dispatch(receiveAllArtists(payload.artists));
+//     dispatch(receiveAllAlbums(payload.albums));
+//     dispatch(receiveAllSongs(payload.songs));
+//   })
+// );
+
 export const createPlaylist = (playlist, history) => dispatch => (
   PlaylistApiUtil.createPlaylist(playlist)
   .then(payload => {

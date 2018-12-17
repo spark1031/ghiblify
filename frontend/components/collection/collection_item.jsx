@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PlayButtonOverlay from "./play_button_overlay";
+import CollectionImageTitle from "./collection_image_title";
 
 // props: {
 //    primaryTo: string path
@@ -10,38 +10,16 @@ import PlayButtonOverlay from "./play_button_overlay";
 //   subTitle: string (optional)
 // }
 class CollectionItem extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			isHovering: false
-		};
-	}
-	// componentDidMount() {
-	// 	const imageTitle = document.getElementsByClassName(
-	// 		"collection-image-title"
-	// 	);
-	// 	imageTitle.addEventListener(
-	// 		"mouseover",
-	// 		() => {
-	// 			this.setState({ isHovering: true });
-	// 		}
-	// 	);
-	// }
-
-	toggleHover(isHovering) {
-		return () => {
-			this.setState({ isHovering });
-		};
-	}
-
 	render() {
 		let {
+			circular,
 			primaryTo,
 			secondaryTo,
 			imageUrl,
 			title,
-			subTitle
-		} = this.props.itemInfo;
+			subTitle,
+			onClick
+		} = this.props;
 		let optional;
 		if (subTitle && secondaryTo) {
 			optional = (
@@ -55,34 +33,33 @@ class CollectionItem extends React.Component {
 			optional = <div />;
 		}
 
-		const overlay = this.state.isHovering ? <PlayButtonOverlay /> : null;
+		if (onClick) {
+			return (
+				<div className="collection-item">
+					<CollectionImageTitle
+						onClick={onClick}
+						imageUrl={imageUrl}
+						title={title}
+						circular={circular}
+					/>
 
-		return (
-			<div className="collection-item">
-				<div
-					className="collection-image-title"
-					onMouseEnter={this.toggleHover(true)}
-					onMouseLeave={this.toggleHover(false)}
-				>
-					<Link to={primaryTo} style={{ textDecoration: "none" }}>
-						<div className="image">
-							<img src={imageUrl} height="200px" width="200px" />
-							{overlay}
-						</div>
-					</Link>
-
-					<Link
-						className="title"
-						to={primaryTo}
-						style={{ textDecoration: "none" }}
-					>
-						<div>{title}</div>
-					</Link>
+					{optional}
 				</div>
+			);
+		} else {
+			return (
+				<div className="collection-item">
+					<CollectionImageTitle
+						primaryTo={primaryTo}
+						imageUrl={imageUrl}
+						title={title}
+						circular={circular}
+					/>
 
-				{optional}
-			</div>
-		);
+					{optional}
+				</div>
+			);
+		}
 	}
 }
 

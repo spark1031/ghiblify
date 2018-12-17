@@ -37,7 +37,7 @@ const convertAlbumToCollectionItemInfo = (album) => {
     imageUrl: album.coverUrl,
     title: album.title,
     subTitle: album.artist.name,
-    primaryTo: '/search',
+    primaryTo: `/albums/${album.id}`,
     secondaryTo: '/search'
     // primaryTo: `/browse/albums/${album.id}`
     // secondaryTo:

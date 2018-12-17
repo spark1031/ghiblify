@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Topbar from "../navigation/topbar";
 import AlbumsContainer from "../album/albums_container";
 import PlaylistsContainer from "../playlist/playlist_container";
+import ArtistsContainer from "../artist/artists_container";
 // import { AuthRoute, ProtectedRoute } from "../../util/route_util";
 
 class Browse extends React.Component {
@@ -45,6 +46,13 @@ class Browse extends React.Component {
 							path="/browse/playlists"
 							render={routeProps => (
 								<PlaylistsContainer {...routeProps} type="all" />
+							)}
+						/>
+
+						<Route
+							path="/browse/artists"
+							render={routeProps => (
+								<ArtistsContainer {...routeProps} type="all" />
 							)}
 						/>
 					</Switch>

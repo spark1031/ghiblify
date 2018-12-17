@@ -1,0 +1,65 @@
+.song-dropdown-wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .dropdown-handler {
+    letter-spacing: 2px;
+    font-size: 8px;
+    padding: 0;
+    margin-right: 20px;
+    border: 0;
+    line-height: 0px;
+    transform: scale(1);
+    transition: .05s ease;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .dropdown-handler:hover {
+    transform: scale(1.2);
+  }
+
+  .dropdown-handler:active {
+    transform: scale(.92);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    width: 190px;
+    padding: 0;
+    top: 5px;
+    right: 30px;
+    background-color: #282828;
+    z-index: 1;
+
+
+    .song-dropdown {
+      padding-top: 3px;
+      padding-bottom: 3px;
+      border-radius: 10px;
+      width: 100%;
+      height: 100%;
+
+      .dropdown {
+        font-family: Circular Medium;
+        color: #bbb;
+        font-size: 14px;
+        font-weight: 400;
+        padding: 10px;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        // background-color: red;
+        transition: .1s ease;
+      }
+
+      .dropdown:hover {
+        background-color: rgba(50, 50, 50, .8);
+        color: #fff;
+      }
+    }
+  }
+}

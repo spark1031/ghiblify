@@ -4,21 +4,21 @@ import {
 import Collection from '../collection/collection';
 import loader from '../hocs/loader';
 import {
-  fetchAllPlaylists
-} from '../../actions/playlist_actions.js';
-import {
-  hydratedPlaylistsSelector
-} from '../../reducers/selectors';
+  fetchAllArtists
+} from '../../actions/artist_actions';
+// import {
+//   hydratedArtistsSelector
+// } from '../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    playlists: hydratedPlaylistsSelector(state.entities) || []
+    artists: Object.values(state.entities.artists)
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    wrappedPropsLoader: () => dispatch(fetchAllPlaylists())
+    wrappedPropsLoader: () => dispatch(fetchAllArtists())
     // playSongs: (arrayOfSongObjects) => dispatch(playSongs(arrayOfSongObjects))
   };
 };
@@ -26,23 +26,19 @@ const mapDispatchToProps = dispatch => {
 const mergeProps = (connectedState, connectedDispatch) => {
   return {
     initialWrappedProps: {
-      collectionItemInfos: connectedState.playlists.map(convertPlaylistToCollectionItemInfo)
+      collectionItemInfos: connectedState.artists.map(convertArtistToCollectionItemInfo)
     },
     wrappedPropsLoader: () => connectedDispatch.wrappedPropsLoader()
   };
 };
 
-const convertPlaylistToCollectionItemInfo = (playlist) => {
-  let coverUrl;
-  playlist.coverUrl ? coverUrl = playlist.coverUrl : coverUrl = "https://s3.amazonaws.com/ghiblify-resources/Other/pink_playlist_default.jpg";
+const convertArtistToCollectionItemInfo = (artist) => {
   return {
-    imageUrl: coverUrl,
-    title: playlist.name,
-    subTitle: playlist.creator.username,
-    primaryTo: '/search',
-    secondaryTo: '/search'
-    // primaryTo: `/browse/playlists/${album.id}`
-    // secondaryTo:
+    circular: true,
+    imageUrl: artist.photoUrl,
+    title: artist.name,
+    primaryTo: '/search'
+    // primaryTo: `/browse/artists/${artist.id}`
   };
 };
 

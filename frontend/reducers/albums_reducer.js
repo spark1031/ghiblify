@@ -8,8 +8,8 @@ const albumsReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_ALL_ALBUMS:
-      if (action.albums === undefined) return null;
-      return action.albums;
+      if (action.albums === undefined) return state;
+      return _.merge({}, state, action.albums);
     case RECEIVE_ONE_ALBUM:
       if (action.album === undefined) return state;
       return _.merge({}, state, action.album);
