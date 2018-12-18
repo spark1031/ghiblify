@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'pry-rails'
-gem "aws-sdk-s3"
+gem "aws-sdk-s3", require: false
 gem 'ez_download', '~> 0.2.0'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
