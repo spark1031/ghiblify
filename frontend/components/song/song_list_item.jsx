@@ -27,7 +27,6 @@ class SongListItem extends React.Component {
 	showDropDown() {
 		return e => {
 			e.preventDefault();
-			console.log(this.state.isDropDownOpen);
 			this.setState({ isDropDownOpen: true });
 			// document.addEventListener("click", this.hideDropDown());
 		};

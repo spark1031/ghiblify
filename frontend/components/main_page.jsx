@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { AuthRoute, ProtectedRoute } from "../util/route_util";
 import Modal from "../components/modal/modal";
 import Sidebar from "./navigation/sidebar";
-import Player from "./player/player";
+import MusicPlayer from "./music_player/music_player";
 import Browse from "./browse/browse";
 import LibraryContainer from "./library/library_container";
 import Search from "./search/search";
@@ -55,7 +55,7 @@ const MainPage = () => {
 				</Switch>
 			</div>
 
-			<Player />
+			<MusicPlayer />
 		</div>
 	);
 };

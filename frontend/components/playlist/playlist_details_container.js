@@ -64,7 +64,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 
 const mergeProps = (connectedProps, connectedDispatch) => {
-  // debugger;
   const {
     fetchOnePlaylistLoader,
     ...restConnectedDispatch
