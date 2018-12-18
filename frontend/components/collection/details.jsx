@@ -40,28 +40,34 @@ class Details extends React.Component {
 			type,
 			history,
 			isLoaded,
-			currentUserId
+			currentUserId,
+			deletePlaylist
 		} = this.props; //playlist or album object (not hydrated) -> threaded to song list item
-
 		const overlay = this.state.isHovering ? <PlayButtonOverlay /> : null;
 
 		let browseButton = null;
 		let deleteButton = null;
+		const deleteButtonAction = () => {
+			deletePlaylist(typeObject.id);
+			history.push("/library");
+		};
+		const browseButtonAction = () => {
+			history.push("/library/songs");
+		};
 
-		if (type === "playlist" && typeObject.creatorId === currentUserId) {
-			const redirectToSongs = () => history.push("/library/songs");
+		if (type === "playlist" && +typeObject.creatorId === +currentUserId) {
 			browseButton = (
 				<Button
 					color="white"
 					buttonType="FIND SONGS"
-					action={redirectToSongs}
+					action={browseButtonAction}
 				/>
 			);
 			deleteButton = (
 				<Button
 					color="transparent"
-					buttonType="DELETE" // action={this.props.deletePlaylist()}
-					action={() => this.props.deletePlaylist(typeObject.id)}
+					buttonType="DELETE"
+					action={deleteButtonAction}
 				/>
 			);
 		}
@@ -95,6 +101,7 @@ class Details extends React.Component {
 						songsArr={songsArr}
 						typeObject={typeObject}
 						type={type}
+						currentUserId={currentUserId}
 					/>
 				</div>
 			</div>

@@ -66,6 +66,7 @@ class Library extends React.Component {
 								</div>
 							)}
 						/>
+						<Redirect to="/library/playlists" />
 					</Switch>
 				</div>
 			</div>

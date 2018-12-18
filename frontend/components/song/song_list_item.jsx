@@ -63,18 +63,19 @@ class SongListItem extends React.Component {
 		// 	albumId:
 		// 	playlistSongsKey: (fetched through selector when I hydrate single playlist)
 		// }
+
 		const songDropdown = (
 			<div className="song-dropdown">
 				<div onClick={this.handleAddToPlaylist()} className="dropdown">
-					Add to Playlist
+					Add to Your Playlists
 				</div>
 
-				{type === "playlist" && currentUserId === typeObject.creatorId ? (
+				{type === "playlist" && +currentUserId === +typeObject.creatorId ? (
 					<div
 						onClick={e => removeSongFromPlaylist(song.playlistSongsKey)}
 						className="dropdown"
 					>
-						Remove from Playlist
+						Remove from Current Playlist
 					</div>
 				) : (
 					""

@@ -12,6 +12,7 @@ class SongList extends React.Component {
 			openModal,
 			currentUserId
 		} = this.props;
+
 		if (songsArr) {
 			let songs = songsArr.map((song, i) => (
 				<SongListItem

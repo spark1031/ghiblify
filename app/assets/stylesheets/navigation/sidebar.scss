@@ -42,33 +42,33 @@
   align-items: center;
   color: white;
   padding-bottom: 30px;
-
-  // .totoro-logo {
-  //   height: 50px;
-  //   width: 50px;
-  //   color: white;
-  //   filter: invert(0.9);
-  //   filter: brightness(100);
-  //   z-index: 10;
-  //   background: image-url('totoroForChip.svg') center center no-repeat;
-  // }
+  //for TOTORO LOGO
+  fill: white;
+  stroke: white;
 }
 
 .sidebar-main-logo i {
   font-size: 38px;
 }
 
+.sidebar-main-logo:hover {
+  fill: #1ed760;
+  stroke: #1ed760;
+  color: #1ed760;
+}
+
 .sidebar-main-logo-name {
   font-family: Circular Medium;
   font-size: 26px;
-  padding-left: 7px;
+  letter-spacing: 1px;
+  margin-left: 2px;
+  // margin-left: px;
 }
 
-.cls-1 {
-  fill: white;
-  // fill-rule: evenodd;
-  stroke: white;
-  stroke-width: 1.5 px;
+// .cls-1 {
+//   fill: white;
+//   stroke: white;
+//   stroke-width: 3px;
 
-  // filter: brightness(100);
-}
+//   // filter: brightness(100);
+// }

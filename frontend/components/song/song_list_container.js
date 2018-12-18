@@ -15,7 +15,7 @@ const mapStateToProps = (state, ownProps) => {
     songsArr: ownProps.songsArr,
     typeObject: ownProps.typeObject, //playlist or album object, non-hydrated, for SongListItem
     type: ownProps.type,
-    currentUserId: state.session.id
+    currentUserId: ownProps.currentUserId
     // playlistSongs: state.entities.playlistSongs
   };
 };
