@@ -39,29 +39,29 @@ song3.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-re
 song4 = Song.create!(title: "Night is Coming", duration: 120, artist: artist1, album: album1)
 song4.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+04+-+Yoru+Kitaru.mp3'), filename: 'yoru.mp3'})
 
-song5 = Song.create!(title: "Dragon Boy", duration: 132, artist: artist1, album: album1)
-song5.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+05+-+Ryuu+no+Shounen.mp3'), filename: 'ryuu.mp3'})
+# song5 = Song.create!(title: "Dragon Boy", duration: 132, artist: artist1, album: album1)
+# song5.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+05+-+Ryuu+no+Shounen.mp3'), filename: 'ryuu.mp3'})
 
-song6 = Song.create!(title: "Sootballs", duration: 153, artist: artist1, album: album1)
-song6.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+06+-+Boiraa+Mushi.mp3'), filename: 'boiraa.mp3'})
+# song6 = Song.create!(title: "Sootballs", duration: 153, artist: artist1, album: album1)
+# song6.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+06+-+Boiraa+Mushi.mp3'), filename: 'boiraa.mp3'})
 
-song7 = Song.create!(title: "Procession of the Gods", duration: 180, artist: artist1, album: album1)
-song7.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+07+-+Kamisama-tachi.mp3'), filename: 'kamisama.mp3'})
+# song7 = Song.create!(title: "Procession of the Gods", duration: 180, artist: artist1, album: album1)
+# song7.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+07+-+Kamisama-tachi.mp3'), filename: 'kamisama.mp3'})
 
-song8 = Song.create!(title: "Yubaba", duration: 210, artist: artist1, album: album1)
-song8.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+08+-+Yu-Baaba.mp3'), filename: 'yubaba.mp3'})
+# song8 = Song.create!(title: "Yubaba", duration: 210, artist: artist1, album: album1)
+# song8.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+08+-+Yu-Baaba.mp3'), filename: 'yubaba.mp3'})
 
-song9 = Song.create!(title: "Sen's Courage", duration: 165, artist: artist1, album: album1)
-song9.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+13+-+Sen+no+Yuuki.mp3'), filename: 'sen.mp3'})
+# song9 = Song.create!(title: "Sen's Courage", duration: 165, artist: artist1, album: album1)
+# song9.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+13+-+Sen+no+Yuuki.mp3'), filename: 'sen.mp3'})
 
-song10 = Song.create!(title: "No-Face", duration: 227, artist: artist1, album: album1)
-song10.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+15+-+Kaonashi.mp3'), filename: 'kaonashi.mp3'})
+# song10 = Song.create!(title: "No-Face", duration: 227, artist: artist1, album: album1)
+# song10.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+15+-+Kaonashi.mp3'), filename: 'kaonashi.mp3'})
 
-song11 = Song.create!(title: "Going Home", duration: 200, artist: artist1, album: album1)
-song11.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+20+-+Kaeru+Hi.mp3'), filename: 'kaeru.mp3'})
+# song11 = Song.create!(title: "Going Home", duration: 200, artist: artist1, album: album1)
+# song11.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Joe+Hisaishi+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+20+-+Kaeru+Hi.mp3'), filename: 'kaeru.mp3'})
 
-song12 = Song.create!(title: "Always with Me", duration: 215, artist: artist1, album: album1)
-song12.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Youmi+Kimura+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+21+-+Itsumo+Nando+Demo.mp3'), filename: 'itsumo.mp3'})
+# song12 = Song.create!(title: "Always with Me", duration: 215, artist: artist1, album: album1)
+# song12.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Spirited+Away/songs/Youmi+Kimura+-+Sen+to+Chihiro+no+Kamikakushi+Soundtrack+-+21+-+Itsumo+Nando+Demo.mp3'), filename: 'itsumo.mp3'})
 
 
 
@@ -78,23 +78,23 @@ song14.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-r
 song15 = Song.create!(title: "Heart Aflutter", duration: 20, artist: artist1, album: album2)
 song15.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+04+-+Tokimeki.mp3'), filename: "tokimeki.mp3"})
 
-song16 = Song.create!(title: "The Indelible Curse", duration: 45, artist: artist1, album: album2)
-song16.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+08+-+Kienai+Noroi.mp3'), filename: "kienai.mp3"})
+# song16 = Song.create!(title: "The Indelible Curse", duration: 45, artist: artist1, album: album2)
+# song16.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+08+-+Kienai+Noroi.mp3'), filename: "kienai.mp3"})
 
-song17 = Song.create!(title: "Sulliman's Magic Square: Return to the Castle", duration: 323, artist: artist1, album: album2)
-song17.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+15+-+Sulliman+no+Mahoujin+~Shiro+he+no+Kikan.mp3'), filename: "sulliman.mp3"})
+# song17 = Song.create!(title: "Sulliman's Magic Square: Return to the Castle", duration: 323, artist: artist1, album: album2)
+# song17.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+15+-+Sulliman+no+Mahoujin+~Shiro+he+no+Kikan.mp3'), filename: "sulliman.mp3"})
 
-song18 = Song.create!(title: "Moving", duration: 185, artist: artist1, album: album2)
-song18.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+17+-+Hikkoshi.mp3'), filename: "hikkoshi.mp3"})
+# song18 = Song.create!(title: "Moving", duration: 185, artist: artist1, album: album2)
+# song18.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+17+-+Hikkoshi.mp3'), filename: "hikkoshi.mp3"})
 
-song19 = Song.create!(title: "Now That's Love", duration: 72, artist: artist1, album: album2)
-song19.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+20+-+Koi+da+ne.mp3'), filename: "koi.mp3"})
+# song19 = Song.create!(title: "Now That's Love", duration: 72, artist: artist1, album: album2)
+# song19.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+20+-+Koi+da+ne.mp3'), filename: "koi.mp3"})
 
-song20 = Song.create!(title: "Sophie's Castle", duration: 159, artist: artist1, album: album2)
-song20.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+24+-+Sophie+no+Shiro.mp3'), filename: "sophie.mp3"})
+# song20 = Song.create!(title: "Sophie's Castle", duration: 159, artist: artist1, album: album2)
+# song20.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+24+-+Sophie+no+Shiro.mp3'), filename: "sophie.mp3"})
 
-song21 = Song.create!(title: "Ending: The Promise of the World", duration: 411, artist: artist1, album: album2)
-song21.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+26+-+-Ending-+Sekai+no+Yakusoku+~Jinsei+no+Merry-go-round.mp3'), filename: "ending.mp3"})
+# song21 = Song.create!(title: "Ending: The Promise of the World", duration: 411, artist: artist1, album: album2)
+# song21.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+26+-+-Ending-+Sekai+no+Yakusoku+~Jinsei+no+Merry-go-round.mp3'), filename: "ending.mp3"})
 
 
 # TOTORO SOUNDTRACK 1
@@ -107,17 +107,17 @@ song32.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-r
 song33 = Song.create!(title: "Evening Wind", duration: 61, artist: artist1, album: album1)
 song33.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/My+Neighbor+Totoro/songs/Joe+Hisaishi+-+Tonari+no+Totoro+Soundtrack+Collection+-+05+-+Yuugure+no+Kaze.mp3'), filename: "yuugure.mp3"})
 
-song34 = Song.create!(title: "Not Afraid", duration: 43, artist: artist1, album: album1)
-song34.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/My+Neighbor+Totoro/songs/Joe+Hisaishi+-+Tonari+no+Totoro+Soundtrack+Collection+-+06+-+Kowakunai.mp3'), filename: "kowakunai.mp3"})
+# song34 = Song.create!(title: "Not Afraid", duration: 43, artist: artist1, album: album1)
+# song34.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/My+Neighbor+Totoro/songs/Joe+Hisaishi+-+Tonari+no+Totoro+Soundtrack+Collection+-+06+-+Kowakunai.mp3'), filename: "kowakunai.mp3"})
 
-song35 = Song.create!(title: "Mother", duration: 66, artist: artist1, album: album1)
-song35.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/My+Neighbor+Totoro/songs/Joe+Hisaishi+-+Tonari+no+Totoro+Soundtrack+Collection+-+08+-+Okaasan.mp3'), filename: "okaasan.mp3"})
+# song35 = Song.create!(title: "Mother", duration: 66, artist: artist1, album: album1)
+# song35.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/My+Neighbor+Totoro/songs/Joe+Hisaishi+-+Tonari+no+Totoro+Soundtrack+Collection+-+08+-+Okaasan.mp3'), filename: "okaasan.mp3"})
 
-song36 = Song.create!(title: "The Path of the Wind", duration: 196, artist: artist1, album: album1)
-song36.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/My+Neighbor+Totoro/songs/Joe+Hisaishi+-+Tonari+no+Totoro+Soundtrack+Collection+-+13+-+Kaze+no+Toorimichi+(Instrumental).mp3'), filename: "kaze.mp3"})
+# song36 = Song.create!(title: "The Path of the Wind", duration: 196, artist: artist1, album: album1)
+# song36.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/My+Neighbor+Totoro/songs/Joe+Hisaishi+-+Tonari+no+Totoro+Soundtrack+Collection+-+13+-+Kaze+no+Toorimichi+(Instrumental).mp3'), filename: "kaze.mp3"})
 
-song37 = Song.create!(title: "Cat Bus", duration: 131, artist: artist1, album: album1)
-song37.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/My+Neighbor+Totoro/songs/Joe+Hisaishi+-+Tonari+no+Totoro+Soundtrack+Collection+-+17+-+Nekobasu.mp3'), filename: "neko.mp3"})
+# song37 = Song.create!(title: "Cat Bus", duration: 131, artist: artist1, album: album1)
+# song37.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/My+Neighbor+Totoro/songs/Joe+Hisaishi+-+Tonari+no+Totoro+Soundtrack+Collection+-+17+-+Nekobasu.mp3'), filename: "neko.mp3"})
 
 
 
@@ -135,17 +135,17 @@ song22.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-r
 song23 = Song.create!(title: "To the Ocean", duration: 97, artist: artist2, album: album3)
 song23.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Grave+Of+The+Fireflies/songs/Michio+Mamiya+-+Hotaru+no+Haka+Soundtrack+Collection+-+06+-+Umi+he+(To+the+Ocean).mp3'), filename: "umi.mp3"})
 
-song24 = Song.create!(title: "The Beach", duration: 97, artist: artist2, album: album3)
-song24.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Grave+Of+The+Fireflies/songs/Michio+Mamiya+-+Hotaru+no+Haka+Soundtrack+Collection+-+07+-+Namiuchigiwa+(The+Beach).mp3'), filename: "nami.mp3"})
+# song24 = Song.create!(title: "The Beach", duration: 97, artist: artist2, album: album3)
+# song24.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Grave+Of+The+Fireflies/songs/Michio+Mamiya+-+Hotaru+no+Haka+Soundtrack+Collection+-+07+-+Namiuchigiwa+(The+Beach).mp3'), filename: "nami.mp3"})
 
-song25 = Song.create!(title: "Under the Cherry Blossoms", duration: 91, artist: artist2, album: album3)
-song25.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Grave+Of+The+Fireflies/songs/Michio+Mamiya+-+Hotaru+no+Haka+Soundtrack+Collection+-+09+-+Sakura+no+Shita+(Under+The+Cherry+Blossom).mp3'), filename: "sakura.mp3"})
+# song25 = Song.create!(title: "Under the Cherry Blossoms", duration: 91, artist: artist2, album: album3)
+# song25.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Grave+Of+The+Fireflies/songs/Michio+Mamiya+-+Hotaru+no+Haka+Soundtrack+Collection+-+09+-+Sakura+no+Shita+(Under+The+Cherry+Blossom).mp3'), filename: "sakura.mp3"})
 
-song26 = Song.create!(title: "Grave of the Fireflies", duration: 106, artist: artist2, album: album3)
-song26.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Grave+Of+The+Fireflies/songs/Michio+Mamiya+-+Hotaru+no+Haka+Soundtrack+Collection+-+14+-+Hotaru+no+Haka.mp3'), filename: "hotaru.mp3"})
+# song26 = Song.create!(title: "Grave of the Fireflies", duration: 106, artist: artist2, album: album3)
+# song26.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Grave+Of+The+Fireflies/songs/Michio+Mamiya+-+Hotaru+no+Haka+Soundtrack+Collection+-+14+-+Hotaru+no+Haka.mp3'), filename: "hotaru.mp3"})
 
-song27 = Song.create!(title: "Sunset Colors", duration: 53, artist: artist2, album: album3)
-song27.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Grave+Of+The+Fireflies/songs/Michio+Mamiya+-+Hotaru+no+Haka+Soundtrack+Collection+-+15+-+Yuuyake+(Sunset+Colors).mp3'), filename: "yuuyake.mp3"})
+# song27 = Song.create!(title: "Sunset Colors", duration: 53, artist: artist2, album: album3)
+# song27.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Grave+Of+The+Fireflies/songs/Michio+Mamiya+-+Hotaru+no+Haka+Soundtrack+Collection+-+15+-+Yuuyake+(Sunset+Colors).mp3'), filename: "yuuyake.mp3"})
 
 
 # TOTORO SOUNDTRACK 2
@@ -167,87 +167,149 @@ song31 = Song.create!(title: "Hey Let's Go (with Chorus)", duration: 163, artist
 song31.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/My+Neighbor+Totoro/songs/Azumi+Inoue+-+Tonari+no+Totoro+Soundtrack+Collection+-+20+-+Sanpo+(Gasshou+tsuki).mp3'), filename: "sanpo.mp3"})
 
 
+#PRINCESS MONONOKE SOUNDTRACK
+album6 = Album.create!(title: "Princess Mononoke Soundtrack", year: 1997, genre: "Ghibli", artist: artist1)
+album6.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Princess+Mononoke/images/princess_mononoke_cover.png'), filename: "princess_mononoke.png"})
+
+song38 = Song.create!(title: "The Legend of Ashitaka", duration: 99, artist: artist1, album: album6)
+song38.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Princess+Mononoke/songs/unknown+artist+-+Princess+Mononoke+Soundtrack+(US)+-+01+-+The+Legend+of+Ashitaka.mp3'), filename: "ashitaka.mp3"})
+
+song39 = Song.create!(title: "The Demon Power", duration: 36, artist: artist1, album: album6)
+song39.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Princess+Mononoke/songs/unknown+artist+-+Princess+Mononoke+Soundtrack+(US)+-+04+-+The+Demon+Power.mp3'), filename: "demon.mp3"})
+
+song40 = Song.create!(title: "The Encounter", duration: 52, artist: artist1, album: album6)
+song40.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Princess+Mononoke/songs/unknown+artist+-+Princess+Mononoke+Soundtrack+(US)+-+06+-+The+Encounter.mp3'), filename: "encounter.mp3"})
+
+# song41 = Song.create!(title: "Evening at the Ironworks", duration: 39, artist: artist1, album: album6)
+# song41.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Princess+Mononoke/songs/unknown+artist+-+Princess+Mononoke+Soundtrack+(US)+-+09+-+Evening+at+the+Ironworks.mp3'), filename: "ironworks.mp3"})
+
+# song42 = Song.create!(title: "Requiem", duration: 141, artist: artist1, album: album6)
+# song42.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Princess+Mononoke/songs/unknown+artist+-+Princess+Mononoke+Soundtrack+(US)+-+15+-+Requiem.mp3'), filename: "requiem.mp3"})
+
+# song43 = Song.create!(title: "Will to Live", duration: 31, artist: artist1, album: album6)
+# song43.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Princess+Mononoke/songs/unknown+artist+-+Princess+Mononoke+Soundtrack+(US)+-+16+-+Will+to+Live.mp3'), filename: "will.mp3"})
+
+# song44 = Song.create!(title: "Princess Mononoke", duration: 212, artist: artist1, album: album6)
+# song44.song_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Princess+Mononoke/songs/unknown+artist+-+Princess+Mononoke+Soundtrack+(US)+-+20+-+The+Battle+Drums.mp3'), filename: "battle.mp3"})
 
 
 
 
 
+##FINISH SEEDING LAST TWO ALBUMS LATER
+# album7 = Album.create!(title: "", year: , genre: "", artist: )
+# album7.cover_url.attach({io: EzDownload.open(''), filename: ""})
+
+# song45 = Song.create!(title: "", duration: , artist: artist1, album: album1)
+# song45.song_url.attach({io: EzDownload.open(''), filename: ".mp3"})
+
+# song46 = Song.create!(title: "", duration: , artist: artist1, album: album1)
+# song46.song_url.attach({io: EzDownload.open(''), filename: ".mp3"})
+
+# song47 = Song.create!(title: "", duration: , artist: artist1, album: album1)
+# song47.song_url.attach({io: EzDownload.open(''), filename: ".mp3"})
+
+# song48 = Song.create!(title: "", duration: , artist: artist1, album: album1)
+# song48.song_url.attach({io: EzDownload.open(''), filename: ".mp3"})
 
 
-album1 = Album.create!(title: "", year: , genre: "", artist: )
-album1.cover_url.attach({io: EzDownload.open(''), filename: ""})
 
-artist1 = Artist.create!(name: "")
-artist1.photo_url.attach({io: EzDownload.open(''), filename: ""})
+# album8 = Album.create!(title: "", year: , genre: "", artist: )
+# album8.cover_url.attach({io: EzDownload.open(''), filename: ""})
 
-song1 = Song.create!(title: "", duration: , artist: artist1, album: album1)
-song1.song_url.attach({io: EzDownload.open(''), filename: ".mp3"})
+# song49 = Song.create!(title: "", duration: , artist: artist1, album: album1)
+# song49.song_url.attach({io: EzDownload.open(''), filename: ".mp3"})
 
+# song50 = Song.create!(title: "", duration: , artist: artist1, album: album1)
+# song50.song_url.attach({io: EzDownload.open(''), filename: ".mp3"})
+
+# song51 = Song.create!(title: "", duration: , artist: artist1, album: album1)
+# song51.song_url.attach({io: EzDownload.open(''), filename: ".mp3"})
+
+# song52 = Song.create!(title: "", duration: , artist: artist1, album: album1)
+# song52.song_url.attach({io: EzDownload.open(''), filename: ".mp3"})
 
 
 playlist1 = Playlist.create!(name: "Best of a/A", creator_id: demo.id)
-playlist1.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/48365122_1820833841353979_6382637554398658560_n.jpg'), filename: "playlist.jpg"})
-playlist2 = Playlist.create!(name: "Ghibli Mix", creator_id: demo.id)
-playlist2.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/48365122_1820833841353979_6382637554398658560_n.jpg'), filename: "playlist.jpg"})
-playlist3 = Playlist.create!(name: "Top 2018", creator_id: demo.id)
-playlist3.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/48365122_1820833841353979_6382637554398658560_n.jpg'), filename: "playlist.jpg"})
+playlist1.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/48365122_1820833841353979_6382637554398658560_n.jpg'), filename: "blue_playlist.jpg"})
+playlist2 = Playlist.create!(name: "Ghibli Mix", creator_id: user1.id)
+playlist2.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/red_playlist_default.jpg'), filename: "red_playlist.jpg"})
+playlist3 = Playlist.create!(name: "Top 2018", creator_id: user2.id)
+playlist3.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/green_playlist_default.jpg'), filename: "green_playlist.jpg"})
 playlist4 = Playlist.create!(name: "Totoro Faves", creator_id: demo.id)
-playlist4.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/48365122_1820833841353979_6382637554398658560_n.jpg'), filename: "playlist.jpg"})
-playlist5 = Playlist.create!(name: "Vanilla DOM ftw!", creator_id: demo.id)
-playlist5.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/48365122_1820833841353979_6382637554398658560_n.jpg'), filename: "playlist.jpg"})
-playlist6 = Playlist.create!(name: "Vanilla JS", creator_id: demo.id)
-playlist6.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/48365122_1820833841353979_6382637554398658560_n.jpg'), filename: "playlist.jpg"})
-
-playlist_song1 = PlaylistSong.create!(song: song1, playlist: playlist1)
-playlist_song2 = PlaylistSong.create!(song: song2, playlist: playlist1)
-playlist_song3 = PlaylistSong.create!(song: song3, playlist: playlist1)
-
-# demo = User.create!(username: "totoro", email: "totolovescode@gmail.com", password: "password")
-
-# artist1 = Artist.create!(name: "Aretha Franklin")
-# artist1.photo_url.attach({io: EzDownload.open('https://s3-us-west-1.amazonaws.com/ghiblify-dev/britney_spears.jpeg'), filename: "britney_album.jpeg"})
-# artist2 = Artist.create!(name: "Britney Spears")
-# artist2.photo_url.attach({io: EzDownload.open('https://s3-us-west-1.amazonaws.com/ghiblify-dev/britney_spears.jpeg'), filename: "britney_album.jpeg"})
-
-# album1 = Album.create!(title: "I Never Loved a Man the Way I Love You", year: 1967, genre: "Soul", artist: artist1)
-# album1.cover_url.attach({io: EzDownload.open('https://s3-us-west-1.amazonaws.com/ghiblify-dev/britney_spears.jpeg'), filename: "britney_album.jpeg"})
-# album2 = Album.create!(title: "Programming for Beginners", year: 2000, genre: "Electronic", artist: artist2)
-# album2.cover_url.attach({io: EzDownload.open('https://s3-us-west-1.amazonaws.com/ghiblify-dev/britney_spears.jpeg'), filename: "britney_album.jpeg"})
-
-# song1 = Song.create!(title: "RSPEC", duration: 180, artist: artist1, album: album1)
-# song1.song_url.attach({io: EzDownload.open('https://s3-us-west-1.amazonaws.com/ghiblify-dev/01+-+Ano+hi+no+Kawa+he.flac'), filename: "01_anohino_kawahe.flac"})
-# song2 = Song.create!(title: "OOPs (I Did It Again)", duration: 130, artist: artist2, album: album2)
-# song2.song_url.attach({io: EzDownload.open('https://s3-us-west-1.amazonaws.com/ghiblify-dev/01+-+Ano+hi+no+Kawa+he.flac'), filename: "01_anohino_kawahe.flac"})
-# song3 = Song.create!(title: "Toxic", duration: 120, artist: artist2, album: album2)
-# song3.song_url.attach({io: EzDownload.open('https://s3-us-west-1.amazonaws.com/ghiblify-dev/01+-+Ano+hi+no+Kawa+he.flac'), filename: "01_anohino_kawahe.flac"})
-
-# playlist1 = Playlist.create!(name: "Best of a/A", creator_id: demo.id)
-
-# playlist_song1 = PlaylistSong.create!(song: song1, playlist: playlist1)
-# playlist_song2 = PlaylistSong.create!(song: song2, playlist: playlist1)
-# playlist_song3 = PlaylistSong.create!(song: song3, playlist: playlist1)
-
-############################
+playlist4.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/pink_playlist_default.jpg'), filename: "pink_playlist.jpg"})
+playlist5 = Playlist.create!(name: "Vanilla DOM ftw!", creator_id: user5.id)
+playlist5.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/grey_playlist_default.jpg'), filename: "grey_playlist.jpg"})
 
 
+##playlist songs TEST
+playlist_song8 = PlaylistSong.create!(song: song1, playlist: playlist1)
+playlist_song9 = PlaylistSong.create!(song: song2, playlist: playlist1)
+playlist_song10 = PlaylistSong.create!(song: song13, playlist: playlist1)
+playlist_song11 = PlaylistSong.create!(song: song4, playlist: playlist1)
+
+playlist_song12 = PlaylistSong.create!(song: song14, playlist: playlist2)
+playlist_song13 = PlaylistSong.create!(song: song3, playlist: playlist2)
+playlist_song14 = PlaylistSong.create!(song: song29, playlist: playlist2)
+playlist_song15 = PlaylistSong.create!(song: song40, playlist: playlist2)
+playlist_song16 = PlaylistSong.create!(song: song23, playlist: playlist2)
+
+playlist_song17 = PlaylistSong.create!(song: song14, playlist: playlist3)
+playlist_song18 = PlaylistSong.create!(song: song33, playlist: playlist3)
+
+
+playlist_song1 = PlaylistSong.create!(song: song33, playlist: playlist4)
+playlist_song2 = PlaylistSong.create!(song: song22, playlist: playlist4)
+playlist_song3 = PlaylistSong.create!(song: song1, playlist: playlist4)
+playlist_song4 = PlaylistSong.create!(song: song14, playlist: playlist4)
+playlist_song5 = PlaylistSong.create!(song: song3, playlist: playlist4)
+playlist_song6 = PlaylistSong.create!(song: song38, playlist: playlist4)
+playlist_song7 = PlaylistSong.create!(song: song40, playlist: playlist4)
+
+playlist_song20 = PlaylistSong.create!(song: song40, playlist: playlist5)
+playlist_song21 = PlaylistSong.create!(song: song14, playlist: playlist5)
+playlist_song22 = PlaylistSong.create!(song: song2, playlist: playlist5)
+playlist_song23 = PlaylistSong.create!(song: song38, playlist: playlist5)
+
+
+##playlist songs REAL
+# playlist_song8 = PlaylistSong.create!(song: song1, playlist: playlist1)
+# playlist_song9 = PlaylistSong.create!(song: song33, playlist: playlist1)
+# playlist_song10 = PlaylistSong.create!(song: song43, playlist: playlist1)
+# playlist_song11 = PlaylistSong.create!(song: song2, playlist: playlist1)
+
+# playlist_song12 = PlaylistSong.create!(song: song3, playlist: playlist2)
+# playlist_song13 = PlaylistSong.create!(song: song27, playlist: playlist2)
+# playlist_song14 = PlaylistSong.create!(song: song29, playlist: playlist2)
+# playlist_song15 = PlaylistSong.create!(song: song37, playlist: playlist2)
+# playlist_song16 = PlaylistSong.create!(song: song23, playlist: playlist2)
+
+# playlist_song17 = PlaylistSong.create!(song: song15, playlist: playlist3)
+# playlist_song18 = PlaylistSong.create!(song: song21, playlist: playlist3)
+# playlist_song19 = PlaylistSong.create!(song: song12, playlist: playlist3)
+
+# playlist_song1 = PlaylistSong.create!(song: song1, playlist: playlist4)
+# playlist_song2 = PlaylistSong.create!(song: song12, playlist: playlist4)
+# playlist_song3 = PlaylistSong.create!(song: song13, playlist: playlist4)
+# playlist_song4 = PlaylistSong.create!(song: song24, playlist: playlist4)
+# playlist_song5 = PlaylistSong.create!(song: song25, playlist: playlist4)
+# playlist_song6 = PlaylistSong.create!(song: song36, playlist: playlist4)
+# playlist_song7 = PlaylistSong.create!(song: song33, playlist: playlist4)
+
+# playlist_song20 = PlaylistSong.create!(song: song13, playlist: playlist5)
+# playlist_song21 = PlaylistSong.create!(song: song23, playlist: playlist5)
+# playlist_song22 = PlaylistSong.create!(song: song17, playlist: playlist5)
+# playlist_song23 = PlaylistSong.create!(song: song5, playlist: playlist5)
 
 
 
 
-# demo = User.create!(username: "totoro", email: "toto.loves.vanilladom@gmail.com", password: "password")
 
-# artist1 = Artist.create!(name: "Aretha Franklin", photo_url: 'https://s3-us-west-1.amazonaws.com/ghiblify-dev/britney_spears.jpeg')
-# artist2 = Artist.create!(name: "Britney Spears", photo_url: 'https://s3-us-west-1.amazonaws.com/ghiblify-dev/britney_spears.jpeg')
+# album1 = Album.create!(title: "", year: , genre: "", artist: )
+# album1.cover_url.attach({io: EzDownload.open(''), filename: ""})
 
-# album1 = Album.create!(title: "I Never Loved a Man the Way I Love You", year: 1967, genre: "Soul", artist: artist1, cover_url: 'https://s3-us-west-1.amazonaws.com/ghiblify-dev/britney_spears.jpeg')
-# album2 = Album.create!(title: "Programming for Beginners", year: 2000, genre: "Electronic", artist: artist2, cover_url: 'https://s3-us-west-1.amazonaws.com/ghiblify-dev/britney_spears.jpeg')
+# artist1 = Artist.create!(name: "")
+# artist1.photo_url.attach({io: EzDownload.open(''), filename: ""})
 
-# song1 = Song.create!(title: "RSPEC", duration: 180, artist: artist1, album: album1, song_url: 'https://s3-us-west-1.amazonaws.com/ghiblify-dev/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+01+-+-Opening-+Jinsei+no+Merry-go-round.mp3')
-# song2 = Song.create!(title: "OOPs (I Did It Again)", duration: 130, artist: artist2, album: album2, song_url: 'https://s3-us-west-1.amazonaws.com/ghiblify-dev/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+01+-+-Opening-+Jinsei+no+Merry-go-round.mp3')
-# song3 = Song.create!(title: "Toxic", duration: 120, artist: artist2, album: album2, song_url: 'https://s3-us-west-1.amazonaws.com/ghiblify-dev/Howls+Moving+Castle/songs/Joe+Hisaishi+-+Hauru+no+Ugoku+Shiro+Soundtrack+-+01+-+-Opening-+Jinsei+no+Merry-go-round.mp3')
-
-# playlist1 = Playlist.create!(name: "Best of a/A", creator_id: demo.id)
-
-# playlist_song1 = PlaylistSong.create!(song: song1, playlist: playlist1)
-# playlist_song2 = PlaylistSong.create!(song: song2, playlist: playlist1)
-# playlist_song3 = PlaylistSong.create!(song: song3, playlist: playlist1)
+# song1 = Song.create!(title: "", duration: , artist: artist1, album: album1)
+# song1.song_url.attach({io: EzDownload.open(''), filename: ".mp3"})

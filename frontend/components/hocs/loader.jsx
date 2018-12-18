@@ -11,18 +11,26 @@ const loader = WrappedComponent => {
 		componentDidMount() {
 			const { wrappedPropsLoader } = this.props;
 			// wrappedPropsLoader().then(() =>
-			// 	this.state({
+			// 	this.setState({
 			// 		isLoaded: true
 			// 	})
 			// );
 			wrappedPropsLoader();
 		}
 		render() {
-			const { initialWrappedProps } = this.props;
+			const {
+				initialWrappedProps,
+				wrappedPropsLoader,
+				...restProps
+			} = this.props;
 			const { isLoaded } = this.state;
 			if (initialWrappedProps) {
 				return (
-					<WrappedComponent {...initialWrappedProps} isLoaded={isLoaded} />
+					<WrappedComponent
+						{...initialWrappedProps}
+						{...restProps}
+						isLoaded={isLoaded}
+					/>
 				);
 			} else {
 				return <p>I'm LOADING!</p>;

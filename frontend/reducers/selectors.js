@@ -51,7 +51,7 @@ export const hydratedSinglePlaylistSelector = (entities, playlistId) => {
   const users = entities.users;
   const playlistSongsJoins = entities.playlistSongs;
   const songs = entities.songs;
-  if (_.isUndefined(playlist) || _.isEmpty(users) || _.isEmpty(playlistSongsJoins) || _.isEmpty(songs)) {
+  if (_.isUndefined(playlist) || _.isEmpty(users)) {
     return undefined;
   }
 
@@ -87,13 +87,17 @@ export const hydratedPlaylistsSelector = (entities) => {
   const result = Object.values(playlists).map(playlist => {
     const creator = users[playlist.creatorId];
 
-    return {
-      ...playlist,
-      creatorId: undefined,
-      creator
-    };
+    if (creator) {
+      return {
+        ...playlist,
+        creatorId: undefined,
+        creator
+      };
+    } else {
+      return undefined;
+    }
   });
-  return result;
+  return _.compact(result);
 }
 
 

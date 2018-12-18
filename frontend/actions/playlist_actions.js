@@ -10,6 +10,11 @@ import {
 } from './artist_actions';
 
 import {
+  receiveAllUsers,
+  receiveOneUser
+} from './user_actions';
+
+import {
   receiveErrors
 } from './session_actions';
 
@@ -44,6 +49,7 @@ export const fetchAllPlaylists = () => dispatch => (
     dispatch(receiveAllAlbums(payload.albums));
     dispatch(receiveAllSongs(payload.songs));
     dispatch(receiveAllPlaylistSongs(payload.playlistSongs));
+    dispatch(receiveAllUsers(payload.users));
   })
 );
 
@@ -55,6 +61,7 @@ export const fetchOnePlaylist = (id) => dispatch => (
     dispatch(receiveAllAlbums(payload.albums));
     dispatch(receiveAllArtists(payload.artists));
     dispatch(receiveAllPlaylistSongs(payload.playlistSongs));
+    dispatch(receiveOneUser(payload.users));
   })
 );
 

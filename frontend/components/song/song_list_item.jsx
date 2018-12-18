@@ -70,7 +70,7 @@ class SongListItem extends React.Component {
 					Add to Playlist
 				</div>
 
-				{type === "playlist" && currentUserId === typeObject.creator_id ? (
+				{type === "playlist" && currentUserId === typeObject.creatorId ? (
 					<div
 						onClick={e => removeSongFromPlaylist(song.playlistSongsKey)}
 						className="dropdown"

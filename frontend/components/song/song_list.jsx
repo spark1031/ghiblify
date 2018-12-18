@@ -12,19 +12,22 @@ class SongList extends React.Component {
 			openModal,
 			currentUserId
 		} = this.props;
-
-		let songs = songsArr.map((song, i) => (
-			<SongListItem
-				key={i}
-				song={song}
-				removeSongFromPlaylist={removeSongFromPlaylist}
-				openModal={openModal}
-				typeObject={typeObject}
-				type={type}
-				currentUserId={currentUserId}
-			/>
-		));
-		return <div className="song-list">{songs}</div>;
+		if (songsArr) {
+			let songs = songsArr.map((song, i) => (
+				<SongListItem
+					key={i}
+					song={song}
+					removeSongFromPlaylist={removeSongFromPlaylist}
+					openModal={openModal}
+					typeObject={typeObject}
+					type={type}
+					currentUserId={currentUserId}
+				/>
+			));
+			return <div className="song-list">{songs}</div>;
+		} else {
+			return null;
+		}
 	}
 }
 

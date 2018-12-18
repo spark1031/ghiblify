@@ -254,8 +254,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _song_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./song_actions */ "./frontend/actions/song_actions.js");
 /* harmony import */ var _album_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./album_actions */ "./frontend/actions/album_actions.js");
 /* harmony import */ var _artist_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./artist_actions */ "./frontend/actions/artist_actions.js");
-/* harmony import */ var _session_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _playlist_song_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./playlist_song_actions */ "./frontend/actions/playlist_song_actions.js");
+/* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _session_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _playlist_song_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./playlist_song_actions */ "./frontend/actions/playlist_song_actions.js");
+
 
 
 
@@ -290,7 +292,8 @@ var fetchAllPlaylists = function fetchAllPlaylists() {
       dispatch(Object(_artist_actions__WEBPACK_IMPORTED_MODULE_3__["receiveAllArtists"])(payload.artists));
       dispatch(Object(_album_actions__WEBPACK_IMPORTED_MODULE_2__["receiveAllAlbums"])(payload.albums));
       dispatch(Object(_song_actions__WEBPACK_IMPORTED_MODULE_1__["receiveAllSongs"])(payload.songs));
-      dispatch(Object(_playlist_song_actions__WEBPACK_IMPORTED_MODULE_5__["receiveAllPlaylistSongs"])(payload.playlistSongs));
+      dispatch(Object(_playlist_song_actions__WEBPACK_IMPORTED_MODULE_6__["receiveAllPlaylistSongs"])(payload.playlistSongs));
+      dispatch(Object(_user_actions__WEBPACK_IMPORTED_MODULE_4__["receiveAllUsers"])(payload.users));
     });
   };
 };
@@ -301,7 +304,8 @@ var fetchOnePlaylist = function fetchOnePlaylist(id) {
       dispatch(Object(_song_actions__WEBPACK_IMPORTED_MODULE_1__["receiveAllSongs"])(payload.songs));
       dispatch(Object(_album_actions__WEBPACK_IMPORTED_MODULE_2__["receiveAllAlbums"])(payload.albums));
       dispatch(Object(_artist_actions__WEBPACK_IMPORTED_MODULE_3__["receiveAllArtists"])(payload.artists));
-      dispatch(Object(_playlist_song_actions__WEBPACK_IMPORTED_MODULE_5__["receiveAllPlaylistSongs"])(payload.playlistSongs));
+      dispatch(Object(_playlist_song_actions__WEBPACK_IMPORTED_MODULE_6__["receiveAllPlaylistSongs"])(payload.playlistSongs));
+      dispatch(Object(_user_actions__WEBPACK_IMPORTED_MODULE_4__["receiveOneUser"])(payload.users));
     });
   };
 }; // export const fetchCurrentUserPlaylists = (currentUserId) => dispatch => (
@@ -321,7 +325,7 @@ var createPlaylist = function createPlaylist(playlist, history) {
 
       history.push("/playlists/".concat(Object.keys(payload.playlists)[0]));
     }, function (err) {
-      return dispatch(Object(_session_actions__WEBPACK_IMPORTED_MODULE_4__["receiveErrors"])(err.responseJSON));
+      return dispatch(Object(_session_actions__WEBPACK_IMPORTED_MODULE_5__["receiveErrors"])(err.responseJSON));
     });
   };
 };
@@ -337,7 +341,7 @@ var deletePlaylist = function deletePlaylist(id) {
     return _util_playlist_api_util__WEBPACK_IMPORTED_MODULE_0__["deletePlaylist"](id).then(function (payload) {
       dispatch(removePlaylist(id));
     }, function (err) {
-      return dispatch(Object(_session_actions__WEBPACK_IMPORTED_MODULE_4__["receiveErrors"])(err.responseJSON));
+      return dispatch(Object(_session_actions__WEBPACK_IMPORTED_MODULE_5__["receiveErrors"])(err.responseJSON));
     });
   };
 };
@@ -530,6 +534,36 @@ var fetchAllSongs = function fetchAllSongs() {
       dispatch(Object(_album_actions__WEBPACK_IMPORTED_MODULE_1__["receiveAllAlbums"])(payload.albums));
       dispatch(Object(_artist_actions__WEBPACK_IMPORTED_MODULE_2__["receiveAllArtists"])(payload.artists));
     });
+  };
+};
+
+/***/ }),
+
+/***/ "./frontend/actions/user_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/user_actions.js ***!
+  \******************************************/
+/*! exports provided: RECEIVE_ALL_USERS, RECEIVE_ONE_USER, receiveAllUsers, receiveOneUser */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_USERS", function() { return RECEIVE_ALL_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ONE_USER", function() { return RECEIVE_ONE_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveAllUsers", function() { return receiveAllUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveOneUser", function() { return receiveOneUser; });
+var RECEIVE_ALL_USERS = 'RECEIVE_ALL_USERS';
+var RECEIVE_ONE_USER = 'RECEIVE_ONE_USER';
+var receiveAllUsers = function receiveAllUsers(users) {
+  return {
+    type: RECEIVE_ALL_USERS,
+    users: users
+  };
+};
+var receiveOneUser = function receiveOneUser(user) {
+  return {
+    type: RECEIVE_ONE_USER,
+    user: user
   };
 };
 
@@ -1515,6 +1549,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _song_song_list_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../song/song_list_container */ "./frontend/components/song/song_list_container.js");
 /* harmony import */ var _collection_collection_image_title__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../collection//collection_image_title */ "./frontend/components/collection/collection_image_title.jsx");
 /* harmony import */ var _collection_play_button_overlay__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../collection/play_button_overlay */ "./frontend/components/collection/play_button_overlay.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1532,6 +1567,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1580,6 +1616,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var _this$props = this.props,
           typeObject = _this$props.typeObject,
           imageUrl = _this$props.imageUrl,
@@ -1588,12 +1626,15 @@ function (_React$Component) {
           songsArr = _this$props.songsArr,
           detailsText = _this$props.detailsText,
           type = _this$props.type,
-          history = _this$props.history;
+          history = _this$props.history,
+          isLoaded = _this$props.isLoaded,
+          currentUserId = _this$props.currentUserId; //playlist or album object (not hydrated) -> threaded to song list item
+
       var overlay = this.state.isHovering ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collection_play_button_overlay__WEBPACK_IMPORTED_MODULE_5__["default"], null) : null;
       var browseButton = null;
       var deleteButton = null;
 
-      if (type === "playlist") {
+      if (type === "playlist" && typeObject.creatorId === currentUserId) {
         var redirectToSongs = function redirectToSongs() {
           return history.push("/library/songs");
         };
@@ -1607,7 +1648,9 @@ function (_React$Component) {
           color: "transparent",
           buttonType: "DELETE" // action={this.props.deletePlaylist()}
           ,
-          action: this.props.deletePlaylist
+          action: function action() {
+            return _this3.props.deletePlaylist(typeObject.id);
+          }
         });
       }
 
@@ -1649,7 +1692,48 @@ function (_React$Component) {
   return Details;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Details);
+/* harmony default export */ __webpack_exports__["default"] = (Details); // if (title === undefined) {
+// 	return (
+// 		<div>404 PAGE DOES NOT EXIST</div>
+// 		// <Switch>
+// 		// 	<Redirect to="/library/playlists" />
+// 		// </Switch>
+// 	);
+// } else {
+// 	return (
+// 		<div className="details-main">
+// 			<div className="info">
+// 				<div className="details-item">
+// 					<div
+// 						className="details-image-title"
+// 						onMouseEnter={this.toggleHover(true)}
+// 						onMouseLeave={this.toggleHover(false)}
+// 					>
+// 						<div className="image">
+// 							<img src={imageUrl} />
+// 							{overlay}
+// 						</div>
+// 						<div className="title">{title}</div>
+// 					</div>
+// 					<div className="sub-title">{subTitle}</div>
+// 				</div>
+// 				<Button buttonType="PLAY" action={this.playSongs} />
+// 				<div className="year-songs">{detailsText}</div>
+// 				<div className="extra-buttons">
+// 					{browseButton}
+// 					{deleteButton}
+// 				</div>
+// 			</div>
+// 			<div className="songs">
+// 				<SongListContainer
+// 					songsArr={songsArr}
+// 					typeObject={typeObject}
+// 					type={type}
+// 				/>
+// 			</div>
+// 		</div>
+// 	);
+// }
 
 /***/ }),
 
@@ -1734,6 +1818,10 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1774,7 +1862,7 @@ var loader = function loader(WrappedComponent) {
         key: "componentDidMount",
         value: function componentDidMount() {
           var wrappedPropsLoader = this.props.wrappedPropsLoader; // wrappedPropsLoader().then(() =>
-          // 	this.state({
+          // 	this.setState({
           // 		isLoaded: true
           // 	})
           // );
@@ -1784,11 +1872,15 @@ var loader = function loader(WrappedComponent) {
       }, {
         key: "render",
         value: function render() {
-          var initialWrappedProps = this.props.initialWrappedProps;
+          var _this$props = this.props,
+              initialWrappedProps = _this$props.initialWrappedProps,
+              wrappedPropsLoader = _this$props.wrappedPropsLoader,
+              restProps = _objectWithoutProperties(_this$props, ["initialWrappedProps", "wrappedPropsLoader"]);
+
           var isLoaded = this.state.isLoaded;
 
           if (initialWrappedProps) {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedComponent, _extends({}, initialWrappedProps, {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(WrappedComponent, _extends({}, initialWrappedProps, restProps, {
               isLoaded: isLoaded
             }));
           } else {
@@ -2826,6 +2918,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _button_logout_button_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../_button/logout_button_container */ "./frontend/components/_button/logout_button_container.js");
 /* harmony import */ var _search_icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./search_icon */ "./frontend/components/navigation/search_icon.jsx");
+/* harmony import */ var _navigation_totoro_logo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../navigation/totoro_logo */ "./frontend/components/navigation/totoro_logo.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2847,8 +2940,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
- // import TotoroLogo from "../navigation/totoro_logo";
-// sampleProps: {
+
+ // sampleProps: {
 //   sidebarItemInfos: [
 //     {
 //       to: "/search",
@@ -2899,9 +2992,7 @@ function (_React$Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidebar-main-logo"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fab fa-spotify"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navigation_totoro_logo__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidebar-main-logo-name"
       }, "Ghiblify"))), links, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_button_logout_button_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
     }
@@ -3015,6 +3106,53 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Topbar);
+
+/***/ }),
+
+/***/ "./frontend/components/navigation/totoro_logo.jsx":
+/*!********************************************************!*\
+  !*** ./frontend/components/navigation/totoro_logo.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var TotoroLogo = function TotoroLogo() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "40",
+    height: "40",
+    viewBox: "0 0 383.92 512.33"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    className: "cls-1",
+    d: "M152.12,96.88a4.53,4.53,0,0,1-3.48-3.5c-1.59-5.33-5.85-8-11.37-7.65a21.26,21.26,0,0,0,1.58,42.47,21.39,21.39,0,0,0,20.93-19C160.42,103.23,157.75,98.73,152.12,96.88Zm60.21,27.29c-1.78-4.64-5.68-6.34-10.3-6.59-3.32-.17-6.66,0-10,0v.18c-4,0-8-.47-12,.1-9,1.3-12.39,10.86-6.41,17.7a135.52,135.52,0,0,0,10.16,10.32c5.42,5,10.89,4.91,16.41-.2,3.17-3,6.17-6.08,9.23-9.14C213,133,214.12,128.85,212.33,124.17ZM259.06,97a5.28,5.28,0,0,1-3.87-3.83c-1.77-5.4-5.89-7.91-11.45-7.5A21.31,21.31,0,1,0,266.5,108.5C266.93,102.91,264.45,98.82,259.06,97Zm-66.45,74C109.76,170.74,42,238.48,42.68,321c.64,82,67.5,148.74,148.85,148.55A149.4,149.4,0,0,0,341.18,319.78C341.29,238.37,274.24,171.22,192.61,171Zm-.52,277.14a127.53,127.53,0,0,1-128-126.6C63.22,251,120,192.86,191.55,192.3c69.44.13,127,54.82,128.25,125.93A127.68,127.68,0,0,1,192.09,448.12ZM192.61,171C109.76,170.74,42,238.48,42.68,321c.64,82,67.5,148.74,148.85,148.55A149.4,149.4,0,0,0,341.18,319.78C341.29,238.37,274.24,171.22,192.61,171Zm-.52,277.14a127.53,127.53,0,0,1-128-126.6C63.22,251,120,192.86,191.55,192.3c69.44.13,127,54.82,128.25,125.93A127.68,127.68,0,0,1,192.09,448.12Zm67-351.1a5.28,5.28,0,0,1-3.87-3.83c-1.77-5.4-5.89-7.91-11.45-7.5A21.31,21.31,0,1,0,266.5,108.5C266.93,102.91,264.45,98.82,259.06,97Zm-46.73,27.15c-1.78-4.64-5.68-6.34-10.3-6.59-3.32-.17-6.66,0-10,0v.18c-4,0-8-.47-12,.1-9,1.3-12.39,10.86-6.41,17.7a135.52,135.52,0,0,0,10.16,10.32c5.42,5,10.89,4.91,16.41-.2,3.17-3,6.17-6.08,9.23-9.14C213,133,214.12,128.85,212.33,124.17ZM152.12,96.88a4.53,4.53,0,0,1-3.48-3.5c-1.59-5.33-5.85-8-11.37-7.65a21.26,21.26,0,0,0,1.58,42.47,21.39,21.39,0,0,0,20.93-19C160.42,103.23,157.75,98.73,152.12,96.88Zm0,0a4.53,4.53,0,0,1-3.48-3.5c-1.59-5.33-5.85-8-11.37-7.65a21.26,21.26,0,0,0,1.58,42.47,21.39,21.39,0,0,0,20.93-19C160.42,103.23,157.75,98.73,152.12,96.88Zm60.21,27.29c-1.78-4.64-5.68-6.34-10.3-6.59-3.32-.17-6.66,0-10,0v.18c-4,0-8-.47-12,.1-9,1.3-12.39,10.86-6.41,17.7a135.52,135.52,0,0,0,10.16,10.32c5.42,5,10.89,4.91,16.41-.2,3.17-3,6.17-6.08,9.23-9.14C213,133,214.12,128.85,212.33,124.17ZM259.06,97a5.28,5.28,0,0,1-3.87-3.83c-1.77-5.4-5.89-7.91-11.45-7.5A21.31,21.31,0,1,0,266.5,108.5C266.93,102.91,264.45,98.82,259.06,97Zm-66.45,74C109.76,170.74,42,238.48,42.68,321c.64,82,67.5,148.74,148.85,148.55A149.4,149.4,0,0,0,341.18,319.78C341.29,238.37,274.24,171.22,192.61,171Zm-.52,277.14a127.53,127.53,0,0,1-128-126.6C63.22,251,120,192.86,191.55,192.3c69.44.13,127,54.82,128.25,125.93A127.68,127.68,0,0,1,192.09,448.12ZM192.61,171C109.76,170.74,42,238.48,42.68,321c.64,82,67.5,148.74,148.85,148.55A149.4,149.4,0,0,0,341.18,319.78C341.29,238.37,274.24,171.22,192.61,171Zm-.52,277.14a127.53,127.53,0,0,1-128-126.6C63.22,251,120,192.86,191.55,192.3c69.44.13,127,54.82,128.25,125.93A127.68,127.68,0,0,1,192.09,448.12Zm53.13-319.87A21.5,21.5,0,0,0,266.5,108.5c.43-5.59-2.05-9.68-7.44-11.48a5.28,5.28,0,0,1-3.87-3.83c-1.77-5.4-5.89-7.91-11.45-7.5a21.31,21.31,0,0,0,1.48,42.56Zm-61.39,17.6c5.42,5,10.89,4.91,16.41-.2,3.17-3,6.17-6.08,9.23-9.14,3.51-3.52,4.65-7.66,2.86-12.34s-5.68-6.34-10.3-6.59c-3.32-.17-6.66,0-10,0v.18c-4,0-8-.47-12,.1-9,1.3-12.39,10.86-6.41,17.7A135.52,135.52,0,0,0,183.83,145.85Zm-45-17.65a21.39,21.39,0,0,0,20.93-19c.64-6-2-10.48-7.66-12.33a4.53,4.53,0,0,1-3.48-3.5c-1.59-5.33-5.85-8-11.37-7.65a21.26,21.26,0,0,0,1.58,42.47Zm203.88,42.59c-.81-1.78-1.51-3.6-2.4-5.71,5.57-2,10.87-3.39,15.81-5.62,7.41-3.36,14.75-7,21.81-11,6-3.46,7.52-9.64,4.35-14.94-3-5-8.94-6.46-14.84-3.49-2.37,1.19-4.61,2.67-6.95,3.94A114.87,114.87,0,0,1,330.45,145c-4.3-8.2-8.52-16.24-12.91-24.63,3.72-2.17,6.91-4.26,10.3-6,7.47-3.75,15.11-6.93,23.64-7.47,4.77-.31,8.71-2.42,10.4-7.27,2.66-7.59-3.25-15.11-11.77-13.88a125.77,125.77,0,0,0-24,6.11c-6.65,2.36-12.76,6.19-19.32,9.48-5.62-8.92-11.22-17.57-16.52-26.4a16.55,16.55,0,0,1-2.31-7.37c-.71-13.72-2.54-27.18-7.56-40.07-3.49-9-8.06-17.2-15.64-23.4C257.9-1.42,252.53-1,246.41,5.44a196.29,196.29,0,0,0-26.66,34.23,6.09,6.09,0,0,1-6,3.37c-13.83-.15-27.67-.25-41.5,0-4.34.08-6.67-1.48-9.25-5-8.41-11.36-17.23-22.43-26.3-33.26-5-5.95-10.94-6.46-16.62-1.26a64,64,0,0,0-12,14.49C99.3,33.12,97,50,96,67.05c-.11,2-.09,4.19-1,5.75-5.76,9.54-11.78,18.92-18,28.86-2.4-1.33-4.35-2.61-6.45-3.53-8.37-3.64-16.62-7.72-25.26-10.54-4.88-1.59-10.5-1.69-15.69-1.3-4.93.37-8.07,5-8.11,9.89a10.16,10.16,0,0,0,7.94,10.17,46.58,46.58,0,0,0,5.42.81c11.72,1.47,21.58,7.16,31.61,13.39-4.49,8.45-8.74,16.48-13,24.56-2.1-.51-3.72-.86-5.31-1.3a124,124,0,0,1-30.63-13.18c-6.59-3.93-12.91-2.46-16,3.11S.32,145.08,6.64,148.91a104.19,104.19,0,0,0,12.25,6.71c7.9,3.43,16,6.43,24.44,9.78-.64,1.59-1.28,3.24-2,4.89-5.34,12.92-11,25.7-16,38.78C12.1,244.45,2.64,280.69.41,318.68-1.2,346.14,3.47,372.43,13.16,398,26.94,434.26,48.28,465.86,74,494.71a24.21,24.21,0,0,0,12.48,7.7c25.49,6.53,51.43,9.08,77.65,9.88,7.61.23,13.72-1.44,18.52-7.47,1-1.26,2.48-2.9,3.82-3,5.82-.35,11.93-1.83,16.33,4.24,3.59,5,8.81,6.38,15,6.24,25.73-.57,51.18-3.12,76.29-9,6.72-1.56,12.2-4.42,16.87-9.71,22.31-25.28,41.23-52.75,54.92-83.64,11-24.75,17.81-50.57,18-77.8.17-21.75-2.72-43.21-7.52-64.38C368.72,234.25,357,202.07,342.73,170.79Zm19.21,172.08c-1.47,18.76-6.62,36.64-13.88,53.93-12.84,30.59-31.32,57.54-53.17,82.3a9.52,9.52,0,0,1-4.44,2.9c-23,5.9-46.55,8.16-70.24,8.75a7.12,7.12,0,0,1-5-2.5c-5.25-6.73-12-9.12-20.28-8.07a16.64,16.64,0,0,1-4,0c-9.18-1-17.16.91-23,8.76a5.94,5.94,0,0,1-4.33,1.74c-23.38-.44-46.54-2.8-69.26-8.5a11.23,11.23,0,0,1-5.39-3.2c-27.24-30.94-49.27-64.95-61.13-104.88-7.06-23.75-7.53-47.85-4.4-72.23,5.85-45.63,21.81-88,40.74-129.53,1.21-2.67,2.74-3.22,5.42-2.82a92,92,0,0,0,12.92,1.23,19.26,19.26,0,0,0,8.13-1.6c3.83-1.79,5.86-6.53,5.09-10.53-.86-4.47-3.37-7.64-8-8.49-3.58-.66-7.25-.89-11.84-1.42l8.2-15.48c3.73,3.21,7.06,6.11,10.41,9a68.06,68.06,0,0,0,6.9,5.73,10.27,10.27,0,0,0,12.81-1.71c3.33-3.45,4.23-9.07,1.29-12.84a82.63,82.63,0,0,0-9.45-9.54c-3.3-3-6.81-5.88-10.21-8.83a6.29,6.29,0,0,1-.74-1.27c5.24-8.57,10.22-17.62,16.09-26a33.51,33.51,0,0,0,6.46-19.93A90.91,90.91,0,0,1,123.19,36c1.14-3,2.67-5.95,4.64-10.28,6.44,8.89,12.22,16.74,17.84,24.7,1.82,2.57,3.26,5.42,4.87,8.14a10.86,10.86,0,0,0,9.9,5.69q31.49.06,63,.06c5.09,0,8.1-2.9,10.77-6.9,6.3-9.39,12.89-18.59,19.38-27.84a39.15,39.15,0,0,1,2.62-2.94c1.47,3,2.88,5.48,4,8.11,4.75,11.43,6.07,23.5,6.19,35.71A25.82,25.82,0,0,0,271,84.87c6.21,9.45,12,19.18,18.29,29.29-2.07,1.78-4.07,3.45-6,5.18-4.24,3.75-8.64,7.35-12.65,11.34-4.86,4.84-5.05,11.34-.87,15.62,4,4.12,10.21,4.19,15.31-.1,4.84-4.07,9.47-8.38,14.83-13.15,2.79,5.34,5.34,10.24,8.12,15.55-4.5.58-8.46.8-12.27,1.65-4.59,1-7.87,5.81-7.69,10.45a10.31,10.31,0,0,0,8,9.6,22.24,22.24,0,0,0,5.93.44c4.32-.26,8.64-.64,12.93-1.19,2.31-.3,3.61.25,4.66,2.5,17.56,37.53,31.92,76.14,39.17,117.1C361.87,306.9,363.35,324.84,361.94,342.87ZM192.61,171C109.76,170.74,42,238.48,42.68,321c.64,82,67.5,148.74,148.85,148.55A149.4,149.4,0,0,0,341.18,319.78C341.29,238.37,274.24,171.22,192.61,171Zm-.52,277.14a127.53,127.53,0,0,1-128-126.6C63.22,251,120,192.86,191.55,192.3c69.44.13,127,54.82,128.25,125.93A127.68,127.68,0,0,1,192.09,448.12Zm53.13-319.87A21.5,21.5,0,0,0,266.5,108.5c.43-5.59-2.05-9.68-7.44-11.48a5.28,5.28,0,0,1-3.87-3.83c-1.77-5.4-5.89-7.91-11.45-7.5a21.31,21.31,0,0,0,1.48,42.56Zm-61.39,17.6c5.42,5,10.89,4.91,16.41-.2,3.17-3,6.17-6.08,9.23-9.14,3.51-3.52,4.65-7.66,2.86-12.34s-5.68-6.34-10.3-6.59c-3.32-.17-6.66,0-10,0v.18c-4,0-8-.47-12,.1-9,1.3-12.39,10.86-6.41,17.7A135.52,135.52,0,0,0,183.83,145.85Zm-45-17.65a21.39,21.39,0,0,0,20.93-19c.64-6-2-10.48-7.66-12.33a4.53,4.53,0,0,1-3.48-3.5c-1.59-5.33-5.85-8-11.37-7.65a21.26,21.26,0,0,0,1.58,42.47Zm13.27-31.32a4.53,4.53,0,0,1-3.48-3.5c-1.59-5.33-5.85-8-11.37-7.65a21.26,21.26,0,0,0,1.58,42.47,21.39,21.39,0,0,0,20.93-19C160.42,103.23,157.75,98.73,152.12,96.88Zm60.21,27.29c-1.78-4.64-5.68-6.34-10.3-6.59-3.32-.17-6.66,0-10,0v.18c-4,0-8-.47-12,.1-9,1.3-12.39,10.86-6.41,17.7a135.52,135.52,0,0,0,10.16,10.32c5.42,5,10.89,4.91,16.41-.2,3.17-3,6.17-6.08,9.23-9.14C213,133,214.12,128.85,212.33,124.17ZM259.06,97a5.28,5.28,0,0,1-3.87-3.83c-1.77-5.4-5.89-7.91-11.45-7.5A21.31,21.31,0,1,0,266.5,108.5C266.93,102.91,264.45,98.82,259.06,97Zm-66.45,74C109.76,170.74,42,238.48,42.68,321c.64,82,67.5,148.74,148.85,148.55A149.4,149.4,0,0,0,341.18,319.78C341.29,238.37,274.24,171.22,192.61,171Zm-.52,277.14a127.53,127.53,0,0,1-128-126.6C63.22,251,120,192.86,191.55,192.3c69.44.13,127,54.82,128.25,125.93A127.68,127.68,0,0,1,192.09,448.12ZM192.61,171C109.76,170.74,42,238.48,42.68,321c.64,82,67.5,148.74,148.85,148.55A149.4,149.4,0,0,0,341.18,319.78C341.29,238.37,274.24,171.22,192.61,171Zm-.52,277.14a127.53,127.53,0,0,1-128-126.6C63.22,251,120,192.86,191.55,192.3c69.44.13,127,54.82,128.25,125.93A127.68,127.68,0,0,1,192.09,448.12Zm67-351.1a5.28,5.28,0,0,1-3.87-3.83c-1.77-5.4-5.89-7.91-11.45-7.5A21.31,21.31,0,1,0,266.5,108.5C266.93,102.91,264.45,98.82,259.06,97Zm-46.73,27.15c-1.78-4.64-5.68-6.34-10.3-6.59-3.32-.17-6.66,0-10,0v.18c-4,0-8-.47-12,.1-9,1.3-12.39,10.86-6.41,17.7a135.52,135.52,0,0,0,10.16,10.32c5.42,5,10.89,4.91,16.41-.2,3.17-3,6.17-6.08,9.23-9.14C213,133,214.12,128.85,212.33,124.17ZM152.12,96.88a4.53,4.53,0,0,1-3.48-3.5c-1.59-5.33-5.85-8-11.37-7.65a21.26,21.26,0,0,0,1.58,42.47,21.39,21.39,0,0,0,20.93-19C160.42,103.23,157.75,98.73,152.12,96.88Zm0,0a4.53,4.53,0,0,1-3.48-3.5c-1.59-5.33-5.85-8-11.37-7.65a21.26,21.26,0,0,0,1.58,42.47,21.39,21.39,0,0,0,20.93-19C160.42,103.23,157.75,98.73,152.12,96.88Zm60.21,27.29c-1.78-4.64-5.68-6.34-10.3-6.59-3.32-.17-6.66,0-10,0v.18c-4,0-8-.47-12,.1-9,1.3-12.39,10.86-6.41,17.7a135.52,135.52,0,0,0,10.16,10.32c5.42,5,10.89,4.91,16.41-.2,3.17-3,6.17-6.08,9.23-9.14C213,133,214.12,128.85,212.33,124.17ZM259.06,97a5.28,5.28,0,0,1-3.87-3.83c-1.77-5.4-5.89-7.91-11.45-7.5A21.31,21.31,0,1,0,266.5,108.5C266.93,102.91,264.45,98.82,259.06,97Zm-66.45,74C109.76,170.74,42,238.48,42.68,321c.64,82,67.5,148.74,148.85,148.55A149.4,149.4,0,0,0,341.18,319.78C341.29,238.37,274.24,171.22,192.61,171Zm-.52,277.14a127.53,127.53,0,0,1-128-126.6C63.22,251,120,192.86,191.55,192.3c69.44.13,127,54.82,128.25,125.93A127.68,127.68,0,0,1,192.09,448.12ZM192.61,171C109.76,170.74,42,238.48,42.68,321c.64,82,67.5,148.74,148.85,148.55A149.4,149.4,0,0,0,341.18,319.78C341.29,238.37,274.24,171.22,192.61,171Zm-.52,277.14a127.53,127.53,0,0,1-128-126.6C63.22,251,120,192.86,191.55,192.3c69.44.13,127,54.82,128.25,125.93A127.68,127.68,0,0,1,192.09,448.12Zm67-351.1a5.28,5.28,0,0,1-3.87-3.83c-1.77-5.4-5.89-7.91-11.45-7.5A21.31,21.31,0,1,0,266.5,108.5C266.93,102.91,264.45,98.82,259.06,97Zm-46.73,27.15c-1.78-4.64-5.68-6.34-10.3-6.59-3.32-.17-6.66,0-10,0v.18c-4,0-8-.47-12,.1-9,1.3-12.39,10.86-6.41,17.7a135.52,135.52,0,0,0,10.16,10.32c5.42,5,10.89,4.91,16.41-.2,3.17-3,6.17-6.08,9.23-9.14C213,133,214.12,128.85,212.33,124.17ZM152.12,96.88a4.53,4.53,0,0,1-3.48-3.5c-1.59-5.33-5.85-8-11.37-7.65a21.26,21.26,0,0,0,1.58,42.47,21.39,21.39,0,0,0,20.93-19C160.42,103.23,157.75,98.73,152.12,96.88Z"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    className: "cls-1",
+    d: "M342.73,170.79c-.81-1.78-1.51-3.6-2.4-5.71,5.57-2,10.87-3.39,15.81-5.62,7.41-3.36,14.75-7,21.81-11,6-3.46,7.52-9.64,4.35-14.94-3-5-8.94-6.46-14.84-3.49-2.37,1.19-4.61,2.67-6.95,3.94A114.87,114.87,0,0,1,330.45,145c-4.3-8.2-8.52-16.24-12.91-24.63,3.72-2.17,6.91-4.26,10.3-6,7.47-3.75,15.11-6.93,23.64-7.47,4.77-.31,8.71-2.42,10.4-7.27,2.66-7.59-3.25-15.11-11.77-13.88a125.77,125.77,0,0,0-24,6.11c-6.65,2.36-12.76,6.19-19.32,9.48-5.62-8.92-11.22-17.57-16.52-26.4a16.55,16.55,0,0,1-2.31-7.37c-.71-13.72-2.54-27.18-7.56-40.07-3.49-9-8.06-17.2-15.64-23.4C257.9-1.42,252.53-1,246.41,5.44a196.29,196.29,0,0,0-26.66,34.23,6.09,6.09,0,0,1-6,3.37c-13.83-.15-27.67-.25-41.5,0-4.34.08-6.67-1.48-9.25-5-8.41-11.36-17.23-22.43-26.3-33.26-5-5.95-10.94-6.46-16.62-1.26a64,64,0,0,0-12,14.49C99.3,33.12,97,50,96,67.05c-.11,2-.09,4.19-1,5.75-5.76,9.54-11.78,18.92-18,28.86-2.4-1.33-4.35-2.61-6.45-3.53-8.37-3.64-16.62-7.72-25.26-10.54-4.88-1.59-10.5-1.69-15.69-1.3-4.93.37-8.07,5-8.11,9.89a10.16,10.16,0,0,0,7.94,10.17,46.58,46.58,0,0,0,5.42.81c11.72,1.47,21.58,7.16,31.61,13.39-4.49,8.45-8.74,16.48-13,24.56-2.1-.51-3.72-.86-5.31-1.3a124,124,0,0,1-30.63-13.18c-6.59-3.93-12.91-2.46-16,3.11S.32,145.08,6.64,148.91a104.19,104.19,0,0,0,12.25,6.71c7.9,3.43,16,6.43,24.44,9.78-.64,1.59-1.28,3.24-2,4.89-5.34,12.92-11,25.7-16,38.78C12.1,244.45,2.64,280.69.41,318.68-1.2,346.14,3.47,372.43,13.16,398,26.94,434.26,48.28,465.86,74,494.71a24.21,24.21,0,0,0,12.48,7.7c25.49,6.53,51.43,9.08,77.65,9.88,7.61.23,13.72-1.44,18.52-7.47,1-1.26,2.48-2.9,3.82-3,5.82-.35,11.93-1.83,16.33,4.24,3.59,5,8.81,6.38,15,6.24,25.73-.57,51.18-3.12,76.29-9,6.72-1.56,12.2-4.42,16.87-9.71,22.31-25.28,41.23-52.75,54.92-83.64,11-24.75,17.81-50.57,18-77.8.17-21.75-2.72-43.21-7.52-64.38C368.72,234.25,357,202.07,342.73,170.79Zm19.21,172.08c-1.47,18.76-6.62,36.64-13.88,53.93-12.84,30.59-31.32,57.54-53.17,82.3a9.52,9.52,0,0,1-4.44,2.9c-23,5.9-46.55,8.16-70.24,8.75a7.12,7.12,0,0,1-5-2.5c-5.25-6.73-12-9.12-20.28-8.07a16.64,16.64,0,0,1-4,0c-9.18-1-17.16.91-23,8.76a5.94,5.94,0,0,1-4.33,1.74c-23.38-.44-46.54-2.8-69.26-8.5a11.23,11.23,0,0,1-5.39-3.2c-27.24-30.94-49.27-64.95-61.13-104.88-7.06-23.75-7.53-47.85-4.4-72.23,5.85-45.63,21.81-88,40.74-129.53,1.21-2.67,2.74-3.22,5.42-2.82a92,92,0,0,0,12.92,1.23,19.26,19.26,0,0,0,8.13-1.6c3.83-1.79,5.86-6.53,5.09-10.53-.86-4.47-3.37-7.64-8-8.49-3.58-.66-7.25-.89-11.84-1.42l8.2-15.48c3.73,3.21,7.06,6.11,10.41,9a68.06,68.06,0,0,0,6.9,5.73,10.27,10.27,0,0,0,12.81-1.71c3.33-3.45,4.23-9.07,1.29-12.84a82.63,82.63,0,0,0-9.45-9.54c-3.3-3-6.81-5.88-10.21-8.83a6.29,6.29,0,0,1-.74-1.27c5.24-8.57,10.22-17.62,16.09-26a33.51,33.51,0,0,0,6.46-19.93A90.91,90.91,0,0,1,123.19,36c1.14-3,2.67-5.95,4.64-10.28,6.44,8.89,12.22,16.74,17.84,24.7,1.82,2.57,3.26,5.42,4.87,8.14a10.86,10.86,0,0,0,9.9,5.69q31.49.06,63,.06c5.09,0,8.1-2.9,10.77-6.9,6.3-9.39,12.89-18.59,19.38-27.84a39.15,39.15,0,0,1,2.62-2.94c1.47,3,2.88,5.48,4,8.11,4.75,11.43,6.07,23.5,6.19,35.71A25.82,25.82,0,0,0,271,84.87c6.21,9.45,12,19.18,18.29,29.29-2.07,1.78-4.07,3.45-6,5.18-4.24,3.75-8.64,7.35-12.65,11.34-4.86,4.84-5.05,11.34-.87,15.62,4,4.12,10.21,4.19,15.31-.1,4.84-4.07,9.47-8.38,14.83-13.15,2.79,5.34,5.34,10.24,8.12,15.55-4.5.58-8.46.8-12.27,1.65-4.59,1-7.87,5.81-7.69,10.45a10.31,10.31,0,0,0,8,9.6,22.24,22.24,0,0,0,5.93.44c4.32-.26,8.64-.64,12.93-1.19,2.31-.3,3.61.25,4.66,2.5,17.56,37.53,31.92,76.14,39.17,117.1C361.87,306.9,363.35,324.84,361.94,342.87Z"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    className: "cls-1",
+    d: "M192.61,171C109.76,170.74,42,238.48,42.68,321c.64,82,67.5,148.74,148.85,148.55A149.4,149.4,0,0,0,341.18,319.78C341.29,238.37,274.24,171.22,192.61,171Zm-.52,277.14a127.53,127.53,0,0,1-128-126.6C63.22,251,120,192.86,191.55,192.3c69.44.13,127,54.82,128.25,125.93A127.68,127.68,0,0,1,192.09,448.12Z"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    className: "cls-1",
+    d: "M266.5,108.5a21.3,21.3,0,1,1-22.76-22.81c5.56-.41,9.68,2.1,11.45,7.5A5.28,5.28,0,0,0,259.06,97C264.45,98.82,266.93,102.91,266.5,108.5Z"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    className: "cls-1",
+    d: "M159.78,109.21a21.29,21.29,0,0,1-42.45-2,21.17,21.17,0,0,1,19.94-21.48c5.52-.32,9.78,2.32,11.37,7.65a4.53,4.53,0,0,0,3.48,3.5C157.75,98.73,160.42,103.23,159.78,109.21Z"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    className: "cls-1",
+    d: "M209.47,136.51c-3.06,3.06-6.06,6.19-9.23,9.14-5.52,5.11-11,5.22-16.41.2a135.52,135.52,0,0,1-10.16-10.32c-6-6.84-2.56-16.4,6.41-17.7,3.91-.57,8-.1,12-.1v-.18c3.33,0,6.67-.14,10,0,4.62.25,8.52,2,10.3,6.59S213,133,209.47,136.51Z"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    className: "cls-1",
+    d: "M249.2,376.43a8,8,0,0,1-11,2.66C208,360.66,170.09,356.5,125.39,366.71a8,8,0,0,1-3.56-15.6c48.91-11.18,90.87-6.37,124.72,14.31A8,8,0,0,1,249.2,376.43Zm15.72-35a10,10,0,0,1-13.78,3.3c-34.5-21.21-87.12-27.36-127.95-15a10,10,0,1,1-5.82-19.16C164,296.49,222,303.34,261.62,327.7A10,10,0,0,1,264.92,341.46Zm1.35-36.4c-41.39-24.59-109.67-26.85-149.18-14.85a12,12,0,1,1-7-23c45.36-13.77,120.76-11.11,168.41,17.18a12,12,0,1,1-12.26,20.66Z"
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TotoroLogo);
 
 /***/ }),
 
@@ -3158,6 +3296,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _collection_details__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../collection/details */ "./frontend/components/collection/details.jsx");
 /* harmony import */ var _hocs_loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hocs/loader */ "./frontend/components/hocs/loader.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 //must pass down the following to Details:
 // props = {
 // 	imageUrl:
@@ -3173,75 +3319,59 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var playlistId = +ownProps.match.params.playlistId;
   var playlist = Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_1__["hydratedSinglePlaylistSelector"])(state.entities, playlistId);
-
-  if (playlist === undefined) {
-    return {
-      initialWrappedProps: undefined
-    };
-  }
-
+  if (playlist === undefined) return {};
   return {
-    initialWrappedProps: {
-      typeObject: state.entities.playlists[playlistId],
-      imageUrl: playlist.coverUrl,
-      title: playlist.name,
-      subTitle: playlist.creator.username,
-      songsArr: playlist.playlistSongs,
-      detailsText: "".concat(playlist.playlistSongs.length, " SONGS"),
-      type: "playlist"
-    }
+    currentUserId: state.session.id,
+    typeObject: state.entities.playlists[playlistId],
+    imageUrl: playlist.coverUrl,
+    title: playlist.name,
+    subTitle: playlist.creator.username,
+    songsArr: playlist.playlistSongs,
+    detailsText: "".concat(playlist.playlistSongs.length, " SONGS"),
+    type: "playlist"
   };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-  var playlistId = ownProps.match.params.playlistId;
-  return {
-    wrappedPropsLoader: function wrappedPropsLoader() {
-      return dispatch(Object(_actions_playlist_actions__WEBPACK_IMPORTED_MODULE_2__["fetchOnePlaylist"])(playlistId));
-    },
-    deletePlaylist: function (_deletePlaylist) {
-      function deletePlaylist(_x) {
-        return _deletePlaylist.apply(this, arguments);
-      }
-
-      deletePlaylist.toString = function () {
-        return _deletePlaylist.toString();
-      };
-
-      return deletePlaylist;
-    }(function (id) {
-      return dispatch(deletePlaylist(id));
-    }) // playSongs:
-
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_hocs_loader__WEBPACK_IMPORTED_MODULE_4__["default"])(_collection_details__WEBPACK_IMPORTED_MODULE_3__["default"])))); // const mapDispatchToProps = (dispatch, ownProps) => {
+}; // const mapDispatchToProps = (dispatch, ownProps) => {
 //   const playlistId = ownProps.match.params.playlistId;
 //   return {
-//     fetchOnePlaylistLoader: () => dispatch(fetchOnePlaylist(playlistId)),
+//     wrappedPropsLoader: () => dispatch(fetchOnePlaylist(playlistId)),
 //     deletePlaylist: (id) => dispatch(deletePlaylist(id))
 //     // playSongs:
 //   };
 // };
-// const mergeProps = (connectedProps, connectedDispatch) => {
-//   // debugger;
-//   const {
-//     fetchOnePlaylistLoader,
-//     ...restConnectedDispatch
-//   } = connectedDispatch;
-//   return {
-//     initialWrappedProps: {
-//       ...connectedProps,
-//       ...restConnectedDispatch
-//     },
-//     wrappedPropsLoader: () => fetchOnePlaylistLoader(),
-//   }
-// };
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps, mergeProps)(loader(Details)));
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(loader(Details)));
+
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+  var playlistId = ownProps.match.params.playlistId;
+  return {
+    fetchOnePlaylistLoader: function fetchOnePlaylistLoader() {
+      return dispatch(Object(_actions_playlist_actions__WEBPACK_IMPORTED_MODULE_2__["fetchOnePlaylist"])(playlistId));
+    },
+    deletePlaylist: function deletePlaylist(id) {
+      return dispatch(Object(_actions_playlist_actions__WEBPACK_IMPORTED_MODULE_2__["deletePlaylist"])(id));
+    } // playSongs:
+
+  };
+};
+
+var mergeProps = function mergeProps(connectedProps, connectedDispatch) {
+  // debugger;
+  var fetchOnePlaylistLoader = connectedDispatch.fetchOnePlaylistLoader,
+      restConnectedDispatch = _objectWithoutProperties(connectedDispatch, ["fetchOnePlaylistLoader"]);
+
+  return {
+    initialWrappedProps: _objectSpread({}, connectedProps, restConnectedDispatch),
+    wrappedPropsLoader: function wrappedPropsLoader() {
+      return fetchOnePlaylistLoader();
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps, mergeProps)(Object(_hocs_loader__WEBPACK_IMPORTED_MODULE_4__["default"])(Object(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["withRouter"])(_collection_details__WEBPACK_IMPORTED_MODULE_3__["default"]))));
 
 /***/ }),
 
@@ -3849,20 +3979,25 @@ function (_React$Component) {
           removeSongFromPlaylist = _this$props.removeSongFromPlaylist,
           openModal = _this$props.openModal,
           currentUserId = _this$props.currentUserId;
-      var songs = songsArr.map(function (song, i) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_song_list_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          key: i,
-          song: song,
-          removeSongFromPlaylist: removeSongFromPlaylist,
-          openModal: openModal,
-          typeObject: typeObject,
-          type: type,
-          currentUserId: currentUserId
+
+      if (songsArr) {
+        var songs = songsArr.map(function (song, i) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_song_list_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            key: i,
+            song: song,
+            removeSongFromPlaylist: removeSongFromPlaylist,
+            openModal: openModal,
+            typeObject: typeObject,
+            type: type,
+            currentUserId: currentUserId
+          });
         });
-      });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "song-list"
-      }, songs);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "song-list"
+        }, songs);
+      } else {
+        return null;
+      }
     }
   }]);
 
@@ -4052,7 +4187,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: this.handleAddToPlaylist(),
         className: "dropdown"
-      }, "Add to Playlist"), type === "playlist" && currentUserId === typeObject.creator_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Add to Playlist"), type === "playlist" && currentUserId === typeObject.creatorId ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick(e) {
           return removeSongFromPlaylist(song.playlistSongsKey);
         },
@@ -4119,47 +4254,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _hocs_loader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../hocs/loader */ "./frontend/components/hocs/loader.jsx");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-
-
-
-
-var mapStateToProps = function mapStateToProps(state) {
-  var songs = state.entities.songs;
-
-  if (lodash__WEBPACK_IMPORTED_MODULE_5__["isEmpty"](songs)) {
-    return {
-      initialWrappedProps: undefined
-    };
-  }
-
-  return {
-    initialWrappedProps: {
-      songsArr: Object.values(songs)
-    }
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    // addSongToPlaylist: (songId, playlistId) => dispatch(addSongToPlaylist(songId, playlistId)),
-    removeSongFromPlaylist: function removeSongFromPlaylist(playlistSongId) {
-      return dispatch(Object(_actions_playlist_song_actions__WEBPACK_IMPORTED_MODULE_2__["removeSongFromPlaylist"])(playlistSongId));
-    },
-    openModal: function openModal(modal, modalInfo) {
-      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["openModal"])(modal, modalInfo));
-    },
-    wrappedPropsLoader: function wrappedPropsLoader() {
-      return dispatch(Object(_actions_song_actions__WEBPACK_IMPORTED_MODULE_3__["fetchAllSongs"])());
-    } // playSongs:
-
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(Object(_hocs_loader__WEBPACK_IMPORTED_MODULE_6__["default"])(_song_list__WEBPACK_IMPORTED_MODULE_1__["default"]))); // import {
+// import {
 //   connect
 // } from 'react-redux';
 // import SongList from './song_list';
@@ -4197,20 +4300,56 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 //     // playSongs:
 //   };
 // };
-// const mergeProps = (connectedProps, connectedDispatch) => {
-//   const {
-//     wrappedPropsLoader,
-//     ...restConnectedDispatch
-//   } = connectedDispatch;
-//   return {
-//     initialWrappedProps: {
-//       ...connectedProps,
-//       ...restConnectedDispatch
-//     },
-//     wrappedPropsLoader
-//   }
-// };
-// export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(loader(SongList));
+// export default connect(mapStateToProps, mapDispatchToProps)(loader(SongList));
+
+
+
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  var songs = state.entities.songs;
+
+  if (lodash__WEBPACK_IMPORTED_MODULE_5__["isEmpty"](songs)) {
+    return {
+      songsArr: undefined
+    };
+  }
+
+  return {
+    songsArr: Object.values(songs)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    // addSongToPlaylist: (songId, playlistId) => dispatch(addSongToPlaylist(songId, playlistId)),
+    removeSongFromPlaylist: function removeSongFromPlaylist(playlistSongId) {
+      return dispatch(Object(_actions_playlist_song_actions__WEBPACK_IMPORTED_MODULE_2__["removeSongFromPlaylist"])(playlistSongId));
+    },
+    openModal: function openModal(modal, modalInfo) {
+      return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["openModal"])(modal, modalInfo));
+    },
+    wrappedPropsLoader: function wrappedPropsLoader() {
+      return dispatch(Object(_actions_song_actions__WEBPACK_IMPORTED_MODULE_3__["fetchAllSongs"])());
+    } // playSongs:
+
+  };
+};
+
+var mergeProps = function mergeProps(connectedProps, connectedDispatch) {
+  var wrappedPropsLoader = connectedDispatch.wrappedPropsLoader,
+      restConnectedDispatch = _objectWithoutProperties(connectedDispatch, ["wrappedPropsLoader"]);
+
+  return {
+    initialWrappedProps: _objectSpread({}, connectedProps, restConnectedDispatch),
+    wrappedPropsLoader: wrappedPropsLoader
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps, mergeProps)(Object(_hocs_loader__WEBPACK_IMPORTED_MODULE_6__["default"])(_song_list__WEBPACK_IMPORTED_MODULE_1__["default"])));
 
 /***/ }),
 
@@ -4617,7 +4756,7 @@ var hydratedSinglePlaylistSelector = function hydratedSinglePlaylistSelector(ent
   var playlistSongsJoins = entities.playlistSongs;
   var songs = entities.songs;
 
-  if (lodash__WEBPACK_IMPORTED_MODULE_0__["isUndefined"](playlist) || lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"](users) || lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"](playlistSongsJoins) || lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"](songs)) {
+  if (lodash__WEBPACK_IMPORTED_MODULE_0__["isUndefined"](playlist) || lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"](users)) {
     return undefined;
   }
 
@@ -4650,12 +4789,17 @@ var hydratedPlaylistsSelector = function hydratedPlaylistsSelector(entities) {
 
   var result = Object.values(playlists).map(function (playlist) {
     var creator = users[playlist.creatorId];
-    return _objectSpread({}, playlist, {
-      creatorId: undefined,
-      creator: creator
-    });
+
+    if (creator) {
+      return _objectSpread({}, playlist, {
+        creatorId: undefined,
+        creator: creator
+      });
+    } else {
+      return undefined;
+    }
   });
-  return result;
+  return lodash__WEBPACK_IMPORTED_MODULE_0__["compact"](result);
 };
 var currentUserPlaylistsSelector = function currentUserPlaylistsSelector(entities, currentUserId) {
   var playlists = entities.playlists; // const playlistSongs = entities.playlistSongs;
@@ -4860,6 +5004,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/user_actions */ "./frontend/actions/user_actions.js");
+
 
 
 
@@ -4871,6 +5017,12 @@ var usersReducer = function usersReducer() {
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CURRENT_USER"]:
       return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, action.currentUser);
+
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_ALL_USERS"]:
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, action.users);
+
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_ONE_USER"]:
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, action.user);
 
     default:
       return state;

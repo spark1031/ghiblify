@@ -21,62 +21,61 @@ import {
   withRouter
 } from 'react-router-dom';
 
+import {
+  deletePlaylist as deletePlaylistAction
+} from '../../actions/playlist_actions';
+
 const mapStateToProps = (state, ownProps) => {
   const playlistId = +ownProps.match.params.playlistId;
   const playlist = hydratedSinglePlaylistSelector(state.entities, playlistId);
-  if (playlist === undefined) {
-    return {
-      initialWrappedProps: undefined
-    };
-  }
+  if (playlist === undefined) return {};
   return {
-    initialWrappedProps: {
-      typeObject: state.entities.playlists[playlistId],
-      imageUrl: playlist.coverUrl,
-      title: playlist.name,
-      subTitle: playlist.creator.username,
-      songsArr: playlist.playlistSongs,
-      detailsText: `${playlist.playlistSongs.length} SONGS`,
-      type: "playlist"
-    }
+    currentUserId: state.session.id,
+    typeObject: state.entities.playlists[playlistId],
+    imageUrl: playlist.coverUrl,
+    title: playlist.name,
+    subTitle: playlist.creator.username,
+    songsArr: playlist.playlistSongs,
+    detailsText: `${playlist.playlistSongs.length} SONGS`,
+    type: "playlist"
   };
 };
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  const playlistId = ownProps.match.params.playlistId;
-  return {
-    wrappedPropsLoader: () => dispatch(fetchOnePlaylist(playlistId)),
-    deletePlaylist: (id) => dispatch(deletePlaylist(id))
-    // playSongs:
-  };
-};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(loader(Details)));
-
-
 
 // const mapDispatchToProps = (dispatch, ownProps) => {
 //   const playlistId = ownProps.match.params.playlistId;
 //   return {
-//     fetchOnePlaylistLoader: () => dispatch(fetchOnePlaylist(playlistId)),
+//     wrappedPropsLoader: () => dispatch(fetchOnePlaylist(playlistId)),
 //     deletePlaylist: (id) => dispatch(deletePlaylist(id))
 //     // playSongs:
 //   };
 // };
 
-// const mergeProps = (connectedProps, connectedDispatch) => {
-//   // debugger;
-//   const {
-//     fetchOnePlaylistLoader,
-//     ...restConnectedDispatch
-//   } = connectedDispatch;
-//   return {
-//     initialWrappedProps: {
-//       ...connectedProps,
-//       ...restConnectedDispatch
-//     },
-//     wrappedPropsLoader: () => fetchOnePlaylistLoader(),
-//   }
-// };
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(loader(Details)));
 
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps, mergeProps)(loader(Details)));
+
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const playlistId = ownProps.match.params.playlistId;
+  return {
+    fetchOnePlaylistLoader: () => dispatch(fetchOnePlaylist(playlistId)),
+    deletePlaylist: (id) => dispatch(deletePlaylistAction(id))
+    // playSongs:
+  };
+};
+
+const mergeProps = (connectedProps, connectedDispatch) => {
+  // debugger;
+  const {
+    fetchOnePlaylistLoader,
+    ...restConnectedDispatch
+  } = connectedDispatch;
+  return {
+    initialWrappedProps: {
+      ...connectedProps,
+      ...restConnectedDispatch
+    },
+    wrappedPropsLoader: () => fetchOnePlaylistLoader(),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(loader(withRouter(Details)));
