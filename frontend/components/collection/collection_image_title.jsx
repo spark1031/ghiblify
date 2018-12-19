@@ -24,8 +24,7 @@ class CollectionImageTitle extends React.Component {
 			circular, //needed for artists
 			onClick, //coming for add to playlist form
 			overlayIcon, //coming from add to playlist form?
-			updateTrackList, //coming from Playlist/AlbumDetailsContainers OR Playlist/AlbumContainers
-			tracks
+			onPlayButtonClick //coming from Playlist/AlbumDetailsContainers OR Playlist/AlbumContainers
 		} = this.props;
 
 		let imageClass;
@@ -33,8 +32,7 @@ class CollectionImageTitle extends React.Component {
 		const overlay = this.state.isHovering ? (
 			<PlayButtonOverlay
 				overlayIcon={overlayIcon}
-				updateTrackList={updateTrackList}
-				tracks={tracks}
+				onClick={onPlayButtonClick}
 			/>
 		) : null;
 

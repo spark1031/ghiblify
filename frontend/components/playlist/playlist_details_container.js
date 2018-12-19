@@ -22,7 +22,8 @@ import {
 } from 'react-router-dom';
 
 import {
-  updateTrackList
+  toggleIsPlaying,
+  updateCurrentPlayingPlaylist
 } from '../../actions/music_player_actions';
 
 import {
@@ -35,6 +36,7 @@ const mapStateToProps = (state, ownProps) => {
   const playlist = hydratedSinglePlaylistSelector(state.entities, playlistId);
   if (playlist === undefined) return {};
   return {
+    currentPlayingPlaylist: state.ui.musicPlayer.currentPlayingPlaylist,
     currentUserId: state.session.id,
     typeObject: state.entities.playlists[playlistId],
     imageUrl: playlist.coverUrl,
@@ -51,19 +53,44 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchOnePlaylistLoader: () => dispatch(fetchOnePlaylist(playlistId)),
     deletePlaylist: (id) => dispatch(deletePlaylistAction(id)),
-    updateTrackList: (tracks) => dispatch(updateTrackList(tracks))
+    updateTrackList: (tracks, typeObject) => dispatch(updateCurrentPlayingPlaylist(tracks, typeObject)),
+    toggleIsPlaying: () => dispatch(toggleIsPlaying())
   };
 };
 
 const mergeProps = (connectedProps, connectedDispatch) => {
+
   const {
     fetchOnePlaylistLoader,
-    ...restConnectedDispatch
+    deletePlaylist,
+    updateTrackList,
+    toggleIsPlaying,
   } = connectedDispatch;
+
+  const {
+    currentPlayingPlaylist,
+    ...restConnectedProps
+  } = connectedProps;
+
+  // if (connectedState.currentPlayingPlaylist && (connectedState.currentPlayingPlaylist.id === playList.id)) {
+  //   connectedDispatch.toggleIsPlaying();
+  // } else {
+  //   connectedDispatch.updateCurrentPlayingPlaylist(trackList, playList);
+  // }
+
+  const finalUpdateTrackList = (tracks, typeObject) => {
+    if (currentPlayingPlaylist && (currentPlayingPlaylist.id === typeObject.id)) {
+      toggleIsPlaying();
+    } else {
+      updateTrackList(tracks, typeObject);
+    }
+  }
+
   return {
     initialWrappedProps: {
-      ...connectedProps,
-      ...restConnectedDispatch
+      deletePlaylist,
+      updateTrackList: finalUpdateTrackList,
+      ...restConnectedProps,
     },
     wrappedPropsLoader: () => fetchOnePlaylistLoader(),
   }

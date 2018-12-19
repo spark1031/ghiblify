@@ -1,5 +1,7 @@
 import {
-  UPDATE_TRACK_LIST,
+  UPDATE_CURRENT_PLAYING_ALBUM,
+  UPDATE_CURRENT_PLAYING_PLAYLIST,
+  UPDATE_CURRENT_PLAYING_SONGLIST,
   TOGGLE_IS_PLAYING,
   PLAY_NEXT_SONG,
   PLAY_PREVIOUS_SONG
@@ -8,6 +10,8 @@ import {
 import * as _ from 'lodash';
 
 const _initialPlayer = Object.freeze({
+  currentPlayingAlbum: null,
+  currentPlayingPlaylist: null,
   trackList: [],
   currentSongIndex: 0,
   isPlaying: false
@@ -16,12 +20,30 @@ const _initialPlayer = Object.freeze({
 const musicPlayerReducer = (state = _initialPlayer, action) => {
   Object.freeze(state);
   switch (action.type) {
-    case UPDATE_TRACK_LIST:
-      return _.merge({}, state, {
-        trackList: action.trackList,
+    case UPDATE_CURRENT_PLAYING_ALBUM:
+      return {
         currentSongIndex: 0,
+        currentPlayingAlbum: action.album,
+        currentPlayingPlaylist: null,
+        trackList: action.trackList,
         isPlaying: true
-      });
+      };
+    case UPDATE_CURRENT_PLAYING_PLAYLIST:
+      return {
+        currentSongIndex: 0,
+        currentPlayingAlbum: null,
+        currentPlayingPlaylist: action.playlist,
+        trackList: action.trackList,
+        isPlaying: true
+      };
+    case UPDATE_CURRENT_PLAYING_SONGLIST:
+      return {
+        currentSongIndex: 0,
+        currentPlayingAlbum: null,
+        currentPlayingPlaylist: null,
+        trackList: action.trackList,
+        isPlaying: true
+      };
     case TOGGLE_IS_PLAYING:
       return _.merge({}, state, {
         isPlaying: !state.isPlaying

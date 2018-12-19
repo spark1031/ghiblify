@@ -19,8 +19,7 @@ class CollectionItem extends React.Component {
 			title,
 			subTitle,
 			onClick,
-			updateTrackList,
-			tracks //comes from itemInfos in Collection
+			onPlayButtonClick
 		} = this.props;
 		let optional;
 		if (subTitle && secondaryTo) {
@@ -58,8 +57,7 @@ class CollectionItem extends React.Component {
 						imageUrl={imageUrl}
 						title={title}
 						circular={circular}
-						updateTrackList={updateTrackList}
-						tracks={tracks}
+						onPlayButtonClick={onPlayButtonClick}
 					/>
 
 					{optional}

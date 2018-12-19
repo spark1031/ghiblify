@@ -234,16 +234,20 @@ var closeModal = function closeModal() {
 /*!**************************************************!*\
   !*** ./frontend/actions/music_player_actions.js ***!
   \**************************************************/
-/*! exports provided: UPDATE_TRACK_LIST, TOGGLE_IS_PLAYING, PLAY_NEXT_SONG, PLAY_PREVIOUS_SONG, updateTrackList, toggleIsPlaying, playNextSong, playPrevSong */
+/*! exports provided: UPDATE_CURRENT_PLAYING_ALBUM, UPDATE_CURRENT_PLAYING_PLAYLIST, UPDATE_CURRENT_PLAYING_SONG_LIST, TOGGLE_IS_PLAYING, PLAY_NEXT_SONG, PLAY_PREVIOUS_SONG, updateCurrentPlayingAlbum, updateCurrentPlayingPlaylist, updateCurrentPlayingSongList, toggleIsPlaying, playNextSong, playPrevSong */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_TRACK_LIST", function() { return UPDATE_TRACK_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_CURRENT_PLAYING_ALBUM", function() { return UPDATE_CURRENT_PLAYING_ALBUM; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_CURRENT_PLAYING_PLAYLIST", function() { return UPDATE_CURRENT_PLAYING_PLAYLIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_CURRENT_PLAYING_SONG_LIST", function() { return UPDATE_CURRENT_PLAYING_SONG_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_IS_PLAYING", function() { return TOGGLE_IS_PLAYING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLAY_NEXT_SONG", function() { return PLAY_NEXT_SONG; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLAY_PREVIOUS_SONG", function() { return PLAY_PREVIOUS_SONG; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTrackList", function() { return updateTrackList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCurrentPlayingAlbum", function() { return updateCurrentPlayingAlbum; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCurrentPlayingPlaylist", function() { return updateCurrentPlayingPlaylist; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCurrentPlayingSongList", function() { return updateCurrentPlayingSongList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toggleIsPlaying", function() { return toggleIsPlaying; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "playNextSong", function() { return playNextSong; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "playPrevSong", function() { return playPrevSong; });
@@ -256,15 +260,31 @@ __webpack_require__.r(__webpack_exports__);
 //  inside musicPlayerContainer's mapDispatchToProps: updateTrackList: (trackList) => dispatch(updateTrackList(trackList))
 //the button has to tell someone it's been pressed, and whatever is rendering the button has an onClick
 // clickHandler
-var UPDATE_TRACK_LIST = 'UPDATE_TRACK_LIST';
+var UPDATE_CURRENT_PLAYING_ALBUM = 'UPDATE_CURRENT_PLAYING_ALBUM';
+var UPDATE_CURRENT_PLAYING_PLAYLIST = 'UPDATE_CURRENT_PLAYING_PLAYLIST';
+var UPDATE_CURRENT_PLAYING_SONG_LIST = 'UPDATE_CURRENT_PLAYING_SONG_LIST';
 var TOGGLE_IS_PLAYING = 'TOGGLE_IS_PLAYING';
 var PLAY_NEXT_SONG = 'PLAY_NEXT_SONG';
 var PLAY_PREVIOUS_SONG = 'PLAY_PREVIOUS_SONG'; //trackList is an array of songs (for a given playlist/album)
 //corresponding reducer should replace the existing trackList with this new trackList
 
-var updateTrackList = function updateTrackList(trackList) {
+var updateCurrentPlayingAlbum = function updateCurrentPlayingAlbum(trackList, album) {
   return {
-    type: UPDATE_TRACK_LIST,
+    type: UPDATE_CURRENT_PLAYING_ALBUM,
+    trackList: trackList,
+    album: album
+  };
+};
+var updateCurrentPlayingPlaylist = function updateCurrentPlayingPlaylist(trackList, playlist) {
+  return {
+    type: UPDATE_CURRENT_PLAYING_PLAYLIST,
+    trackList: trackList,
+    playlist: playlist
+  };
+};
+var updateCurrentPlayingSongList = function updateCurrentPlayingSongList(trackList) {
+  return {
+    type: UPDATE_CURRENT_PLAYING_SONG_LIST,
     trackList: trackList
   };
 }; //this is to pause or play the music
@@ -993,6 +1013,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var album = Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_1__["hydratedSingleAlbumSelector"])(state.entities, albumId);
   if (album === undefined) return {};
   return {
+    currentPlayingAlbum: state.ui.musicPlayer.currentPlayingAlbum,
     typeObject: state.entities.albums[albumId],
     imageUrl: album.coverUrl,
     title: album.title,
@@ -1009,18 +1030,35 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     fetchOneAlbumLoader: function fetchOneAlbumLoader() {
       return dispatch(Object(_actions_album_actions__WEBPACK_IMPORTED_MODULE_2__["fetchOneAlbum"])(albumId));
     },
-    updateTrackList: function updateTrackList(tracks) {
-      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_5__["updateTrackList"])(tracks));
+    updateTrackList: function updateTrackList(tracks, typeObject) {
+      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_5__["updateCurrentPlayingAlbum"])(tracks, typeObject));
+    },
+    toggleIsPlaying: function toggleIsPlaying() {
+      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_5__["toggleIsPlaying"])());
     }
   };
 };
 
 var mergeProps = function mergeProps(connectedProps, connectedDispatch) {
   var fetchOneAlbumLoader = connectedDispatch.fetchOneAlbumLoader,
-      restConnectedDispatch = _objectWithoutProperties(connectedDispatch, ["fetchOneAlbumLoader"]);
+      updateTrackList = connectedDispatch.updateTrackList,
+      toggleIsPlaying = connectedDispatch.toggleIsPlaying;
+
+  var currentPlayingAlbum = connectedProps.currentPlayingAlbum,
+      restConnectedProps = _objectWithoutProperties(connectedProps, ["currentPlayingAlbum"]);
+
+  var finalUpdateTrackList = function finalUpdateTrackList(tracks, typeObject) {
+    if (currentPlayingAlbum && currentPlayingAlbum.id === typeObject.id) {
+      toggleIsPlaying();
+    } else {
+      updateTrackList(tracks, typeObject);
+    }
+  };
 
   return {
-    initialWrappedProps: _objectSpread({}, connectedProps, restConnectedDispatch),
+    initialWrappedProps: _objectSpread({
+      updateTrackList: finalUpdateTrackList
+    }, restConnectedProps),
     wrappedPropsLoader: function wrappedPropsLoader() {
       return fetchOneAlbumLoader();
     }
@@ -1054,8 +1092,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var musicPlayer = state.ui.musicPlayer;
   return {
-    albums: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["hydratedAlbumsSelector"])(state.entities) || []
+    albums: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["hydratedAlbumsSelector"])(state.entities) || [],
+    currentSong: musicPlayer.trackList[musicPlayer.currentSongIndex],
+    currentPlayingAlbum: musicPlayer.currentPlayingAlbum
   };
 };
 
@@ -1064,17 +1105,29 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     wrappedPropsLoader: function wrappedPropsLoader() {
       return dispatch(Object(_actions_album_actions__WEBPACK_IMPORTED_MODULE_3__["fetchAllAlbums"])());
     },
-    updateTrackList: function updateTrackList(tracks) {
-      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_5__["updateTrackList"])(tracks));
+    updateCurrentPlayingAlbum: function updateCurrentPlayingAlbum(trackList, album) {
+      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_5__["updateCurrentPlayingAlbum"])(trackList, album));
+    },
+    toggleIsPlaying: function toggleIsPlaying() {
+      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_5__["toggleIsPlaying"])());
     }
   };
 };
 
 var mergeProps = function mergeProps(connectedState, connectedDispatch) {
+  var updateCurrentPlayingAlbum = function updateCurrentPlayingAlbum(trackList, album) {
+    if (connectedState.currentPlayingAlbum && connectedState.currentPlayingAlbum.id === album.id) {
+      connectedDispatch.toggleIsPlaying();
+    } else {
+      connectedDispatch.updateCurrentPlayingAlbum(trackList, album);
+    }
+  };
+
   return {
     initialWrappedProps: {
-      collectionItemInfos: connectedState.albums.map(convertAlbumToCollectionItemInfo),
-      updateTrackList: connectedDispatch.updateTrackList
+      collectionItemInfos: connectedState.albums.map(function (album) {
+        return convertAlbumToCollectionItemInfo(album, connectedState.currentPlayingAlbum, updateCurrentPlayingAlbum);
+      })
     },
     wrappedPropsLoader: function wrappedPropsLoader() {
       return connectedDispatch.wrappedPropsLoader();
@@ -1082,14 +1135,18 @@ var mergeProps = function mergeProps(connectedState, connectedDispatch) {
   };
 };
 
-var convertAlbumToCollectionItemInfo = function convertAlbumToCollectionItemInfo(album) {
+var convertAlbumToCollectionItemInfo = function convertAlbumToCollectionItemInfo(album, currentPlayingAlbum, updateCurrentPlayingAlbum) {
+  var isPlaying = currentPlayingAlbum ? album.id === currentPlayingAlbum.id : false;
   return {
     imageUrl: album.coverUrl,
     title: album.title,
     subTitle: album.artist.name,
     primaryTo: "/albums/".concat(album.id),
     secondaryTo: '/artists',
-    tracks: album.albumSongs // primaryTo: `/browse/albums/${album.id}`
+    tracks: album.albumSongs,
+    onPlayButtonClick: function onPlayButtonClick() {
+      updateCurrentPlayingAlbum(album.albumSongs, album);
+    } // primaryTo: `/browse/albums/${album.id}`
     // secondaryTo:
 
   };
@@ -1349,7 +1406,6 @@ function (_React$Component) {
       var _this$props = this.props,
           title = _this$props.title,
           collectionItemInfos = _this$props.collectionItemInfos,
-          updateTrackList = _this$props.updateTrackList,
           songId = _this$props.songId;
       var collectionTitle;
 
@@ -1365,9 +1421,7 @@ function (_React$Component) {
         return (//itemInfo now includes "tracks" for specific collection item
           react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collection_item__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
             key: i
-          }, itemInfo, {
-            updateTrackList: updateTrackList
-          }))
+          }, itemInfo))
         );
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1460,14 +1514,12 @@ function (_React$Component) {
           circular = _this$props.circular,
           onClick = _this$props.onClick,
           overlayIcon = _this$props.overlayIcon,
-          updateTrackList = _this$props.updateTrackList,
-          tracks = _this$props.tracks;
+          onPlayButtonClick = _this$props.onPlayButtonClick;
       var imageClass;
       circular ? imageClass = "image-circular" : imageClass = "image";
       var overlay = this.state.isHovering ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_play_button_overlay__WEBPACK_IMPORTED_MODULE_2__["default"], {
         overlayIcon: overlayIcon,
-        updateTrackList: updateTrackList,
-        tracks: tracks
+        onClick: onPlayButtonClick
       }) : null;
       var imageElement = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: imageClass
@@ -1579,8 +1631,7 @@ function (_React$Component) {
           title = _this$props.title,
           subTitle = _this$props.subTitle,
           onClick = _this$props.onClick,
-          updateTrackList = _this$props.updateTrackList,
-          tracks = _this$props.tracks;
+          onPlayButtonClick = _this$props.onPlayButtonClick;
       var optional;
 
       if (subTitle && secondaryTo) {
@@ -1613,8 +1664,7 @@ function (_React$Component) {
           imageUrl: imageUrl,
           title: title,
           circular: circular,
-          updateTrackList: updateTrackList,
-          tracks: tracks
+          onPlayButtonClick: onPlayButtonClick
         }), optional);
       }
     }
@@ -1708,6 +1758,19 @@ function (_React$Component) {
     key: "playSongs",
     value: function playSongs() {}
   }, {
+    key: "onPlayButtonOverlayClick",
+    value: function onPlayButtonOverlayClick() {
+      var _this3 = this;
+
+      return function () {
+        var _this3$props = _this3.props,
+            updateTrackList = _this3$props.updateTrackList,
+            typeObject = _this3$props.typeObject,
+            songsArr = _this3$props.songsArr;
+        updateTrackList(songsArr, typeObject);
+      };
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -1725,7 +1788,7 @@ function (_React$Component) {
           updateTrackList = _this$props.updateTrackList; //playlist or album object (not hydrated) -> threaded to song list item
 
       var overlay = this.state.isHovering ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collection_play_button_overlay__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        updateTrackList: updateTrackList,
+        onClick: this.onPlayButtonOverlayClick(),
         tracks: songsArr
       }) : null;
       var browseButton = null;
@@ -1867,6 +1930,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
  // import PlayIcon from "./play_icon";
+// props:
+// overlayIcon = { overlayIcon }
+// onClick
 
 var PlayButtonOverlay =
 /*#__PURE__*/
@@ -1880,28 +1946,23 @@ function (_React$Component) {
   }
 
   _createClass(PlayButtonOverlay, [{
-    key: "playCollection",
-    value: function playCollection() {
+    key: "playButtonClicked",
+    // playCollection() {
+    // 	return e => {
+    // 		e.preventDefault();
+    // 		e.stopPropagation();
+    // 		let { updateTrackList, tracks } = this.props;
+    // 		updateTrackList(tracks);
+    // 	};
+    // }
+    value: function playButtonClicked() {
       var _this = this;
 
       return function (e) {
         e.preventDefault();
         e.stopPropagation();
-        var _this$props = _this.props,
-            updateTrackList = _this$props.updateTrackList,
-            tracks = _this$props.tracks; // let { updateTrackList } = this.props;
-        // let song = {
-        // 	id: 19,
-        // 	title: "One Summer's Day",
-        // 	duration: 189,
-        // 	artistId: 4,
-        // 	albumId: 7,
-        // 	songUrl:
-        // 		"/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBMZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--8da6af2a017728e11b674ee8c3921c1e1fd7b258/ano.mp3"
-        // };
-        // let tracks = [song];
-
-        updateTrackList(tracks);
+        var onClick = _this.props.onClick;
+        onClick();
       };
     }
   }, {
@@ -1927,7 +1988,7 @@ function (_React$Component) {
             className: "play-button-overlay"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "play-button",
-            onClick: this.playCollection()
+            onClick: this.playButtonClicked()
           }, icon))
         );
       }
@@ -3573,8 +3634,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var musicPlayer = state.ui.musicPlayer;
   return {
-    playlists: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["hydratedPlaylistsSelector"])(state.entities) || []
+    playlists: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["hydratedPlaylistsSelector"])(state.entities) || [],
+    currentSong: musicPlayer.trackList[musicPlayer.currentSongIndex],
+    currentPlayingPlaylist: musicPlayer.currentPlayingPlaylist
   };
 };
 
@@ -3583,17 +3647,29 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     wrappedPropsLoader: function wrappedPropsLoader() {
       return dispatch(Object(_actions_playlist_actions_js__WEBPACK_IMPORTED_MODULE_3__["fetchAllPlaylists"])());
     },
-    updateTrackList: function updateTrackList(tracks) {
-      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_5__["updateTrackList"])(tracks));
+    updateCurrentPlayingPlaylist: function updateCurrentPlayingPlaylist(trackList, playList) {
+      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_5__["updateCurrentPlayingPlaylist"])(trackList, playList));
+    },
+    toggleIsPlaying: function toggleIsPlaying() {
+      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_5__["toggleIsPlaying"])());
     }
   };
 };
 
 var mergeProps = function mergeProps(connectedState, connectedDispatch) {
+  var updateCurrentPlayingPlaylist = function updateCurrentPlayingPlaylist(trackList, playList) {
+    if (connectedState.currentPlayingPlaylist && connectedState.currentPlayingPlaylist.id === playList.id) {
+      connectedDispatch.toggleIsPlaying();
+    } else {
+      connectedDispatch.updateCurrentPlayingPlaylist(trackList, playList);
+    }
+  };
+
   return {
     initialWrappedProps: {
-      collectionItemInfos: connectedState.playlists.map(convertPlaylistToCollectionItemInfo),
-      updateTrackList: connectedDispatch.updateTrackList
+      collectionItemInfos: connectedState.playlists.map(function (playlist) {
+        return convertPlaylistToCollectionItemInfo(playlist, connectedState.currentPlayingPlaylist, updateCurrentPlayingPlaylist);
+      })
     },
     wrappedPropsLoader: function wrappedPropsLoader() {
       return connectedDispatch.wrappedPropsLoader();
@@ -3601,7 +3677,8 @@ var mergeProps = function mergeProps(connectedState, connectedDispatch) {
   };
 };
 
-var convertPlaylistToCollectionItemInfo = function convertPlaylistToCollectionItemInfo(playlist) {
+var convertPlaylistToCollectionItemInfo = function convertPlaylistToCollectionItemInfo(playlist, currentPlayingPlaylist, updateCurrentPlayingPlaylist) {
+  var isPlaying = currentPlayingPlaylist ? playlist.id === currentPlayingPlaylist.id : false;
   var coverUrl;
   playlist.coverUrl ? coverUrl = playlist.coverUrl : coverUrl = "https://s3.amazonaws.com/ghiblify-resources/Other/pink_playlist_default.jpg";
   return {
@@ -3610,7 +3687,11 @@ var convertPlaylistToCollectionItemInfo = function convertPlaylistToCollectionIt
     subTitle: playlist.creator.username,
     primaryTo: "/playlists/".concat(playlist.id),
     secondaryTo: '/search',
-    tracks: playlist.playlistSongs // secondaryTo: to creator/user's page
+    tracks: playlist.playlistSongs,
+    isPlaying: isPlaying,
+    onPlayButtonClick: function onPlayButtonClick() {
+      updateCurrentPlayingPlaylist(playlist.playlistSongs, playlist);
+    } // secondaryTo: to creator/user's page
 
   };
 };
@@ -3669,6 +3750,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var playlist = Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_1__["hydratedSinglePlaylistSelector"])(state.entities, playlistId);
   if (playlist === undefined) return {};
   return {
+    currentPlayingPlaylist: state.ui.musicPlayer.currentPlayingPlaylist,
     currentUserId: state.session.id,
     typeObject: state.entities.playlists[playlistId],
     imageUrl: playlist.coverUrl,
@@ -3689,18 +3771,42 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     deletePlaylist: function deletePlaylist(id) {
       return dispatch(Object(_actions_playlist_actions__WEBPACK_IMPORTED_MODULE_2__["deletePlaylist"])(id));
     },
-    updateTrackList: function updateTrackList(tracks) {
-      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_6__["updateTrackList"])(tracks));
+    updateTrackList: function updateTrackList(tracks, typeObject) {
+      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_6__["updateCurrentPlayingPlaylist"])(tracks, typeObject));
+    },
+    toggleIsPlaying: function toggleIsPlaying() {
+      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_6__["toggleIsPlaying"])());
     }
   };
 };
 
 var mergeProps = function mergeProps(connectedProps, connectedDispatch) {
   var fetchOnePlaylistLoader = connectedDispatch.fetchOnePlaylistLoader,
-      restConnectedDispatch = _objectWithoutProperties(connectedDispatch, ["fetchOnePlaylistLoader"]);
+      deletePlaylist = connectedDispatch.deletePlaylist,
+      updateTrackList = connectedDispatch.updateTrackList,
+      toggleIsPlaying = connectedDispatch.toggleIsPlaying;
+
+  var currentPlayingPlaylist = connectedProps.currentPlayingPlaylist,
+      restConnectedProps = _objectWithoutProperties(connectedProps, ["currentPlayingPlaylist"]); // if (connectedState.currentPlayingPlaylist && (connectedState.currentPlayingPlaylist.id === playList.id)) {
+  //   connectedDispatch.toggleIsPlaying();
+  // } else {
+  //   connectedDispatch.updateCurrentPlayingPlaylist(trackList, playList);
+  // }
+
+
+  var finalUpdateTrackList = function finalUpdateTrackList(tracks, typeObject) {
+    if (currentPlayingPlaylist && currentPlayingPlaylist.id === typeObject.id) {
+      toggleIsPlaying();
+    } else {
+      updateTrackList(tracks, typeObject);
+    }
+  };
 
   return {
-    initialWrappedProps: _objectSpread({}, connectedProps, restConnectedDispatch),
+    initialWrappedProps: _objectSpread({
+      deletePlaylist: deletePlaylist,
+      updateTrackList: finalUpdateTrackList
+    }, restConnectedProps),
     wrappedPropsLoader: function wrappedPropsLoader() {
       return fetchOnePlaylistLoader();
     }
@@ -5013,6 +5119,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _initialPlayer = Object.freeze({
+  currentPlayingAlbum: null,
+  currentPlayingPlaylist: null,
   trackList: [],
   currentSongIndex: 0,
   isPlaying: false
@@ -5024,12 +5132,32 @@ var musicPlayerReducer = function musicPlayerReducer() {
   Object.freeze(state);
 
   switch (action.type) {
-    case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_TRACK_LIST"]:
-      return lodash__WEBPACK_IMPORTED_MODULE_1__["merge"]({}, state, {
-        trackList: action.trackList,
+    case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_CURRENT_PLAYING_ALBUM"]:
+      return {
         currentSongIndex: 0,
+        currentPlayingAlbum: action.album,
+        currentPlayingPlaylist: null,
+        trackList: action.trackList,
         isPlaying: true
-      });
+      };
+
+    case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_CURRENT_PLAYING_PLAYLIST"]:
+      return {
+        currentSongIndex: 0,
+        currentPlayingAlbum: null,
+        currentPlayingPlaylist: action.playlist,
+        trackList: action.trackList,
+        isPlaying: true
+      };
+
+    case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_CURRENT_PLAYING_SONGLIST"]:
+      return {
+        currentSongIndex: 0,
+        currentPlayingAlbum: null,
+        currentPlayingPlaylist: null,
+        trackList: action.trackList,
+        isPlaying: true
+      };
 
     case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_IS_PLAYING"]:
       return lodash__WEBPACK_IMPORTED_MODULE_1__["merge"]({}, state, {
@@ -5043,11 +5171,15 @@ var musicPlayerReducer = function musicPlayerReducer() {
       });
 
     case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__["PLAY_PREVIOUS_SONG"]:
-      if (state.trackList.length === 0) return state; // if (state.currentSongIndex === 0) {
-      // }
+      if (state.trackList.length === 0) return state;
+      var currentSongIdx = state.currentSongIndex;
+
+      if (state.currentSongIndex === 0) {
+        currentSongIdx = state.trackList.length;
+      }
 
       return lodash__WEBPACK_IMPORTED_MODULE_1__["merge"]({}, state, {
-        currentSongIndex: (state.currentSongIndex - 1) % state.trackList.length
+        currentSongIndex: (currentSongIdx - 1) % state.trackList.length
       });
 
     default:

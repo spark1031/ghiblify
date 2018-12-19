@@ -10,15 +10,29 @@
 
 //the button has to tell someone it's been pressed, and whatever is rendering the button has an onClick
 // clickHandler
-export const UPDATE_TRACK_LIST = 'UPDATE_TRACK_LIST';
+export const UPDATE_CURRENT_PLAYING_ALBUM = 'UPDATE_CURRENT_PLAYING_ALBUM';
+export const UPDATE_CURRENT_PLAYING_PLAYLIST = 'UPDATE_CURRENT_PLAYING_PLAYLIST';
+export const UPDATE_CURRENT_PLAYING_SONG_LIST = 'UPDATE_CURRENT_PLAYING_SONG_LIST';
 export const TOGGLE_IS_PLAYING = 'TOGGLE_IS_PLAYING';
 export const PLAY_NEXT_SONG = 'PLAY_NEXT_SONG';
 export const PLAY_PREVIOUS_SONG = 'PLAY_PREVIOUS_SONG';
 
 //trackList is an array of songs (for a given playlist/album)
 //corresponding reducer should replace the existing trackList with this new trackList
-export const updateTrackList = (trackList) => ({
-  type: UPDATE_TRACK_LIST,
+export const updateCurrentPlayingAlbum = (trackList, album) => ({
+  type: UPDATE_CURRENT_PLAYING_ALBUM,
+  trackList,
+  album
+});
+
+export const updateCurrentPlayingPlaylist = (trackList, playlist) => ({
+  type: UPDATE_CURRENT_PLAYING_PLAYLIST,
+  trackList,
+  playlist
+});
+
+export const updateCurrentPlayingSongList = (trackList) => ({
+  type: UPDATE_CURRENT_PLAYING_SONG_LIST,
   trackList
 });
 

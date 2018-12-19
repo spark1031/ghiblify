@@ -29,6 +29,13 @@ class Details extends React.Component {
 	}
 	playSongs() {}
 
+	onPlayButtonOverlayClick() {
+		return () => {
+			const { updateTrackList, typeObject, songsArr } = this.props;
+			updateTrackList(songsArr, typeObject);
+		};
+	}
+
 	render() {
 		const {
 			typeObject,
@@ -45,7 +52,10 @@ class Details extends React.Component {
 			updateTrackList
 		} = this.props; //playlist or album object (not hydrated) -> threaded to song list item
 		const overlay = this.state.isHovering ? (
-			<PlayButtonOverlay updateTrackList={updateTrackList} tracks={songsArr} />
+			<PlayButtonOverlay
+				onClick={this.onPlayButtonOverlayClick()}
+				tracks={songsArr}
+			/>
 		) : null;
 
 		let browseButton = null;

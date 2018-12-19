@@ -11,33 +11,45 @@ import {
 } from '../../reducers/selectors';
 
 import {
-  updateTrackList
+  updateCurrentPlayingPlaylist,
+  toggleIsPlaying
 } from '../../actions/music_player_actions';
 
 const mapStateToProps = (state, ownProps) => {
+  const musicPlayer = state.ui.musicPlayer;
   return {
-    playlists: hydratedPlaylistsSelector(state.entities) || []
+    playlists: hydratedPlaylistsSelector(state.entities) || [],
+    currentSong: musicPlayer.trackList[musicPlayer.currentSongIndex],
+    currentPlayingPlaylist: musicPlayer.currentPlayingPlaylist
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     wrappedPropsLoader: () => dispatch(fetchAllPlaylists()),
-    updateTrackList: (tracks) => dispatch(updateTrackList(tracks))
+    updateCurrentPlayingPlaylist: (trackList, playList) => dispatch(updateCurrentPlayingPlaylist(trackList, playList)),
+    toggleIsPlaying: () => dispatch(toggleIsPlaying())
   };
 };
 
 const mergeProps = (connectedState, connectedDispatch) => {
+  const updateCurrentPlayingPlaylist = (trackList, playList) => {
+    if (connectedState.currentPlayingPlaylist && (connectedState.currentPlayingPlaylist.id === playList.id)) {
+      connectedDispatch.toggleIsPlaying();
+    } else {
+      connectedDispatch.updateCurrentPlayingPlaylist(trackList, playList);
+    }
+  };
   return {
     initialWrappedProps: {
-      collectionItemInfos: connectedState.playlists.map(convertPlaylistToCollectionItemInfo),
-      updateTrackList: connectedDispatch.updateTrackList
+      collectionItemInfos: connectedState.playlists.map(playlist => convertPlaylistToCollectionItemInfo(playlist, connectedState.currentPlayingPlaylist, updateCurrentPlayingPlaylist)),
     },
     wrappedPropsLoader: () => connectedDispatch.wrappedPropsLoader()
   };
 };
 
-const convertPlaylistToCollectionItemInfo = (playlist) => {
+const convertPlaylistToCollectionItemInfo = (playlist, currentPlayingPlaylist, updateCurrentPlayingPlaylist) => {
+  const isPlaying = currentPlayingPlaylist ? playlist.id === currentPlayingPlaylist.id : false;
   let coverUrl;
   playlist.coverUrl ? coverUrl = playlist.coverUrl : coverUrl = "https://s3.amazonaws.com/ghiblify-resources/Other/pink_playlist_default.jpg";
   return {
@@ -46,7 +58,11 @@ const convertPlaylistToCollectionItemInfo = (playlist) => {
     subTitle: playlist.creator.username,
     primaryTo: `/playlists/${playlist.id}`,
     secondaryTo: '/search',
-    tracks: playlist.playlistSongs
+    tracks: playlist.playlistSongs,
+    isPlaying,
+    onPlayButtonClick: () => {
+      updateCurrentPlayingPlaylist(playlist.playlistSongs, playlist);
+    }
     // secondaryTo: to creator/user's page
   };
 };

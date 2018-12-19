@@ -19,7 +19,8 @@ import Details from '../collection/details';
 import loader from '../hocs/loader';
 
 import {
-  updateTrackList
+  toggleIsPlaying,
+  updateCurrentPlayingAlbum
 } from '../../actions/music_player_actions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -27,6 +28,7 @@ const mapStateToProps = (state, ownProps) => {
   const album = hydratedSingleAlbumSelector(state.entities, albumId);
   if (album === undefined) return {};
   return {
+    currentPlayingAlbum: state.ui.musicPlayer.currentPlayingAlbum,
     typeObject: state.entities.albums[albumId],
     imageUrl: album.coverUrl,
     title: album.title,
@@ -41,19 +43,35 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   const albumId = ownProps.match.params.albumId;
   return {
     fetchOneAlbumLoader: () => dispatch(fetchOneAlbum(albumId)),
-    updateTrackList: (tracks) => dispatch(updateTrackList(tracks))
+    updateTrackList: (tracks, typeObject) => dispatch(updateCurrentPlayingAlbum(tracks, typeObject)),
+    toggleIsPlaying: () => dispatch(toggleIsPlaying())
   };
 };
 
 const mergeProps = (connectedProps, connectedDispatch) => {
   const {
     fetchOneAlbumLoader,
-    ...restConnectedDispatch
+    updateTrackList,
+    toggleIsPlaying,
   } = connectedDispatch;
+
+  const {
+    currentPlayingAlbum,
+    ...restConnectedProps
+  } = connectedProps;
+
+  const finalUpdateTrackList = (tracks, typeObject) => {
+    if (currentPlayingAlbum && (currentPlayingAlbum.id === typeObject.id)) {
+      toggleIsPlaying();
+    } else {
+      updateTrackList(tracks, typeObject);
+    }
+  }
+
   return {
     initialWrappedProps: {
-      ...connectedProps,
-      ...restConnectedDispatch
+      updateTrackList: finalUpdateTrackList,
+      ...restConnectedProps,
     },
     wrappedPropsLoader: () => fetchOneAlbumLoader(),
   }
