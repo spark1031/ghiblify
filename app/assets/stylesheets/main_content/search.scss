@@ -2,4 +2,59 @@
   background-image: linear-gradient(#192C58, #04080F);
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .search-bar {
+    background: #282828;
+    text-align: left;
+
+    .search-input {
+      width: 100%;
+      padding-left: 38px;
+      caret-color: #1DB954;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      height: 80px;
+      font-family: "Circular Bolder";
+      font-size: 30px;
+    }
+  }
+
+  .no-search-results {
+    text-align: center;
+    width: 100%;
+    margin-top: 55px;
+
+    .header {
+      font-family: "Circular Bolder";
+      font-size: 28px;
+      color: white;
+      padding-bottom: 10px;
+    }
+
+    .text {
+      font-family: "Circular Medium";
+      font-size: 14px;
+      color: #B3B3B3;
+    }
+  }
+
+  .search-results {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    //TEMPORARY FOR TEXT
+    font-family: "Circular Bold";
+    font-size: 30px;
+    padding-top: 10px;
+    text-align: center;
+    color: white;
+  }
+
 }

@@ -10,6 +10,10 @@ import {
   hydratedPlaylistsSelector
 } from '../../reducers/selectors';
 
+import {
+  updateTrackList
+} from '../../actions/music_player_actions';
+
 const mapStateToProps = (state, ownProps) => {
   return {
     playlists: hydratedPlaylistsSelector(state.entities) || []
@@ -18,15 +22,16 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    wrappedPropsLoader: () => dispatch(fetchAllPlaylists())
-    // playSongs: (arrayOfSongObjects) => dispatch(playSongs(arrayOfSongObjects))
+    wrappedPropsLoader: () => dispatch(fetchAllPlaylists()),
+    updateTrackList: (tracks) => dispatch(updateTrackList(tracks))
   };
 };
 
 const mergeProps = (connectedState, connectedDispatch) => {
   return {
     initialWrappedProps: {
-      collectionItemInfos: connectedState.playlists.map(convertPlaylistToCollectionItemInfo)
+      collectionItemInfos: connectedState.playlists.map(convertPlaylistToCollectionItemInfo),
+      updateTrackList: connectedDispatch.updateTrackList
     },
     wrappedPropsLoader: () => connectedDispatch.wrappedPropsLoader()
   };
@@ -40,7 +45,8 @@ const convertPlaylistToCollectionItemInfo = (playlist) => {
     title: playlist.name,
     subTitle: playlist.creator.username,
     primaryTo: `/playlists/${playlist.id}`,
-    secondaryTo: '/search'
+    secondaryTo: '/search',
+    tracks: playlist.playlistSongs
     // secondaryTo: to creator/user's page
   };
 };

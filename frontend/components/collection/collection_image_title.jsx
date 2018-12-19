@@ -21,15 +21,21 @@ class CollectionImageTitle extends React.Component {
 			primaryTo,
 			imageUrl,
 			title,
-			circular,
-			onClick,
-			overlayIcon
+			circular, //needed for artists
+			onClick, //coming for add to playlist form
+			overlayIcon, //coming from add to playlist form?
+			updateTrackList, //coming from Playlist/AlbumDetailsContainers OR Playlist/AlbumContainers
+			tracks
 		} = this.props;
 
 		let imageClass;
 		circular ? (imageClass = "image-circular") : (imageClass = "image");
 		const overlay = this.state.isHovering ? (
-			<PlayButtonOverlay overlayIcon={overlayIcon} />
+			<PlayButtonOverlay
+				overlayIcon={overlayIcon}
+				updateTrackList={updateTrackList}
+				tracks={tracks}
+			/>
 		) : null;
 
 		let imageElement = (

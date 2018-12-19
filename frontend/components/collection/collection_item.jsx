@@ -18,7 +18,9 @@ class CollectionItem extends React.Component {
 			imageUrl,
 			title,
 			subTitle,
-			onClick
+			onClick,
+			updateTrackList,
+			tracks //comes from itemInfos in Collection
 		} = this.props;
 		let optional;
 		if (subTitle && secondaryTo) {
@@ -33,6 +35,7 @@ class CollectionItem extends React.Component {
 			optional = <div />;
 		}
 
+		//onClick only exists if the icon is "+" to add song to playlist
 		if (onClick) {
 			return (
 				<div className="collection-item">
@@ -55,6 +58,8 @@ class CollectionItem extends React.Component {
 						imageUrl={imageUrl}
 						title={title}
 						circular={circular}
+						updateTrackList={updateTrackList}
+						tracks={tracks}
 					/>
 
 					{optional}

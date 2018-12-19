@@ -7,6 +7,7 @@ export const hydratedAlbumsSelector = (entities) => {
     return undefined;
   }
   const result = Object.values(albums).map(album => {
+    const songsArr = albumSongSelector(album.id, entities);
     const artist = artists[album.artistId];
     if (_.isUndefined(artist)) {
       return undefined;
@@ -14,12 +15,28 @@ export const hydratedAlbumsSelector = (entities) => {
       return {
         ...album,
         artistId: undefined,
-        artist
+        artist,
+        albumSongs: songsArr
       };
     }
   });
   return _.compact(result);
 }
+
+const albumSongSelector = (albumId, entities) => {
+  const songs = entities.songs;
+
+  const songsArr = [];
+  Object.values(songs).forEach(song => {
+    if (song.albumId === albumId) {
+      songsArr.push(song)
+    }
+  });
+  return songsArr;
+}
+
+
+
 
 export const hydratedSingleAlbumSelector = (entities, albumId) => {
   const album = entities.albums[albumId];
@@ -86,18 +103,38 @@ export const hydratedPlaylistsSelector = (entities) => {
   }
   const result = Object.values(playlists).map(playlist => {
     const creator = users[playlist.creatorId];
+    const songsArr = playlistSongSelector(playlist.id, entities); //ADDED THIS LINE
 
     if (creator) {
       return {
         ...playlist,
         creatorId: undefined,
-        creator
+        creator,
+        playlistSongs: songsArr //ADDED THIS LINE
       };
     } else {
       return undefined;
     }
   });
   return _.compact(result);
+}
+
+//ADDED THIS FUNCTION
+const playlistSongSelector = (playlistId, entities) => {
+  const playlistSongsJoins = entities.playlistSongs;
+  const songs = entities.songs;
+
+  const songsArr = [];
+  Object.values(playlistSongsJoins).forEach(association => {
+    if (association.playlistId === playlistId) {
+      const songId = association.songId;
+      let songObject = songs[songId];
+      let playlistSongsKey = "playlistSongsKey"
+      songObject[playlistSongsKey] = association.id;
+      songsArr.push(songObject)
+    }
+  });
+  return songsArr;
 }
 
 
@@ -146,17 +183,7 @@ export const albumSongsSelector = (entities, albumId) => {
 
 
 
-// const playlistSongSelector = (targetPlaylistId, entities) => {
-//   const songs = [];
-//   const keys = _.keys(entities.playlistSongs);
-//   Object.keys()
-//   keys.forEach(playlistSongId => {
-//     if (entities.playlistSongs[playlistSongId].playlistId === targetPlaylistId) {
-//       songs.push(entities.playlistSongs[playlistSongId].songId);
-//     }
-//   });
-//   return songs.map((songId => entities.songs[songId]));
-// }
+
 
 // const savedPlaylists = (targetUserId, entities) => {
 //   const playlists = [];

@@ -7,7 +7,7 @@ class MusicPlayer extends React.Component {
 		this.state = {
 			volume: 0.6,
 			isMuted: false,
-			duration: undefined,
+			duration: undefined, //song's actual duration
 			progress: 0,
 			isSeeking: false
 		};
@@ -82,55 +82,56 @@ class MusicPlayer extends React.Component {
 		const { isMuted, volume, duration, progress, isSeeking } = this.state;
 		const isSongLoaded = duration !== undefined;
 
-		return <div className="music-player" />; //TEMPORARY placeholder!!
-		// return (
-		// 	<div>
-		// 		<button className="Play-button" onClick={this.props.onTogglePlaying}>
-		// 			{isPlaying ? "PAUSE" : "PLAY"}
-		// 		</button>
-		// 		<button className="Play-button" onClick={this.toggleIsMuted()}>
-		// 			{isMuted ? "UNMUTE" : "MUTE"}
-		// 		</button>
-		// 		<button className="Play-button" onClick={this.props.onNextSong}>
-		// 			NEXT SONG
-		//     </button>
-		// 		<button className="Play-button" onClick={this.props.onPrevSong}>
-		// 			PREV SONG
-		//     </button>
-		// 		<input
-		// 			className="Play-button"
-		// 			type="range"
-		// 			min={0}
-		// 			max={100}
-		// 			value={isMuted ? 0 : volume * 100}
-		// 			onChange={this.onVolumeSliderChange()}
-		// 		/>
-		// 		<input
-		// 			disabled={!isSongLoaded}
-		// 			className="Play-button"
-		// 			type="range"
-		// 			min={0}
-		// 			max={100}
-		// 			value={isSongLoaded ? (progress / duration) * 100 : 0}
-		// 			onChange={this.onProgressSliderChange()}
-		// 			onMouseDown={this.onSeekBegin()}
-		// 			onMouseUp={this.onSeekEnd()}
-		// 		/>
-		// 		<ReactPlayer
-		// 			url={currentSong}
-		// 			ref={this.ref.bind(this)}
-		// 			width="0px"
-		// 			height="0px"
-		// 			playing={isPlaying}
-		// 			muted={isMuted || isSeeking}
-		// 			volume={volume}
-		// 			onEnded={this.props.onNextSong}
-		// 			onDuration={this.onDuration()}
-		// 			onProgress={this.onProgress()}
-		// 			progress={progress}
-		// 		/>
-		// 	</div>
-		// );
+		return (
+			<div className="music-player">
+				<button className="Play-button" onClick={this.props.onTogglePlaying}>
+					{isPlaying ? "PAUSE" : "PLAY"}
+				</button>
+				<button className="Play-button" onClick={this.toggleIsMuted()}>
+					{isMuted ? "UNMUTE" : "MUTE"}
+				</button>
+				<button className="Play-button" onClick={this.props.onNextSong}>
+					NEXT SONG
+				</button>
+				<button className="Play-button" onClick={this.props.onPrevSong}>
+					PREV SONG
+				</button>
+				<input
+					className="Play-button"
+					type="range"
+					min={0}
+					max={100}
+					value={isMuted ? 0 : volume * 100}
+					onChange={this.onVolumeSliderChange()}
+				/>
+				<input
+					disabled={!isSongLoaded}
+					className="Play-button"
+					type="range"
+					min={0}
+					max={100}
+					value={isSongLoaded ? (progress / duration) * 100 : 0}
+					onChange={this.onProgressSliderChange()}
+					onMouseDown={this.onSeekBegin()}
+					onMouseUp={this.onSeekEnd()}
+				/>
+				{!currentSong || (
+					<ReactPlayer
+						url={currentSong.songUrl}
+						ref={this.ref.bind(this)}
+						width="0px"
+						height="0px"
+						playing={isPlaying}
+						muted={isMuted || isSeeking}
+						volume={volume}
+						onEnded={this.props.onNextSong}
+						onDuration={this.onDuration()}
+						onProgress={this.onProgress()}
+						progress={progress}
+					/>
+				)}
+			</div>
+		);
 	}
 }
 

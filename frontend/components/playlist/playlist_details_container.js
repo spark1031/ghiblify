@@ -22,8 +22,13 @@ import {
 } from 'react-router-dom';
 
 import {
+  updateTrackList
+} from '../../actions/music_player_actions';
+
+import {
   deletePlaylist as deletePlaylistAction
 } from '../../actions/playlist_actions';
+
 
 const mapStateToProps = (state, ownProps) => {
   const playlistId = +ownProps.match.params.playlistId;
@@ -41,25 +46,12 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//   const playlistId = ownProps.match.params.playlistId;
-//   return {
-//     wrappedPropsLoader: () => dispatch(fetchOnePlaylist(playlistId)),
-//     deletePlaylist: (id) => dispatch(deletePlaylist(id))
-//     // playSongs:
-//   };
-// };
-
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(loader(Details)));
-
-
-
 const mapDispatchToProps = (dispatch, ownProps) => {
   const playlistId = ownProps.match.params.playlistId;
   return {
     fetchOnePlaylistLoader: () => dispatch(fetchOnePlaylist(playlistId)),
-    deletePlaylist: (id) => dispatch(deletePlaylistAction(id))
-    // playSongs:
+    deletePlaylist: (id) => dispatch(deletePlaylistAction(id)),
+    updateTrackList: (tracks) => dispatch(updateTrackList(tracks))
   };
 };
 

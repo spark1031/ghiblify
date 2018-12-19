@@ -18,33 +18,45 @@ import {
 import Details from '../collection/details';
 import loader from '../hocs/loader';
 
+import {
+  updateTrackList
+} from '../../actions/music_player_actions';
+
 const mapStateToProps = (state, ownProps) => {
   const albumId = +ownProps.match.params.albumId;
   const album = hydratedSingleAlbumSelector(state.entities, albumId);
-  if (album === undefined) {
-    return {
-      initialWrappedProps: undefined
-    };
-  }
+  if (album === undefined) return {};
   return {
-    initialWrappedProps: {
-      typeObject: state.entities.albums[albumId],
-      imageUrl: album.coverUrl,
-      title: album.title,
-      subTitle: album.artist.name,
-      songsArr: album.albumSongs,
-      detailsText: `${album.year} • ${album.albumSongs.length} SONGS`,
-      type: "album"
-    }
+    typeObject: state.entities.albums[albumId],
+    imageUrl: album.coverUrl,
+    title: album.title,
+    subTitle: album.artist.name,
+    songsArr: album.albumSongs,
+    detailsText: `${album.year} • ${album.albumSongs.length} SONGS`,
+    type: "album"
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const albumId = ownProps.match.params.albumId;
   return {
-    wrappedPropsLoader: () => dispatch(fetchOneAlbum(albumId))
-    // playSongs:
+    fetchOneAlbumLoader: () => dispatch(fetchOneAlbum(albumId)),
+    updateTrackList: (tracks) => dispatch(updateTrackList(tracks))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(loader(Details));
+const mergeProps = (connectedProps, connectedDispatch) => {
+  const {
+    fetchOneAlbumLoader,
+    ...restConnectedDispatch
+  } = connectedDispatch;
+  return {
+    initialWrappedProps: {
+      ...connectedProps,
+      ...restConnectedDispatch
+    },
+    wrappedPropsLoader: () => fetchOneAlbumLoader(),
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(loader(Details));

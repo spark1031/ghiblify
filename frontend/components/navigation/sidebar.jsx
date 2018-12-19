@@ -35,16 +35,7 @@ class Sidebar extends React.Component {
 				<div className="sidebar-main-links">
 					<Link to="/" style={{ textDecoration: "none" }}>
 						<div className="sidebar-main-logo">
-							{/* <img
-								height="50px"
-								width="50px"
-								className="totoro-logo"
-								src="/assets/images/totoroForChip.svg"
-								alt=""
-							/> */}
-							{/* <div className="totoro-logo" /> */}
 							<TotoroLogo />
-							{/* <i className="fab fa-spotify" /> */}
 							<div className="sidebar-main-logo-name">Ghiblify</div>
 						</div>
 					</Link>
