@@ -37,6 +37,7 @@ const mapStateToProps = (state, ownProps) => {
   if (playlist === undefined) return {};
   return {
     currentPlayingPlaylist: state.ui.musicPlayer.currentPlayingPlaylist,
+    isPlaying: state.ui.musicPlayer.isPlaying,
     currentUserId: state.session.id,
     typeObject: state.entities.playlists[playlistId],
     imageUrl: playlist.coverUrl,
@@ -69,6 +70,7 @@ const mergeProps = (connectedProps, connectedDispatch) => {
 
   const {
     currentPlayingPlaylist,
+    isPlaying,
     ...restConnectedProps
   } = connectedProps;
 
@@ -86,10 +88,14 @@ const mergeProps = (connectedProps, connectedDispatch) => {
     }
   }
 
+  let selfIsPlaying;
+  (currentPlayingPlaylist && isPlaying && (currentPlayingPlaylist.id === connectedProps.typeObject.id)) ? selfIsPlaying = true: selfIsPlaying = false;
+
   return {
     initialWrappedProps: {
       deletePlaylist,
       updateTrackList: finalUpdateTrackList,
+      selfIsPlaying,
       ...restConnectedProps,
     },
     wrappedPropsLoader: () => fetchOnePlaylistLoader(),

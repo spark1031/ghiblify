@@ -15,14 +15,17 @@ import {
   toggleIsPlaying
 } from '../../actions/music_player_actions';
 
+
 const mapStateToProps = (state, ownProps) => {
   const musicPlayer = state.ui.musicPlayer;
   return {
     playlists: hydratedPlaylistsSelector(state.entities) || [],
     currentSong: musicPlayer.trackList[musicPlayer.currentSongIndex],
-    currentPlayingPlaylist: musicPlayer.currentPlayingPlaylist
+    currentPlayingPlaylist: musicPlayer.currentPlayingPlaylist,
+    isPlaying: musicPlayer.isPlaying
   };
 };
+
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -42,14 +45,14 @@ const mergeProps = (connectedState, connectedDispatch) => {
   };
   return {
     initialWrappedProps: {
-      collectionItemInfos: connectedState.playlists.map(playlist => convertPlaylistToCollectionItemInfo(playlist, connectedState.currentPlayingPlaylist, updateCurrentPlayingPlaylist)),
+      collectionItemInfos: connectedState.playlists.map(playlist => convertPlaylistToCollectionItemInfo(playlist, connectedState.currentPlayingPlaylist, updateCurrentPlayingPlaylist, connectedState.isPlaying)),
     },
     wrappedPropsLoader: () => connectedDispatch.wrappedPropsLoader()
   };
 };
 
-const convertPlaylistToCollectionItemInfo = (playlist, currentPlayingPlaylist, updateCurrentPlayingPlaylist) => {
-  const isPlaying = currentPlayingPlaylist ? playlist.id === currentPlayingPlaylist.id : false;
+const convertPlaylistToCollectionItemInfo = (playlist, currentPlayingPlaylist, updateCurrentPlayingPlaylist, isPlaying) => {
+  const selfIsPlaying = currentPlayingPlaylist && isPlaying ? +playlist.id === +currentPlayingPlaylist.id : false;
   let coverUrl;
   playlist.coverUrl ? coverUrl = playlist.coverUrl : coverUrl = "https://s3.amazonaws.com/ghiblify-resources/Other/pink_playlist_default.jpg";
   return {
@@ -59,7 +62,7 @@ const convertPlaylistToCollectionItemInfo = (playlist, currentPlayingPlaylist, u
     primaryTo: `/playlists/${playlist.id}`,
     secondaryTo: '/search',
     tracks: playlist.playlistSongs,
-    isPlaying,
+    selfIsPlaying,
     onPlayButtonClick: () => {
       updateCurrentPlayingPlaylist(playlist.playlistSongs, playlist);
     }

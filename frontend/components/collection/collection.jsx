@@ -1,22 +1,18 @@
-// collectionItemInfos: [
-//   {
-//     primaryTo: string path
-//     secondaryTo: string path(optional)
-//     imageUrl: string link
-//     title: string
-//     subTitle: string(optional)
-//   },
-//   {
-//     primaryTo: string path
-//     secondaryTo: string path(optional)
-//     imageUrl: string link
-//     title: string
-//     subTitle: string(optional)
-//   }
-// ]
-
 import React from "react";
 import CollectionItem from "./collection_item";
+
+// collectionItemInfos =  array of itemInfos
+// itemInfos = {
+// 	imageUrl: coverUrl,
+// 	title: playlist.name,
+// 	subTitle: playlist.creator.username,
+// 	primaryTo: `/playlists/${playlist.id}`,
+// 	secondaryTo: '/search',
+// 	tracks: playlist.playlistSongs,
+// 	selfIsPlaying,
+// 	onPlayButtonClick: () => {
+// 		updateCurrentPlayingPlaylist(playlist.playlistSongs, playlist);
+// 	}
 
 class Collection extends React.Component {
 	render() {
@@ -29,7 +25,6 @@ class Collection extends React.Component {
 		}
 
 		let items = collectionItemInfos.map((itemInfo, i) => (
-			//itemInfo now includes "tracks" for specific collection item
 			<CollectionItem key={i} {...itemInfo} />
 		));
 		return (

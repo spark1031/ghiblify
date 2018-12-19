@@ -20,7 +20,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     albums: hydratedAlbumsSelector(state.entities) || [],
     currentSong: musicPlayer.trackList[musicPlayer.currentSongIndex],
-    currentPlayingAlbum: musicPlayer.currentPlayingAlbum
+    currentPlayingAlbum: musicPlayer.currentPlayingAlbum,
+    isPlaying: musicPlayer.isPlaying
   };
 };
 
@@ -42,14 +43,14 @@ const mergeProps = (connectedState, connectedDispatch) => {
   };
   return {
     initialWrappedProps: {
-      collectionItemInfos: connectedState.albums.map(album => convertAlbumToCollectionItemInfo(album, connectedState.currentPlayingAlbum, updateCurrentPlayingAlbum)),
+      collectionItemInfos: connectedState.albums.map(album => convertAlbumToCollectionItemInfo(album, connectedState.currentPlayingAlbum, updateCurrentPlayingAlbum, connectedState.isPlaying)),
     },
     wrappedPropsLoader: () => connectedDispatch.wrappedPropsLoader()
   };
 };
 
-const convertAlbumToCollectionItemInfo = (album, currentPlayingAlbum, updateCurrentPlayingAlbum) => {
-  const isPlaying = currentPlayingAlbum ? album.id === currentPlayingAlbum.id : false;
+const convertAlbumToCollectionItemInfo = (album, currentPlayingAlbum, updateCurrentPlayingAlbum, isPlaying) => {
+  const selfIsPlaying = currentPlayingAlbum && isPlaying ? album.id === currentPlayingAlbum.id : false;
   return {
     imageUrl: album.coverUrl,
     title: album.title,
@@ -57,6 +58,7 @@ const convertAlbumToCollectionItemInfo = (album, currentPlayingAlbum, updateCurr
     primaryTo: `/albums/${album.id}`,
     secondaryTo: '/artists',
     tracks: album.albumSongs,
+    selfIsPlaying,
     onPlayButtonClick: () => {
       updateCurrentPlayingAlbum(album.albumSongs, album);
     }

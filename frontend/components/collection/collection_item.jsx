@@ -2,13 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import CollectionImageTitle from "./collection_image_title";
 
-// props: {
-//    primaryTo: string path
-//    secondaryTo: string path (optional)
-//   imageUrl: string link
-//   title: string
-//   subTitle: string (optional)
-// }
+// itemInfos/props = {
+// 	imageUrl: coverUrl,
+// 	title: playlist.name,
+// 	subTitle: playlist.creator.username,
+// 	primaryTo: `/playlists/${playlist.id}`,
+// 	secondaryTo: '/search',
+// 	tracks: playlist.playlistSongs,
+// 	selfIsPlaying,
+// 	onPlayButtonClick: () => {
+// 		updateCurrentPlayingPlaylist(playlist.playlistSongs, playlist);
+// 	}
 class CollectionItem extends React.Component {
 	render() {
 		let {
@@ -18,8 +22,9 @@ class CollectionItem extends React.Component {
 			imageUrl,
 			title,
 			subTitle,
-			onClick,
-			onPlayButtonClick
+			onClick, //comes from add to playlist functionality ('+' icon)
+			onPlayButtonClick,
+			selfIsPlaying
 		} = this.props;
 		let optional;
 		if (subTitle && secondaryTo) {
@@ -58,6 +63,7 @@ class CollectionItem extends React.Component {
 						title={title}
 						circular={circular}
 						onPlayButtonClick={onPlayButtonClick}
+						selfIsPlaying={selfIsPlaying}
 					/>
 
 					{optional}

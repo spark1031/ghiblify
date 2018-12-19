@@ -24,7 +24,8 @@ class CollectionImageTitle extends React.Component {
 			circular, //needed for artists
 			onClick, //coming for add to playlist form
 			overlayIcon, //coming from add to playlist form?
-			onPlayButtonClick //coming from Playlist/AlbumDetailsContainers OR Playlist/AlbumContainers
+			onPlayButtonClick, //coming from Playlist/AlbumDetailsContainers OR Playlist/AlbumContainers
+			selfIsPlaying
 		} = this.props;
 
 		let imageClass;
@@ -33,6 +34,7 @@ class CollectionImageTitle extends React.Component {
 			<PlayButtonOverlay
 				overlayIcon={overlayIcon}
 				onClick={onPlayButtonClick}
+				selfIsPlaying={selfIsPlaying}
 			/>
 		) : null;
 

@@ -1020,6 +1020,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   if (album === undefined) return {};
   return {
     currentPlayingAlbum: state.ui.musicPlayer.currentPlayingAlbum,
+    isPlaying: state.ui.musicPlayer.isPlaying,
     typeObject: state.entities.albums[albumId],
     imageUrl: album.coverUrl,
     title: album.title,
@@ -1051,7 +1052,8 @@ var mergeProps = function mergeProps(connectedProps, connectedDispatch) {
       toggleIsPlaying = connectedDispatch.toggleIsPlaying;
 
   var currentPlayingAlbum = connectedProps.currentPlayingAlbum,
-      restConnectedProps = _objectWithoutProperties(connectedProps, ["currentPlayingAlbum"]);
+      isPlaying = connectedProps.isPlaying,
+      restConnectedProps = _objectWithoutProperties(connectedProps, ["currentPlayingAlbum", "isPlaying"]);
 
   var finalUpdateTrackList = function finalUpdateTrackList(tracks, typeObject, currentSongIndex) {
     if (currentPlayingAlbum && currentPlayingAlbum.id === typeObject.id) {
@@ -1061,9 +1063,12 @@ var mergeProps = function mergeProps(connectedProps, connectedDispatch) {
     }
   };
 
+  var selfIsPlaying;
+  currentPlayingAlbum && isPlaying && currentPlayingAlbum.id === connectedProps.typeObject.id ? selfIsPlaying = true : selfIsPlaying = false;
   return {
     initialWrappedProps: _objectSpread({
-      updateTrackList: finalUpdateTrackList
+      updateTrackList: finalUpdateTrackList,
+      selfIsPlaying: selfIsPlaying
     }, restConnectedProps),
     wrappedPropsLoader: function wrappedPropsLoader() {
       return fetchOneAlbumLoader();
@@ -1102,7 +1107,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     albums: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["hydratedAlbumsSelector"])(state.entities) || [],
     currentSong: musicPlayer.trackList[musicPlayer.currentSongIndex],
-    currentPlayingAlbum: musicPlayer.currentPlayingAlbum
+    currentPlayingAlbum: musicPlayer.currentPlayingAlbum,
+    isPlaying: musicPlayer.isPlaying
   };
 };
 
@@ -1132,7 +1138,7 @@ var mergeProps = function mergeProps(connectedState, connectedDispatch) {
   return {
     initialWrappedProps: {
       collectionItemInfos: connectedState.albums.map(function (album) {
-        return convertAlbumToCollectionItemInfo(album, connectedState.currentPlayingAlbum, updateCurrentPlayingAlbum);
+        return convertAlbumToCollectionItemInfo(album, connectedState.currentPlayingAlbum, updateCurrentPlayingAlbum, connectedState.isPlaying);
       })
     },
     wrappedPropsLoader: function wrappedPropsLoader() {
@@ -1141,8 +1147,8 @@ var mergeProps = function mergeProps(connectedState, connectedDispatch) {
   };
 };
 
-var convertAlbumToCollectionItemInfo = function convertAlbumToCollectionItemInfo(album, currentPlayingAlbum, updateCurrentPlayingAlbum) {
-  var isPlaying = currentPlayingAlbum ? album.id === currentPlayingAlbum.id : false;
+var convertAlbumToCollectionItemInfo = function convertAlbumToCollectionItemInfo(album, currentPlayingAlbum, updateCurrentPlayingAlbum, isPlaying) {
+  var selfIsPlaying = currentPlayingAlbum && isPlaying ? album.id === currentPlayingAlbum.id : false;
   return {
     imageUrl: album.coverUrl,
     title: album.title,
@@ -1150,6 +1156,7 @@ var convertAlbumToCollectionItemInfo = function convertAlbumToCollectionItemInfo
     primaryTo: "/albums/".concat(album.id),
     secondaryTo: '/artists',
     tracks: album.albumSongs,
+    selfIsPlaying: selfIsPlaying,
     onPlayButtonClick: function onPlayButtonClick() {
       updateCurrentPlayingAlbum(album.albumSongs, album);
     } // primaryTo: `/browse/albums/${album.id}`
@@ -1376,24 +1383,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-// collectionItemInfos: [
-//   {
-//     primaryTo: string path
-//     secondaryTo: string path(optional)
-//     imageUrl: string link
-//     title: string
-//     subTitle: string(optional)
-//   },
-//   {
-//     primaryTo: string path
-//     secondaryTo: string path(optional)
-//     imageUrl: string link
-//     title: string
-//     subTitle: string(optional)
-//   }
-// ]
 
-
+ // collectionItemInfos =  array of itemInfos
+// itemInfos = {
+// 	imageUrl: coverUrl,
+// 	title: playlist.name,
+// 	subTitle: playlist.creator.username,
+// 	primaryTo: `/playlists/${playlist.id}`,
+// 	secondaryTo: '/search',
+// 	tracks: playlist.playlistSongs,
+// 	selfIsPlaying,
+// 	onPlayButtonClick: () => {
+// 		updateCurrentPlayingPlaylist(playlist.playlistSongs, playlist);
+// 	}
 
 var Collection =
 /*#__PURE__*/
@@ -1424,11 +1426,9 @@ function (_React$Component) {
       }
 
       var items = collectionItemInfos.map(function (itemInfo, i) {
-        return (//itemInfo now includes "tracks" for specific collection item
-          react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collection_item__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
-            key: i
-          }, itemInfo))
-        );
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collection_item__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
+          key: i
+        }, itemInfo));
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "collection"
@@ -1520,12 +1520,14 @@ function (_React$Component) {
           circular = _this$props.circular,
           onClick = _this$props.onClick,
           overlayIcon = _this$props.overlayIcon,
-          onPlayButtonClick = _this$props.onPlayButtonClick;
+          onPlayButtonClick = _this$props.onPlayButtonClick,
+          selfIsPlaying = _this$props.selfIsPlaying;
       var imageClass;
       circular ? imageClass = "image-circular" : imageClass = "image";
       var overlay = this.state.isHovering ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_play_button_overlay__WEBPACK_IMPORTED_MODULE_2__["default"], {
         overlayIcon: overlayIcon,
-        onClick: onPlayButtonClick
+        onClick: onPlayButtonClick,
+        selfIsPlaying: selfIsPlaying
       }) : null;
       var imageElement = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: imageClass
@@ -1607,13 +1609,17 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
- // props: {
-//    primaryTo: string path
-//    secondaryTo: string path (optional)
-//   imageUrl: string link
-//   title: string
-//   subTitle: string (optional)
-// }
+ // itemInfos/props = {
+// 	imageUrl: coverUrl,
+// 	title: playlist.name,
+// 	subTitle: playlist.creator.username,
+// 	primaryTo: `/playlists/${playlist.id}`,
+// 	secondaryTo: '/search',
+// 	tracks: playlist.playlistSongs,
+// 	selfIsPlaying,
+// 	onPlayButtonClick: () => {
+// 		updateCurrentPlayingPlaylist(playlist.playlistSongs, playlist);
+// 	}
 
 var CollectionItem =
 /*#__PURE__*/
@@ -1637,7 +1643,8 @@ function (_React$Component) {
           title = _this$props.title,
           subTitle = _this$props.subTitle,
           onClick = _this$props.onClick,
-          onPlayButtonClick = _this$props.onPlayButtonClick;
+          onPlayButtonClick = _this$props.onPlayButtonClick,
+          selfIsPlaying = _this$props.selfIsPlaying;
       var optional;
 
       if (subTitle && secondaryTo) {
@@ -1670,7 +1677,8 @@ function (_React$Component) {
           imageUrl: imageUrl,
           title: title,
           circular: circular,
-          onPlayButtonClick: onPlayButtonClick
+          onPlayButtonClick: onPlayButtonClick,
+          selfIsPlaying: selfIsPlaying
         }), optional);
       }
     }
@@ -1810,11 +1818,13 @@ function (_React$Component) {
           isLoaded = _this$props.isLoaded,
           currentUserId = _this$props.currentUserId,
           deletePlaylist = _this$props.deletePlaylist,
-          updateTrackList = _this$props.updateTrackList; //playlist or album object (not hydrated) -> threaded to song list item
+          updateTrackList = _this$props.updateTrackList,
+          selfIsPlaying = _this$props.selfIsPlaying; //playlist or album object (not hydrated) -> threaded to song list item
 
       var overlay = this.state.isHovering ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_collection_play_button_overlay__WEBPACK_IMPORTED_MODULE_5__["default"], {
         onClick: this.onPlayButtonOverlayClick(),
-        tracks: songsArr
+        tracks: songsArr,
+        selfIsPlaying: selfIsPlaying
       }) : null;
       var browseButton = null;
       var deleteButton = null;
@@ -1997,6 +2007,11 @@ function (_React$Component) {
       var icon;
       this.props.overlayIcon ? icon = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-plus"
+      }) : icon = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-play-circle"
+      });
+      this.props.selfIsPlaying ? icon = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-pause-circle"
       }) : icon = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "far fa-play-circle"
       });
@@ -3008,11 +3023,12 @@ function (_React$Component) {
     _classCallCheck(this, MusicPlayer);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MusicPlayer).call(this, props));
+    var songDuration;
+    _this.props.currentSong ? songDuration = _this.props.currentSong.duration : songDuration = undefined;
     _this.state = {
       volume: 0.6,
       isMuted: false,
-      duration: undefined,
-      //song's actual duration
+      duration: songDuration,
       progress: 0,
       isSeeking: false
     };
@@ -3784,7 +3800,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     playlists: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["hydratedPlaylistsSelector"])(state.entities) || [],
     currentSong: musicPlayer.trackList[musicPlayer.currentSongIndex],
-    currentPlayingPlaylist: musicPlayer.currentPlayingPlaylist
+    currentPlayingPlaylist: musicPlayer.currentPlayingPlaylist,
+    isPlaying: musicPlayer.isPlaying
   };
 };
 
@@ -3814,7 +3831,7 @@ var mergeProps = function mergeProps(connectedState, connectedDispatch) {
   return {
     initialWrappedProps: {
       collectionItemInfos: connectedState.playlists.map(function (playlist) {
-        return convertPlaylistToCollectionItemInfo(playlist, connectedState.currentPlayingPlaylist, updateCurrentPlayingPlaylist);
+        return convertPlaylistToCollectionItemInfo(playlist, connectedState.currentPlayingPlaylist, updateCurrentPlayingPlaylist, connectedState.isPlaying);
       })
     },
     wrappedPropsLoader: function wrappedPropsLoader() {
@@ -3823,8 +3840,8 @@ var mergeProps = function mergeProps(connectedState, connectedDispatch) {
   };
 };
 
-var convertPlaylistToCollectionItemInfo = function convertPlaylistToCollectionItemInfo(playlist, currentPlayingPlaylist, updateCurrentPlayingPlaylist) {
-  var isPlaying = currentPlayingPlaylist ? playlist.id === currentPlayingPlaylist.id : false;
+var convertPlaylistToCollectionItemInfo = function convertPlaylistToCollectionItemInfo(playlist, currentPlayingPlaylist, updateCurrentPlayingPlaylist, isPlaying) {
+  var selfIsPlaying = currentPlayingPlaylist && isPlaying ? +playlist.id === +currentPlayingPlaylist.id : false;
   var coverUrl;
   playlist.coverUrl ? coverUrl = playlist.coverUrl : coverUrl = "https://s3.amazonaws.com/ghiblify-resources/Other/pink_playlist_default.jpg";
   return {
@@ -3834,7 +3851,7 @@ var convertPlaylistToCollectionItemInfo = function convertPlaylistToCollectionIt
     primaryTo: "/playlists/".concat(playlist.id),
     secondaryTo: '/search',
     tracks: playlist.playlistSongs,
-    isPlaying: isPlaying,
+    selfIsPlaying: selfIsPlaying,
     onPlayButtonClick: function onPlayButtonClick() {
       updateCurrentPlayingPlaylist(playlist.playlistSongs, playlist);
     } // secondaryTo: to creator/user's page
@@ -3897,6 +3914,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   if (playlist === undefined) return {};
   return {
     currentPlayingPlaylist: state.ui.musicPlayer.currentPlayingPlaylist,
+    isPlaying: state.ui.musicPlayer.isPlaying,
     currentUserId: state.session.id,
     typeObject: state.entities.playlists[playlistId],
     imageUrl: playlist.coverUrl,
@@ -3933,7 +3951,8 @@ var mergeProps = function mergeProps(connectedProps, connectedDispatch) {
       toggleIsPlaying = connectedDispatch.toggleIsPlaying;
 
   var currentPlayingPlaylist = connectedProps.currentPlayingPlaylist,
-      restConnectedProps = _objectWithoutProperties(connectedProps, ["currentPlayingPlaylist"]); // if (connectedState.currentPlayingPlaylist && (connectedState.currentPlayingPlaylist.id === playList.id)) {
+      isPlaying = connectedProps.isPlaying,
+      restConnectedProps = _objectWithoutProperties(connectedProps, ["currentPlayingPlaylist", "isPlaying"]); // if (connectedState.currentPlayingPlaylist && (connectedState.currentPlayingPlaylist.id === playList.id)) {
   //   connectedDispatch.toggleIsPlaying();
   // } else {
   //   connectedDispatch.updateCurrentPlayingPlaylist(trackList, playList);
@@ -3948,10 +3967,13 @@ var mergeProps = function mergeProps(connectedProps, connectedDispatch) {
     }
   };
 
+  var selfIsPlaying;
+  currentPlayingPlaylist && isPlaying && currentPlayingPlaylist.id === connectedProps.typeObject.id ? selfIsPlaying = true : selfIsPlaying = false;
   return {
     initialWrappedProps: _objectSpread({
       deletePlaylist: deletePlaylist,
-      updateTrackList: finalUpdateTrackList
+      updateTrackList: finalUpdateTrackList,
+      selfIsPlaying: selfIsPlaying
     }, restConnectedProps),
     wrappedPropsLoader: function wrappedPropsLoader() {
       return fetchOnePlaylistLoader();

@@ -62,12 +62,14 @@ class Details extends React.Component {
 			isLoaded,
 			currentUserId,
 			deletePlaylist,
-			updateTrackList
+			updateTrackList,
+			selfIsPlaying
 		} = this.props; //playlist or album object (not hydrated) -> threaded to song list item
 		const overlay = this.state.isHovering ? (
 			<PlayButtonOverlay
 				onClick={this.onPlayButtonOverlayClick()}
 				tracks={songsArr}
+				selfIsPlaying={selfIsPlaying}
 			/>
 		) : null;
 

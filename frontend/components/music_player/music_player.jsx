@@ -5,10 +5,14 @@ import MyPlayer from "./my_player";
 class MusicPlayer extends React.Component {
 	constructor(props) {
 		super(props);
+		let songDuration;
+		this.props.currentSong
+			? (songDuration = this.props.currentSong.duration)
+			: (songDuration = undefined);
 		this.state = {
 			volume: 0.6,
 			isMuted: false,
-			duration: undefined, //song's actual duration
+			duration: songDuration,
 			progress: 0,
 			isSeeking: false
 		};

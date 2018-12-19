@@ -30,6 +30,10 @@ class PlayButtonOverlay extends React.Component {
 			? (icon = <i className="fas fa-plus" />)
 			: (icon = <i className="far fa-play-circle" />);
 
+		this.props.selfIsPlaying
+			? (icon = <i className="far fa-pause-circle" />)
+			: (icon = <i className="far fa-play-circle" />);
+
 		if (this.props.overlayIcon) {
 			//adding song to this specific playlist
 			return (
