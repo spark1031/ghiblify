@@ -33,11 +33,12 @@ const musicPlayerReducer = (state = _initialPlayer, action) => {
       });
     case PLAY_PREVIOUS_SONG:
       if (state.trackList.length === 0) return state;
-      // if (state.currentSongIndex === 0) {
-
-      // }
+      let currentSongIdx = state.currentSongIndex;
+      if (state.currentSongIndex === 0) {
+        currentSongIdx = state.trackList.length;
+      }
       return _.merge({}, state, {
-        currentSongIndex: (state.currentSongIndex - 1) % state.trackList.length
+        currentSongIndex: (currentSongIdx - 1) % state.trackList.length
       });
     default:
       return state;
