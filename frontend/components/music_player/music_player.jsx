@@ -1,5 +1,6 @@
 import React from "react";
-import ReactPlayer from "react-player";
+// import ReactPlayer from "react-player";
+import MyPlayer from "./my_player";
 
 class MusicPlayer extends React.Component {
 	constructor(props) {
@@ -17,6 +18,14 @@ class MusicPlayer extends React.Component {
 		return value => {
 			this.setState({
 				duration: value
+			});
+		};
+	}
+
+	onLoaded() {
+		return () => {
+			this.setState({
+				isSongLoaded: true
 			});
 		};
 	}
@@ -116,18 +125,15 @@ class MusicPlayer extends React.Component {
 					onMouseUp={this.onSeekEnd()}
 				/>
 				{!currentSong || (
-					<ReactPlayer
+					<MyPlayer
 						url={currentSong.songUrl}
-						ref={this.ref.bind(this)}
-						width="0px"
-						height="0px"
+						playerRef={this.ref.bind(this)}
 						playing={isPlaying}
 						muted={isMuted || isSeeking}
 						volume={volume}
 						onEnded={this.props.onNextSong}
-						onDuration={this.onDuration()}
+						onLoaded={this.onLoaded()}
 						onProgress={this.onProgress()}
-						progress={progress}
 					/>
 				)}
 			</div>
@@ -136,3 +142,21 @@ class MusicPlayer extends React.Component {
 }
 
 export default MusicPlayer;
+
+// {
+// !currentSong || (
+// 	<ReactPlayer
+// 		url={currentSong.songUrl}
+// 		ref={this.ref.bind(this)}
+// 		width="0px"
+// 		height="0px"
+// 		playing={isPlaying}
+// 		muted={isMuted || isSeeking}
+// 		volume={volume}
+// 		onEnded={this.props.onNextSong}
+// 		onDuration={this.onDuration()}
+// 		onProgress={this.onProgress()}
+// 		progress={progress}
+// 	/>
+// )
+// }
