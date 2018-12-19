@@ -9,6 +9,11 @@ import { Popover, OverlayTrigger } from "react-bootstrap";
 //   removeFromLibrary: (later)
 // }
 
+// NEEDED BUT DONT HAVE YET 11:58PM, TUES
+//isPlaying
+//	-> if (isPlaying) => change returned divs GREEN, else divs should be WHITE
+//togglePlaying
+
 class SongListItem extends React.Component {
 	constructor(props) {
 		super(props);
@@ -108,7 +113,7 @@ class SongListItem extends React.Component {
 				onMouseLeave={this.toggleHover(false)}
 			>
 				<div className="icon-title">
-					<div className="musical-note-icon">
+					<div className="musical-note-icon" onClick={this.props.togglePlaying}>
 						<i className="fas fa-music" />
 					</div>
 					<div className="title">{song.title}</div>

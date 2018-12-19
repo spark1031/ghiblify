@@ -22,7 +22,7 @@ const musicPlayerReducer = (state = _initialPlayer, action) => {
   switch (action.type) {
     case UPDATE_CURRENT_PLAYING_ALBUM:
       return {
-        currentSongIndex: 0,
+        currentSongIndex: action.currentSongIndex,
         currentPlayingAlbum: action.album,
         currentPlayingPlaylist: null,
         trackList: action.trackList,
@@ -30,7 +30,7 @@ const musicPlayerReducer = (state = _initialPlayer, action) => {
       };
     case UPDATE_CURRENT_PLAYING_PLAYLIST:
       return {
-        currentSongIndex: 0,
+        currentSongIndex: action.currentSongIndex,
         currentPlayingAlbum: null,
         currentPlayingPlaylist: action.playlist,
         trackList: action.trackList,
@@ -38,7 +38,7 @@ const musicPlayerReducer = (state = _initialPlayer, action) => {
       };
     case UPDATE_CURRENT_PLAYING_SONGLIST:
       return {
-        currentSongIndex: 0,
+        currentSongIndex: action.currentSongIndex,
         currentPlayingAlbum: null,
         currentPlayingPlaylist: null,
         trackList: action.trackList,

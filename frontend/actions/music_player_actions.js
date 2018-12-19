@@ -19,21 +19,24 @@ export const PLAY_PREVIOUS_SONG = 'PLAY_PREVIOUS_SONG';
 
 //trackList is an array of songs (for a given playlist/album)
 //corresponding reducer should replace the existing trackList with this new trackList
-export const updateCurrentPlayingAlbum = (trackList, album) => ({
+export const updateCurrentPlayingAlbum = (trackList, album, currentSongIndex = 0) => ({
   type: UPDATE_CURRENT_PLAYING_ALBUM,
   trackList,
-  album
+  album,
+  currentSongIndex
 });
 
-export const updateCurrentPlayingPlaylist = (trackList, playlist) => ({
+export const updateCurrentPlayingPlaylist = (trackList, playlist, currentSongIndex = 0) => ({
   type: UPDATE_CURRENT_PLAYING_PLAYLIST,
   trackList,
-  playlist
+  playlist,
+  currentSongIndex
 });
 
-export const updateCurrentPlayingSongList = (trackList) => ({
+export const updateCurrentPlayingSongList = (trackList, currentSongIndex = 0) => ({
   type: UPDATE_CURRENT_PLAYING_SONG_LIST,
-  trackList
+  trackList,
+  currentSongIndex
 });
 
 //this is to pause or play the music

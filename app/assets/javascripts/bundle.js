@@ -269,23 +269,29 @@ var PLAY_PREVIOUS_SONG = 'PLAY_PREVIOUS_SONG'; //trackList is an array of songs 
 //corresponding reducer should replace the existing trackList with this new trackList
 
 var updateCurrentPlayingAlbum = function updateCurrentPlayingAlbum(trackList, album) {
+  var currentSongIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
   return {
     type: UPDATE_CURRENT_PLAYING_ALBUM,
     trackList: trackList,
-    album: album
+    album: album,
+    currentSongIndex: currentSongIndex
   };
 };
 var updateCurrentPlayingPlaylist = function updateCurrentPlayingPlaylist(trackList, playlist) {
+  var currentSongIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
   return {
     type: UPDATE_CURRENT_PLAYING_PLAYLIST,
     trackList: trackList,
-    playlist: playlist
+    playlist: playlist,
+    currentSongIndex: currentSongIndex
   };
 };
 var updateCurrentPlayingSongList = function updateCurrentPlayingSongList(trackList) {
+  var currentSongIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   return {
     type: UPDATE_CURRENT_PLAYING_SONG_LIST,
-    trackList: trackList
+    trackList: trackList,
+    currentSongIndex: currentSongIndex
   };
 }; //this is to pause or play the music
 //corresponding reducer should set isPlaying = !isPlaying (isPlaying is a key in my musicPlayer ui in global state)
@@ -1030,8 +1036,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     fetchOneAlbumLoader: function fetchOneAlbumLoader() {
       return dispatch(Object(_actions_album_actions__WEBPACK_IMPORTED_MODULE_2__["fetchOneAlbum"])(albumId));
     },
-    updateTrackList: function updateTrackList(tracks, typeObject) {
-      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_5__["updateCurrentPlayingAlbum"])(tracks, typeObject));
+    updateTrackList: function updateTrackList(tracks, typeObject, currentSongIndex) {
+      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_5__["updateCurrentPlayingAlbum"])(tracks, typeObject, currentSongIndex));
     },
     toggleIsPlaying: function toggleIsPlaying() {
       return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_5__["toggleIsPlaying"])());
@@ -1047,11 +1053,11 @@ var mergeProps = function mergeProps(connectedProps, connectedDispatch) {
   var currentPlayingAlbum = connectedProps.currentPlayingAlbum,
       restConnectedProps = _objectWithoutProperties(connectedProps, ["currentPlayingAlbum"]);
 
-  var finalUpdateTrackList = function finalUpdateTrackList(tracks, typeObject) {
+  var finalUpdateTrackList = function finalUpdateTrackList(tracks, typeObject, currentSongIndex) {
     if (currentPlayingAlbum && currentPlayingAlbum.id === typeObject.id) {
       toggleIsPlaying();
     } else {
-      updateTrackList(tracks, typeObject);
+      updateTrackList(tracks, typeObject, currentSongIndex);
     }
   };
 
@@ -1767,7 +1773,26 @@ function (_React$Component) {
             updateTrackList = _this3$props.updateTrackList,
             typeObject = _this3$props.typeObject,
             songsArr = _this3$props.songsArr;
-        updateTrackList(songsArr, typeObject);
+        updateTrackList(songsArr, typeObject, 0);
+      };
+    }
+  }, {
+    key: "onPlaySongListItemClick",
+    value: function onPlaySongListItemClick(songObj) {
+      var _this4 = this;
+
+      return function () {
+        var _this4$props = _this4.props,
+            updateTrackList = _this4$props.updateTrackList,
+            typeObject = _this4$props.typeObject,
+            songsArr = _this4$props.songsArr;
+        var songIdx = 0;
+        songsArr.forEach(function (song, i) {
+          if (songObj.id === song.id) {
+            songIdx = i;
+          }
+        });
+        updateTrackList(songsArr, typeObject, songIdx);
       };
     }
   }, {
@@ -1847,7 +1872,8 @@ function (_React$Component) {
         songsArr: songsArr,
         typeObject: typeObject,
         type: type,
-        currentUserId: currentUserId
+        currentUserId: currentUserId,
+        onPlaySongListItemClick: true
       })));
     }
   }]);
@@ -3771,8 +3797,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     deletePlaylist: function deletePlaylist(id) {
       return dispatch(Object(_actions_playlist_actions__WEBPACK_IMPORTED_MODULE_2__["deletePlaylist"])(id));
     },
-    updateTrackList: function updateTrackList(tracks, typeObject) {
-      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_6__["updateCurrentPlayingPlaylist"])(tracks, typeObject));
+    updateTrackList: function updateTrackList(tracks, typeObject, currentSongIndex) {
+      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_6__["updateCurrentPlayingPlaylist"])(tracks, typeObject, currentSongIndex));
     },
     toggleIsPlaying: function toggleIsPlaying() {
       return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_6__["toggleIsPlaying"])());
@@ -3794,11 +3820,11 @@ var mergeProps = function mergeProps(connectedProps, connectedDispatch) {
   // }
 
 
-  var finalUpdateTrackList = function finalUpdateTrackList(tracks, typeObject) {
+  var finalUpdateTrackList = function finalUpdateTrackList(tracks, typeObject, currentSongIndex) {
     if (currentPlayingPlaylist && currentPlayingPlaylist.id === typeObject.id) {
       toggleIsPlaying();
     } else {
-      updateTrackList(tracks, typeObject);
+      updateTrackList(tracks, typeObject, currentSongIndex);
     }
   };
 
@@ -4629,6 +4655,10 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 //   addToLibrary: (later)
 //   removeFromLibrary: (later)
 // }
+// NEEDED BUT DONT HAVE YET 11:58PM, TUES
+//isPlaying
+//	-> if (isPlaying) => change returned divs GREEN, else divs should be WHITE
+//togglePlaying
 
 var SongListItem =
 /*#__PURE__*/
@@ -4754,7 +4784,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "icon-title"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "musical-note-icon"
+        className: "musical-note-icon",
+        onClick: this.props.togglePlaying
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-music"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -5134,7 +5165,7 @@ var musicPlayerReducer = function musicPlayerReducer() {
   switch (action.type) {
     case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_CURRENT_PLAYING_ALBUM"]:
       return {
-        currentSongIndex: 0,
+        currentSongIndex: action.currentSongIndex,
         currentPlayingAlbum: action.album,
         currentPlayingPlaylist: null,
         trackList: action.trackList,
@@ -5143,7 +5174,7 @@ var musicPlayerReducer = function musicPlayerReducer() {
 
     case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_CURRENT_PLAYING_PLAYLIST"]:
       return {
-        currentSongIndex: 0,
+        currentSongIndex: action.currentSongIndex,
         currentPlayingAlbum: null,
         currentPlayingPlaylist: action.playlist,
         trackList: action.trackList,
@@ -5152,7 +5183,7 @@ var musicPlayerReducer = function musicPlayerReducer() {
 
     case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_CURRENT_PLAYING_SONGLIST"]:
       return {
-        currentSongIndex: 0,
+        currentSongIndex: action.currentSongIndex,
         currentPlayingAlbum: null,
         currentPlayingPlaylist: null,
         trackList: action.trackList,

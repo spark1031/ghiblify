@@ -32,7 +32,20 @@ class Details extends React.Component {
 	onPlayButtonOverlayClick() {
 		return () => {
 			const { updateTrackList, typeObject, songsArr } = this.props;
-			updateTrackList(songsArr, typeObject);
+			updateTrackList(songsArr, typeObject, 0);
+		};
+	}
+
+	onPlaySongListItemClick(songObj) {
+		return () => {
+			const { updateTrackList, typeObject, songsArr } = this.props;
+			let songIdx = 0;
+			songsArr.forEach((song, i) => {
+				if (songObj.id === song.id) {
+					songIdx = i;
+				}
+			});
+			updateTrackList(songsArr, typeObject, songIdx);
 		};
 	}
 
@@ -115,6 +128,7 @@ class Details extends React.Component {
 						typeObject={typeObject}
 						type={type}
 						currentUserId={currentUserId}
+						onPlaySongListItemClick
 					/>
 				</div>
 			</div>

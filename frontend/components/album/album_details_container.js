@@ -43,7 +43,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   const albumId = ownProps.match.params.albumId;
   return {
     fetchOneAlbumLoader: () => dispatch(fetchOneAlbum(albumId)),
-    updateTrackList: (tracks, typeObject) => dispatch(updateCurrentPlayingAlbum(tracks, typeObject)),
+    updateTrackList: (tracks, typeObject, currentSongIndex) => dispatch(updateCurrentPlayingAlbum(tracks, typeObject, currentSongIndex)),
     toggleIsPlaying: () => dispatch(toggleIsPlaying())
   };
 };
@@ -60,11 +60,11 @@ const mergeProps = (connectedProps, connectedDispatch) => {
     ...restConnectedProps
   } = connectedProps;
 
-  const finalUpdateTrackList = (tracks, typeObject) => {
+  const finalUpdateTrackList = (tracks, typeObject, currentSongIndex) => {
     if (currentPlayingAlbum && (currentPlayingAlbum.id === typeObject.id)) {
       toggleIsPlaying();
     } else {
-      updateTrackList(tracks, typeObject);
+      updateTrackList(tracks, typeObject, currentSongIndex);
     }
   }
 
