@@ -1,27 +1,44 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import { Route, Switch, withRouter } from "react-router-dom";
+import SearchResultsContainer from "./search_results"; //has container attached in same file!!
 // import { AuthRoute, ProtectedRoute } from "../../util/route_util";
+
+import { fetchSearchResults } from "../../actions/search_actions";
+
+const WAIT_INTERVAL = 500;
 
 class Search extends React.Component {
 	constructor(props) {
 		super(props);
+
 		this.state = {
-			searchInput: ""
+			query: ""
 		};
 
-		this.renderResults = this.renderResults.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.triggerChange = this.triggerChange.bind(this);
 	}
 
-	componentDidMount() {
-		let { fetchAllSongs, fetchAllPlaylists } = this.props;
-		fetchAllSongs();
-		fetchAllPlaylists();
+	componentWillMount() {
+		this.timer = null;
 	}
 
-	handleInput() {
-		return e => {
-			this.setState({ searchInput: e.target.value });
-		};
+	handleChange(e) {
+		clearTimeout(this.timer);
+		this.setState({ query: e.target.value });
+		this.timer = setTimeout(this.triggerChange, WAIT_INTERVAL);
+	}
+
+	triggerChange() {
+		const { query } = this.state;
+		this.props
+			.fetchSearchResults(query)
+			.then(results =>
+				query
+					? this.props.history.push(`/search/results/${query}`)
+					: this.props.history.push(`/search`)
+			);
 	}
 
 	renderNullResults() {
@@ -36,12 +53,12 @@ class Search extends React.Component {
 	}
 
 	renderResults() {
-		return <div className="search-results">RESULT COLLECTIONS</div>;
+		return <Route path="/search/results" component={SearchResultsContainer} />;
 	}
 
 	render() {
 		let results;
-		this.state.searchInput.length === 0
+		this.state.query.length === 0
 			? (results = this.renderNullResults())
 			: (results = this.renderResults());
 
@@ -53,8 +70,8 @@ class Search extends React.Component {
 						type="text"
 						placeholder="Start typing..."
 						autoComplete="off"
-						value={this.state.name}
-						onChange={this.handleInput()}
+						value={this.state.query}
+						onChange={this.handleChange}
 					/>
 				</div>
 				{results}
@@ -63,4 +80,13 @@ class Search extends React.Component {
 	}
 }
 
-export default Search;
+const mapDispatchToProps = dispatch => ({
+	fetchSearchResults: query => dispatch(fetchSearchResults(query))
+});
+
+export default withRouter(
+	connect(
+		null,
+		mapDispatchToProps
+	)(Search)
+);

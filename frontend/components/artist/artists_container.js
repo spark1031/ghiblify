@@ -16,6 +16,15 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
+//CAUSES ISSUES!! (probably with loader/fetching) wanted to do this to implement search filtering!
+// const mapStateToProps = (state, ownProps) => {
+//   let artists;
+//   ownProps.artists ? artists = ownProps.artists : Object.values(state.entities.artists);
+//   return {
+//     artists
+//   };
+// };
+
 const mapDispatchToProps = dispatch => {
   return {
     wrappedPropsLoader: () => dispatch(fetchAllArtists())

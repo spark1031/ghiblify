@@ -6,7 +6,7 @@ import Sidebar from "./navigation/sidebar";
 import MusicPlayerContainer from "./music_player/music_player_container";
 import Browse from "./browse/browse";
 import LibraryContainer from "./library/library_container";
-import SearchContainer from "./search/search_container";
+import Search from "./search/search";
 import SearchIcon from "./navigation/search_icon";
 import HomeIcon from "./navigation/home_icon";
 import LibraryIcon from "./navigation/library_icon";
@@ -45,7 +45,7 @@ const MainPage = () => {
 				<Switch>
 					<Route path="/browse" component={Browse} />
 					<Route path="/library" component={LibraryContainer} />
-					<Route path="/search" component={SearchContainer} />
+					<Route path="/search" component={Search} />
 					<Route path="/albums/:albumId" component={AlbumDetailsContainer} />
 					<Route
 						path="/playlists/:playlistId"

@@ -18,8 +18,12 @@ import {
 
 const mapStateToProps = (state, ownProps) => {
   const musicPlayer = state.ui.musicPlayer;
+  let playlists = hydratedPlaylistsSelector(state.entities) || [];
+  if (ownProps.playlists) {
+    playlists = ownProps.playlists;
+  }
   return {
-    playlists: hydratedPlaylistsSelector(state.entities) || [],
+    playlists,
     currentSong: musicPlayer.trackList[musicPlayer.currentSongIndex],
     currentPlayingPlaylist: musicPlayer.currentPlayingPlaylist,
     isPlaying: musicPlayer.isPlaying

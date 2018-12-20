@@ -99,6 +99,13 @@ class Details extends React.Component {
 				/>
 			);
 		}
+
+		let playPauseButtonType = "PLAY";
+		let playPauseButtonAction = () => updateTrackList(songsArr, typeObject, 0);
+		if (selfIsPlaying) {
+			playPauseButtonType = "PAUSE";
+		}
+
 		return (
 			<div className="details-main">
 				<div className="info">
@@ -116,7 +123,10 @@ class Details extends React.Component {
 						</div>
 						<div className="sub-title">{subTitle}</div>
 					</div>
-					<Button buttonType="PLAY" action={this.playSongs} />
+					<Button
+						buttonType={playPauseButtonType}
+						action={playPauseButtonAction}
+					/>
 					<div className="year-songs">{detailsText}</div>
 					<div className="extra-buttons">
 						{browseButton}

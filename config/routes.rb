@@ -9,5 +9,9 @@ Rails.application.routes.draw do
     resources :playlists, only: [:index, :show, :create, :update, :destroy]
     resources :playlist_songs, only: [:create, :destroy]
   end
+
+  namespace :api do
+    get 'searches', to:'searches#index'
+  end
   root to: "static_pages#root"
 end

@@ -1,4 +1,125 @@
-.music-player {
+.player {
+  z-index: 9999;
+}
+
+.icon {
+  opacity: .5;
+  width: 12px;
+  height: 12px;
+  padding: 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0px -3px;
+  position: relative;
+}
+
+.play,
+.pause {
+  border-radius: 50%;
+  border: 1px solid white;
+  transition: transform .2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.icon:hover {
+  opacity: 1;
+}
+
+.icon:active {
+  opacity: .5;
+}
+
+.play:hover,
+.pause:hover {
+  transform: scale(1.1);
+}
+
+.play:active,
+.pause:active {
+  transform: scale(1);
+}
+
+.play {
+  background-image: url('https://s3.us-east-2.amazonaws.com/bop-images/buttons/play.png');
+  background-size: 11px 13px;
+  background-position: 55% 50%;
+}
+
+.pause {
+  background-image: url('https://s3.us-east-2.amazonaws.com/bop-images/buttons/pause.png');
+  background-size: 10px 12px;
+}
+
+.next,
+.prev {
+  background-size: 11px 11px;
+}
+
+.next {
+  background-image: url('https://s3.us-east-2.amazonaws.com/bop-images/buttons/next.png');
+}
+
+.prev {
+  background-image: url('https://s3.us-east-2.amazonaws.com/bop-images/buttons/prev.png');
+}
+
+.shuffle,
+.shuffle-selected {
+  background-size: 15px 11px;
+}
+
+.shuffle {
+  background-image: url('https://s3.us-east-2.amazonaws.com/bop-images/buttons/shuffle.png');
+}
+
+.shuffle-selected {
+  background-image: url('https://s3.us-east-2.amazonaws.com/bop-images/buttons/shuffle-green.png');
+}
+
+.loop,
+.loop-selected,
+.loop-tracklist {
+  background-size: 14px 14px;
+}
+
+.shuffle-selected,
+.loop-selected,
+.loop-tracklist {
+  opacity: .8;
+
+  &:active {
+    opacity: .8;
+  }
+}
+
+.loop {
+  background-image: url('https://s3.us-east-2.amazonaws.com/bop-images/buttons/loop.png');
+}
+
+.loop-selected {
+  background-image: url('https://s3.us-east-2.amazonaws.com/bop-images/buttons/loop-selected.png');
+}
+
+.loop-tracklist {
+  background-image: url('https://s3.us-east-2.amazonaws.com/bop-images/buttons/loop-playlist.png');
+}
+
+.shuffle-selected,
+.loop-selected,
+.loop-tracklist {
+  &:after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    left: calc(50% - 2px);
+    bottom: 0px;
+    border-radius: 50%;
+    background-color: #2fd565;
+  }
+}
+
+//su's origin music-player css
+.music-player-wrapper {
   background-color: #282828;
   width: 100%;
   height: 90px;
@@ -7,6 +128,146 @@
   bottom: 0;
 }
 
-.Play-button {
-  margin-left: 20px;
+.music-player {
+  font-size: 10px;
+  display: flex;
+  height: 100%;
+  // justify-content: space-evenly;
+  align-items: center;
+
+  div[class*="col"] {
+    box-sizing: border-box;
+    height: 100%;
+  }
+
+  .col-3-11 {
+    margin-right: 100px;
+    flex: 3;
+    padding: 15px;
+  }
+
+  .col-5-11 {
+    flex: 5;
+    padding: 5px;
+    padding-left: 13%;
+
+  }
+
+  button {
+    background: transparent;
+    border: 0;
+    margin: 0;
+    padding: 10px;
+  }
+
+  button:focus {
+    border: 0;
+    outline: 0;
+  }
+
+  i {
+    color: #aaa;
+    border-radius: 80%;
+    font-size: 18px;
+    transition: all .2s ease;
+    transform: scale(1);
+
+  }
+
+  i:hover {
+    color: #ccc;
+    transform: scale(1.05);
+  }
+
+  .fa-play-circle,
+  .fa-pause-circle {
+    font-size: 35px;
+    width: 35px;
+    height: 35px;
+  }
+
+  .fa-play-circle:hover,
+  .fa-pause-circle:hover {}
+
+
+
+  .selected {
+    // -webkit-text-stroke-width: .3px;
+    // -webkit-text-stroke-color: #4bfa75;
+    // text-shadow: 0px 0px 5px #4bfa75;
+    color: #1ed760 !important;
+  }
+
+  .song-info {
+    font-family: Circular Bold;
+    font-size: 14px;
+    color: white;
+    flex: 3;
+    margin-left: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+
+    .song-info-album-cover {
+      width: 55px;
+      height: 55px;
+      object-fit: cover;
+    }
+
+    .song-info-links {
+      display: flex;
+      flex-direction: column;
+      padding: 5px;
+
+      .album-link {
+        font-size: 14px;
+        ;
+      }
+
+      .artist-link {
+        font-size: 11.5px;
+        color: #bbb;
+      }
+
+      a {
+        padding: 4px;
+        letter-spacing: .4px
+      }
+
+      // for adding border before links
+      a span {
+        position: relative;
+      }
+
+      a span:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        height: 1px;
+        width: 100%;
+        border-bottom: 1px solid transparent;
+      }
+
+      a:hover span:after {
+        border-bottom-color: #fff;
+        color: #fff;
+      }
+    }
+
+  }
+
+
+  .volume-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    // background-color: yellow;
+
+    .mute {
+      text-align: left;
+      width: 25px;
+    }
+  }
 }

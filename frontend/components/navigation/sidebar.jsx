@@ -30,6 +30,8 @@ class Sidebar extends React.Component {
 			<SidebarItem key={i} itemInfo={item} />
 		));
 
+
+
 		return (
 			<div className="sidebar-main">
 				<div className="sidebar-main-links">
@@ -50,6 +52,7 @@ class Sidebar extends React.Component {
 const SidebarItem = props => {
 	const { itemInfo } = props;
 	const { to, icon, displayText } = itemInfo;
+
 	return (
 		<Link to={to} style={{ textDecoration: "none" }}>
 			<div className="sidebar-item">
