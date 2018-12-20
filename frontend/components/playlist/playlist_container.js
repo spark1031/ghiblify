@@ -15,6 +15,8 @@ import {
   toggleIsPlaying
 } from '../../actions/music_player_actions';
 
+import * as _ from 'lodash';
+
 
 const mapStateToProps = (state, ownProps) => {
   const musicPlayer = state.ui.musicPlayer;
@@ -49,7 +51,7 @@ const mergeProps = (connectedState, connectedDispatch) => {
   };
   return {
     initialWrappedProps: {
-      collectionItemInfos: connectedState.playlists.map(playlist => convertPlaylistToCollectionItemInfo(playlist, connectedState.currentPlayingPlaylist, updateCurrentPlayingPlaylist, connectedState.isPlaying)),
+      collectionItemInfos: _.compact(connectedState.playlists.map(playlist => convertPlaylistToCollectionItemInfo(playlist, connectedState.currentPlayingPlaylist, updateCurrentPlayingPlaylist, connectedState.isPlaying))),
     },
     wrappedPropsLoader: () => connectedDispatch.wrappedPropsLoader()
   };
@@ -59,19 +61,24 @@ const convertPlaylistToCollectionItemInfo = (playlist, currentPlayingPlaylist, u
   const selfIsPlaying = currentPlayingPlaylist && isPlaying ? +playlist.id === +currentPlayingPlaylist.id : false;
   let coverUrl;
   playlist.coverUrl ? coverUrl = playlist.coverUrl : coverUrl = "https://s3.amazonaws.com/ghiblify-resources/Other/pink_playlist_default.jpg";
-  return {
-    imageUrl: coverUrl,
-    title: playlist.name,
-    subTitle: playlist.creator.username,
-    primaryTo: `/playlists/${playlist.id}`,
-    secondaryTo: '/search',
-    tracks: playlist.playlistSongs,
-    selfIsPlaying,
-    onPlayButtonClick: () => {
-      updateCurrentPlayingPlaylist(playlist.playlistSongs, playlist);
-    }
-    // secondaryTo: to creator/user's page
-  };
+  if (playlist && playlist.creator) {
+    return {
+      imageUrl: coverUrl,
+      title: playlist.name,
+      subTitle: playlist.creator.username,
+      primaryTo: `/playlists/${playlist.id}`,
+      secondaryTo: '/search',
+      tracks: playlist.playlistSongs,
+      selfIsPlaying,
+      onPlayButtonClick: () => {
+        updateCurrentPlayingPlaylist(playlist.playlistSongs, playlist);
+      }
+      // secondaryTo: to creator/user's page
+    };
+  } else {
+    return undefined;
+  }
+
 };
 
 

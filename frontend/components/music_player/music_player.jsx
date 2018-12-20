@@ -1,21 +1,19 @@
 import React from "react";
 // import ReactPlayer from "react-player";
 import MyPlayer from "./my_player";
-// import PlayingSongInfoContainer from "./playing_song_info_container";
+import PlayingSongInfoContainer from "./playing_song_info_container";
 
 class MusicPlayer extends React.Component {
 	constructor(props) {
 		super(props);
 		let songDuration;
-		this.props.currentSong
-			? (songDuration = this.props.currentSong.duration)
-			: (songDuration = undefined);
+
 		this.state = {
 			volume: 0.6,
 			isMuted: false,
-			duration: songDuration,
 			progress: 0,
-			isSeeking: false
+			isSeeking: false,
+			isSongLoaded: false
 		};
 	}
 
@@ -45,8 +43,8 @@ class MusicPlayer extends React.Component {
 
 	onProgressSliderChange() {
 		return event => {
-			const newProgress = (event.target.value * this.state.duration) / 100;
-			this.player.seekTo(newProgress);
+			const newProgress = (event.target.value * this.props.currentSong.duration) / 100;
+			this.player.currentTime = newProgress;
 			this.setState({
 				progress: newProgress
 			});
@@ -93,8 +91,7 @@ class MusicPlayer extends React.Component {
 
 	render() {
 		const { currentSong, isPlaying } = this.props;
-		const { isMuted, volume, duration, progress, isSeeking } = this.state;
-		const isSongLoaded = duration !== undefined;
+		const { isMuted, volume, progress, isSeeking, isSongLoaded } = this.state;
 
 		// const playIcon = <i className="fa fa-play-circle" />;
 		const playIcon = <div className="icon play" />;
@@ -131,10 +128,10 @@ class MusicPlayer extends React.Component {
 		return (
 			<div className="music-player-wrapper">
 				<div className="music-player">
-					{/* <PlayingSongInfoContainer /> */}
-					<div className="song-info">
+					<PlayingSongInfoContainer />
+					{/* <div className="song-info">
 						{currentSong ? currentSong.title : ""}
-					</div>
+					</div> */}
 					<div className="play-bar col-5-11">
 						<div className="play-button">
 							<button>{shuffleIcon}</button>
@@ -181,7 +178,7 @@ class MusicPlayer extends React.Component {
 												type="range"
 												min={0}
 												max={100}
-												value={isSongLoaded ? (progress / duration) * 100 : 0}
+												value={isSongLoaded ? (progress / currentSong.duration) * 100 : 0}
 												onChange={this.onProgressSliderChange()}
 												onMouseDown={this.onSeekBegin()}
 												onMouseUp={this.onSeekEnd()}

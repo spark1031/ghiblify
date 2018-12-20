@@ -15,6 +15,8 @@ import {
   toggleIsPlaying
 } from '../../actions/music_player_actions';
 
+import * as _ from 'lodash';
+
 const mapStateToProps = (state, ownProps) => {
   const musicPlayer = state.ui.musicPlayer;
   let albums = hydratedAlbumsSelector(state.entities) || [];
@@ -47,7 +49,7 @@ const mergeProps = (connectedState, connectedDispatch) => {
   };
   return {
     initialWrappedProps: {
-      collectionItemInfos: connectedState.albums.map(album => convertAlbumToCollectionItemInfo(album, connectedState.currentPlayingAlbum, updateCurrentPlayingAlbum, connectedState.isPlaying)),
+      collectionItemInfos: _.compact(connectedState.albums.map(album => convertAlbumToCollectionItemInfo(album, connectedState.currentPlayingAlbum, updateCurrentPlayingAlbum, connectedState.isPlaying))),
     },
     wrappedPropsLoader: () => connectedDispatch.wrappedPropsLoader()
   };
@@ -55,20 +57,25 @@ const mergeProps = (connectedState, connectedDispatch) => {
 
 const convertAlbumToCollectionItemInfo = (album, currentPlayingAlbum, updateCurrentPlayingAlbum, isPlaying) => {
   const selfIsPlaying = currentPlayingAlbum && isPlaying ? album.id === currentPlayingAlbum.id : false;
-  return {
-    imageUrl: album.coverUrl,
-    title: album.title,
-    subTitle: album.artist.name,
-    primaryTo: `/albums/${album.id}`,
-    secondaryTo: '/artists',
-    tracks: album.albumSongs,
-    selfIsPlaying,
-    onPlayButtonClick: () => {
-      updateCurrentPlayingAlbum(album.albumSongs, album);
-    }
-    // primaryTo: `/browse/albums/${album.id}`
-    // secondaryTo:
-  };
+  if (album && album.artist) {
+    return {
+      imageUrl: album.coverUrl,
+      title: album.title,
+      subTitle: album.artist.name,
+      primaryTo: `/albums/${album.id}`,
+      secondaryTo: '/artists',
+      tracks: album.albumSongs,
+      selfIsPlaying,
+      onPlayButtonClick: () => {
+        updateCurrentPlayingAlbum(album.albumSongs, album);
+      }
+      // primaryTo: `/browse/albums/${album.id}`
+      // secondaryTo:
+    };
+  } else {
+    return undefined;
+  }
+
 };
 
 

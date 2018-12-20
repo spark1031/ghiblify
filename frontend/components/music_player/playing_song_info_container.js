@@ -8,8 +8,8 @@ const mapStateToProps = (state, ownProps) => {
   const currentSong = state.ui.musicPlayer.trackList[currentSongIdx];
 
   if (currentSong) {
-    currentSongAlbum = state.entities.albums[currentSong.albumId];
-    currentSongArtist = state.entities.artists[currentSong.artistId];
+    const currentSongAlbum = state.entities.albums[currentSong.albumId];
+    const currentSongArtist = state.entities.artists[currentSong.artistId];
     return ({
       currentSong,
       currentSongAlbum,

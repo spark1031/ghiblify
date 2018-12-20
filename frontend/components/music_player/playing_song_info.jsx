@@ -7,29 +7,29 @@ class PlayingSongInfo extends React.Component {
 		return !currentSong ? (
 			<div className="song-info col-3-11" />
 		) : (
-			<div className="song-info col-3-11">
-				<section className="song-info-cover-art">
-					<Link to={`/albums/${currentSong.album_id}`}>
-						<img
-							className="song-info-album-cover"
-							src={currentSongAlbum.coverUrl}
-						/>
-					</Link>
-				</section>
-				<section className="song-info-links">
-					<Link className="album-link" to={`/albums/${currentSong.album_id}`}>
-						<span>{currentSongAlbum.title}</span>
-					</Link>
-					<Link
-						className="artist-link"
-						to={`/artists/${currentSong.artist_id}`}
-					>
-						<span>{currentSongArtistName}</span>
-					</Link>
-				</section>
-				<section className="song-info-add-song" />
-			</div>
-		);
+				<div className="song-info col-3-11">
+					<section className="song-info-cover-art">
+						<Link to={`/albums/${currentSong.albumId}`}>
+							<img
+								className="song-info-album-cover"
+								src={currentSongAlbum.coverUrl}
+							/>
+						</Link>
+					</section>
+					<section className="song-info-links">
+						<Link className="album-link" to={`/albums/${currentSong.albumId}`}>
+							<span>{currentSongAlbum.title}</span>
+						</Link>
+						<Link
+							className="artist-link"
+							to={`/artists/${currentSong.artistId}`}
+						>
+							<span>{currentSongArtistName}</span>
+						</Link>
+					</section>
+					<section className="song-info-add-song" />
+				</div>
+			);
 	}
 }
 

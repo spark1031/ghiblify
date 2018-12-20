@@ -33,7 +33,7 @@ class Sidebar extends React.Component {
 		return (
 			<div className="sidebar-main">
 				<div className="sidebar-main-links">
-					<Link to="/" style={{ textDecoration: "none" }}>
+					<Link to="/browse/featured" style={{ textDecoration: "none" }}>
 						<div className="sidebar-main-logo">
 							<TotoroLogo />
 							<div className="sidebar-main-logo-name">Ghiblify</div>

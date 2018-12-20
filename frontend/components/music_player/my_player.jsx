@@ -9,12 +9,20 @@ class MyPlayer extends React.Component {
 		this.audio.addEventListener("timeupdate", () => {
 			const playedSeconds = this.audio.currentTime;
 			props.onProgress({
-				playedSeconds
+				playedSeconds: playedSeconds
 			});
 		});
 		console.log(props);
 		props.playerRef(this.audio);
+		if (props.playing) {
+			this.audio.autoplay = true;
+		}
 	}
+
+	componentWillUnmount() {
+		this.audio.pause();
+	}
+
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.url !== this.props.url) {
 			this.audio.src = nextProps.url;

@@ -15,7 +15,6 @@
   color: white;
   align-items: center;
   text-align: center;
-
 }
 
 // .category-selector-main {
@@ -27,7 +26,7 @@
 .category-selector-main {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 22px;
+  grid-gap: 40px;
   // margin-left: 15px;
 }
 
