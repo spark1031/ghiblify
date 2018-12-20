@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { AuthRoute, ProtectedRoute } from "../util/route_util";
 import Modal from "../components/modal/modal";
-import Sidebar from "./navigation/sidebar";
+import SidebarContainer from "./navigation/sidebar_container";
 import MusicPlayerContainer from "./music_player/music_player_container";
 import Browse from "./browse/browse";
 import LibraryContainer from "./library/library_container";
@@ -41,7 +41,7 @@ const MainPage = () => {
 		<div>
 			<div className="main-nav-content">
 				<Modal />
-				<Sidebar sidebarItemInfos={sidebarItemInfos} />
+				<SidebarContainer sidebarItemInfos={sidebarItemInfos} />
 				<Switch>
 					<Route path="/browse" component={Browse} />
 					<Route path="/library" component={LibraryContainer} />

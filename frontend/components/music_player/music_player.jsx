@@ -114,12 +114,12 @@ class MusicPlayer extends React.Component {
 			volume < 0.01 ? volumeOff : volume < 0.6 ? volumeDown : volumeUp;
 
 		// Really fine tuning on the overlay div
-		// let seekStyle =
-		// 	played < 0.001
-		// 		? { width: "0" }
-		// 		: {
-		// 				width: `${played * 100 + 0.5 - played * 0.5}%`
-		// 		  };
+		let seekStyle =
+			progress < 0.001
+				? { width: "0" }
+				: {
+					width: `${progress * 100 + 0.5 - progress * 0.5}%`
+				};
 
 		// let volumeStyle =
 		//   volume < 0.001
@@ -171,8 +171,8 @@ class MusicPlayer extends React.Component {
 								<div className="progress-bar-with-duration">
 									{/* <Duration seconds={duration * played} /> */}
 									<div className="overlay-wrapper">
-										{/* <div className="played" style={seekStyle} /> */}
-										<div className="played" />
+										<div className="played" style={seekStyle} />
+										{/* <div className="played" /> */}
 										<div className="player-underlay" />
 										<div className="seek-slider-wrapper">
 											<input
@@ -203,7 +203,7 @@ class MusicPlayer extends React.Component {
 						<button className="mute" onClick={this.toggleIsMuted()}>
 							{isMuted ? volumeOff : volumeUp}
 						</button>
-						<div className="progress-bar-with-duration">
+						<div className="volume-bar-with-duration">
 							<div className="overlay-wrapper">
 								<div className="played" />
 								{/* <div className="played" style={volumeStyle} /> */}

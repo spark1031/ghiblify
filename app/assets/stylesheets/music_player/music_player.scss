@@ -141,7 +141,7 @@
   }
 
   .col-3-11 {
-    margin-right: 100px;
+    margin-right: 80px;
     flex: 3;
     padding: 15px;
   }
@@ -269,5 +269,15 @@
       text-align: left;
       width: 25px;
     }
+
+    .volume-bar-with-duration {
+      padding-left: 10px;
+    }
+  }
+}
+
+.progress-bar-with-duration {
+  input {
+    width: 230px;
   }
 }

@@ -19,23 +19,23 @@
   display: flex;
   align-items: center;
   transition: 0.5s;
+  fill: black;
+  stroke: black;
 }
 
 .black-logo:hover {
   color: darkgray;
+  fill: darkgray;
+  stroke: darkgray;
 }
 
 .black-logo-name {
-  color: black;
   font-family: Circular Bold;
   font-size: 40px;
-  padding-left: 15px;
   letter-spacing: -1px;
+  margin-bottom: -35px;
 }
 
-.black-logo-name:hover {
-  color: darkgray;
-}
 
 .session-form {
   display: flex;

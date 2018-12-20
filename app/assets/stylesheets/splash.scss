@@ -43,18 +43,23 @@ body {
   font-size: 2.5em;
   display: flex;
   align-items: center;
+  fill: white;
+  stroke: white;
 }
 
 .white-logo:hover {
   cursor: pointer;
   color: #1ed760;
+  fill: #1ed760;
+  stroke: #1ed760;
 }
 
 .white-logo-name {
   // color: white;
   font-family: Circular Bold;
   font-size: 20px;
-  padding-left: 15px;
+  padding-left: 2px;
+  margin-bottom: -12px;
 }
 
 

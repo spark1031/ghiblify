@@ -3,6 +3,8 @@
   width: 100%;
   align-items: center;
   background-color: transparent;
+  display: flex;
+  justify-content: center;
 }
 
 .topbar-inner {
@@ -12,13 +14,21 @@
   display: flex;
   color: white;
   align-items: center;
+  text-align: center;
+
 }
 
+// .category-selector-main {
+//   flex: 3;
+//   display: inblock;
+//   margin-left: 50px;
+//   // justify-content: space-evenly;
+// }
 .category-selector-main {
-  flex: 3;
-  display: inblock;
-  margin-left: 50px;
-  // justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 22px;
+  // margin-left: 15px;
 }
 
 .category-item {
@@ -41,7 +51,7 @@
   margin-top: -20px;
 
   .topbar-button {
-    max-width: 150px;
+    width: 150px;
     cursor: pointer;
     margin-top: 20px;
     background-color: #1DB954;
@@ -63,6 +73,7 @@
     transition: .5s;
     outline: none;
     transform: scale(1);
+    margin-left: 50px;
   }
 
   .topbar-button:hover {

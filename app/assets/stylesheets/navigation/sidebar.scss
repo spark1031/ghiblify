@@ -31,7 +31,7 @@
   font-size: 20px;
 }
 
-.sidebar-item:active {
+.sidebar-item-highlighted {
   color: white;
   font-weight: bold
 }
@@ -65,8 +65,9 @@
 .sidebar-main-logo-name {
   font-family: Circular Medium;
   font-size: 26px;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   margin-left: 2px;
+  margin-bottom: -11px;
   // margin-left: px;
 }
 

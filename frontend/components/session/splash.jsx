@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../../actions/session_actions";
+import TotoroLogo from "../navigation/totoro_logo";
 
 const mapDispatchToProps = dispatch => {
 	return {
@@ -22,7 +23,7 @@ class Splash extends React.Component {
 				<div className="splash-nav">
 					<Link to="/" style={{ textDecoration: "none" }}>
 						<div className="white-logo">
-							<i className="fab fa-spotify" />
+							<TotoroLogo />
 							<div className="white-logo-name">Ghiblify</div>
 						</div>
 					</Link>

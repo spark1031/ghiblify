@@ -1,6 +1,7 @@
 import React from "react";
 import * as _ from "lodash";
 import { Link } from "react-router-dom";
+import TotoroLogoLarge from "../navigation/totoro_logo_large";
 
 class SessionForm extends React.Component {
 	constructor(props) {
@@ -106,15 +107,15 @@ class SessionForm extends React.Component {
 		let demoUserButton;
 		this.props.formType === "LOG IN"
 			? (demoUserButton = (
-					<div className="session-demo">
-						<div className="session-demo-button" onClick={this.handleClick()}>
-							DEMO USER
+				<div className="session-demo">
+					<div className="session-demo-button" onClick={this.handleClick()}>
+						DEMO USER
 						</div>
-						<fieldset className="hr-line">
-							<legend className="or-divider">OR</legend>
-						</fieldset>
-					</div>
-			  ))
+					<fieldset className="hr-line">
+						<legend className="or-divider">OR</legend>
+					</fieldset>
+				</div>
+			))
 			: (demoUserButton = null);
 
 		return (
@@ -122,7 +123,8 @@ class SessionForm extends React.Component {
 				<div className="session-nav">
 					<Link to="/" style={{ textDecoration: "none" }}>
 						<div className="black-logo">
-							<i className="fab fa-spotify" />
+							{/* <i className="fab fa-spotify" /> */}
+							<TotoroLogoLarge />
 							<div className="black-logo-name">Ghiblify</div>
 						</div>
 					</Link>
