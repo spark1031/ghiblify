@@ -3857,8 +3857,10 @@ var CategoryItem = function CategoryItem(props) {
       textDecoration: "none"
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "category-item-wrapper"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "category-item"
-  }, displayText));
+  }, displayText)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CategorySelector);
@@ -5550,6 +5552,8 @@ function (_React$Component) {
   _createClass(SongList, [{
     key: "render",
     value: function render() {
+      var _this = this;
+
       var _this$props = this.props,
           typeObject = _this$props.typeObject,
           type = _this$props.type,
@@ -5557,7 +5561,9 @@ function (_React$Component) {
           addSongToPlaylist = _this$props.addSongToPlaylist,
           removeSongFromPlaylist = _this$props.removeSongFromPlaylist,
           openModal = _this$props.openModal,
-          currentUserId = _this$props.currentUserId;
+          currentUserId = _this$props.currentUserId,
+          isPlaying = _this$props.isPlaying,
+          currentSongIndex = _this$props.currentSongIndex;
 
       if (songsArr) {
         var songs = songsArr.map(function (song, i) {
@@ -5568,7 +5574,11 @@ function (_React$Component) {
             openModal: openModal,
             typeObject: typeObject,
             type: type,
-            currentUserId: currentUserId
+            currentUserId: currentUserId,
+            togglePlaying: function togglePlaying() {
+              _this.props.togglePlaying(song, i, type, typeObject, songsArr);
+            },
+            isPlaying: isPlaying && i === currentSongIndex
           });
         });
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -5583,7 +5593,9 @@ function (_React$Component) {
   return SongList;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (SongList);
+/* harmony default export */ __webpack_exports__["default"] = (SongList); // this song, at this index, for this album/playlist/songindexlist
+// this.props.togglePlaying = (song, index, type, typeObject, songsArr) => {
+// }
 
 /***/ }),
 
@@ -5600,19 +5612,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _song_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./song_list */ "./frontend/components/song/song_list.jsx");
 /* harmony import */ var _actions_playlist_song_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/playlist_song_actions */ "./frontend/actions/playlist_song_actions.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/music_player_actions */ "./frontend/actions/music_player_actions.js");
+
 
 
 
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var musicPlayer = state.ui.musicPlayer;
+  var collectionType = ownProps.type;
+  var collectionObject = ownProps.typeObject;
+  var collectionPlaying = false;
+
+  if (musicPlayer.isPlaying && collectionType === "playlist" && musicPlayer.currentPlayingPlaylist && musicPlayer.currentPlayingPlaylist.id === collectionObject.id) {
+    collectionPlaying = true;
+  } else if (musicPlayer.isPlaying && collectionType === "album" && musicPlayer.currentPlayingAlbum && musicPlayer.currentPlayingAlbum.id === collectionObject.id) {
+    collectionPlaying = true;
+  } else if (musicPlayer.isPlaying && !musicPlayer.currentPlayingAlbum && !musicPlayer.currentPlayingPlaylist) {
+    collectionPlaying = true;
+  }
+
   return {
     songsArr: ownProps.songsArr,
-    typeObject: ownProps.typeObject,
+    typeObject: collectionObject,
     //playlist or album object, non-hydrated, for SongListItem
-    type: ownProps.type,
-    currentUserId: ownProps.currentUserId // playlistSongs: state.entities.playlistSongs
-
+    type: collectionType,
+    currentUserId: ownProps.currentUserId,
+    currentSongIndex: musicPlayer.currentSongIndex,
+    isPlaying: collectionPlaying,
+    //is this collection the one that's playing?
+    // playlistSongs: state.entities.playlistSongs
+    musicPlayer: musicPlayer
   };
 };
 
@@ -5624,12 +5655,69 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     openModal: function openModal(modal, modalInfo) {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__["openModal"])(modal, modalInfo));
+    },
+    playSong: function playSong(song, index, type, typeObject, songsArr) {
+      if (type === "playlist") {
+        dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_4__["updateCurrentPlayingPlaylist"])(songsArr, typeObject, index));
+      } else if (type === "album") {
+        dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_4__["updateCurrentPlayingAlbum"])(songsArr, typeObject, index));
+      } else {
+        dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_4__["updateCurrentPlayingSongList"])(songsArr, index));
+      }
+    },
+    toggleSongPlay: function toggleSongPlay() {
+      return dispatch(Object(_actions_music_player_actions__WEBPACK_IMPORTED_MODULE_4__["toggleIsPlaying"])());
     } // playSongs:
 
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapDispatchToProps)(_song_list__WEBPACK_IMPORTED_MODULE_1__["default"]));
+var mergeProps = function mergeProps(connectedState, connectedDispatch) {
+  var songsArr = connectedState.songsArr,
+      currentUserId = connectedState.currentUserId,
+      currentSongIndex = connectedState.currentSongIndex,
+      isPlaying = connectedState.isPlaying,
+      musicPlayer = connectedState.musicPlayer,
+      type = connectedState.type,
+      typeObject = connectedState.typeObject;
+  var removeSongFromPlaylist = connectedDispatch.removeSongFromPlaylist,
+      openModal = connectedDispatch.openModal,
+      playSong = connectedDispatch.playSong,
+      toggleSongPlay = connectedDispatch.toggleSongPlay;
+  var isCurrentContext = false;
+
+  if (type === "playlist" && musicPlayer.currentPlayingPlaylist && musicPlayer.currentPlayingPlaylist.id === typeObject.id) {
+    isCurrentContext = true;
+  } else if (type === "album" && musicPlayer.currentPlayingAlbum && musicPlayer.currentPlayingAlbum.id === typeObject.id) {
+    isCurrentContext = true;
+  } else if (musicPlayer.isPlaying && !musicPlayer.currentPlayingAlbum && !musicPlayer.currentPlayingPlaylist) {
+    isCurrentContext = true;
+  }
+
+  var togglePlaying = function togglePlaying(song, index, type, typeObject, songsArr) {
+    if (isCurrentContext && musicPlayer.currentSongIndex === index) {
+      toggleSongPlay();
+    } else {
+      playSong(song, index, type, typeObject, songsArr);
+    }
+  };
+
+  return {
+    songsArr: songsArr,
+    typeObject: typeObject,
+    type: type,
+    currentUserId: currentUserId,
+    currentSongIndex: currentSongIndex,
+    isPlaying: isPlaying,
+    removeSongFromPlaylist: removeSongFromPlaylist,
+    openModal: openModal,
+    togglePlaying: togglePlaying
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps, mergeProps)(_song_list__WEBPACK_IMPORTED_MODULE_1__["default"])); // we 're not the currently playing thing
+// OR we are the currently playing thing => then we want to toggle pause and play based on
+// if we are playing
 
 /***/ }),
 
@@ -5754,7 +5842,8 @@ function (_React$Component) {
           removeSongFromPlaylist = _this$props.removeSongFromPlaylist,
           typeObject = _this$props.typeObject,
           type = _this$props.type,
-          currentUserId = _this$props.currentUserId; //typeObject = album/playlist object, non-hydrated; song = array of song objects
+          currentUserId = _this$props.currentUserId,
+          isPlaying = _this$props.isPlaying; //typeObject = album/playlist object, non-hydrated; song = array of song objects
       //song = {
       // 	id:
       // 	title:
@@ -5793,6 +5882,16 @@ function (_React$Component) {
       }
 
       var duration = "".concat(minutes, ":").concat(seconds);
+      var icon = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-music"
+      });
+
+      if (isPlaying) {
+        icon = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fas fa-pause"
+        });
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "song-list-item",
         onMouseEnter: this.toggleHover(true),
@@ -5802,9 +5901,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "musical-note-icon",
         onClick: this.props.togglePlaying
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-music"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, icon), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "title"
       }, song.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "duration",
@@ -5830,7 +5927,7 @@ function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _song_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./song_list */ "./frontend/components/song/song_list.jsx");
+/* harmony import */ var _song_list_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./song_list_container */ "./frontend/components/song/song_list_container.js");
 /* harmony import */ var _actions_playlist_song_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/playlist_song_actions */ "./frontend/actions/playlist_song_actions.js");
 /* harmony import */ var _actions_song_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/song_actions */ "./frontend/actions/song_actions.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
@@ -5932,7 +6029,7 @@ var mergeProps = function mergeProps(connectedProps, connectedDispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps, mergeProps)(Object(_hocs_loader__WEBPACK_IMPORTED_MODULE_6__["default"])(_song_list__WEBPACK_IMPORTED_MODULE_1__["default"])));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps, mergeProps)(Object(_hocs_loader__WEBPACK_IMPORTED_MODULE_6__["default"])(_song_list_container__WEBPACK_IMPORTED_MODULE_1__["default"])));
 
 /***/ }),
 

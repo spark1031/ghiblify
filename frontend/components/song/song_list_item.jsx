@@ -58,7 +58,8 @@ class SongListItem extends React.Component {
 			removeSongFromPlaylist,
 			typeObject,
 			type,
-			currentUserId
+			currentUserId,
+			isPlaying //is this song playing
 		} = this.props; //typeObject = album/playlist object, non-hydrated; song = array of song objects
 		//song = {
 		// 	id:
@@ -83,8 +84,8 @@ class SongListItem extends React.Component {
 						Remove from Current Playlist
 					</div>
 				) : (
-					""
-				)}
+						""
+					)}
 			</div>
 		);
 
@@ -106,6 +107,12 @@ class SongListItem extends React.Component {
 			seconds = `0${seconds}`;
 		}
 		const duration = `${minutes}:${seconds}`;
+
+
+		let icon = <i className="fas fa-music" />;
+		if (isPlaying) {
+			icon = <i className="fas fa-pause"></i>;
+		}
 		return (
 			<div
 				className="song-list-item"
@@ -114,7 +121,7 @@ class SongListItem extends React.Component {
 			>
 				<div className="icon-title">
 					<div className="musical-note-icon" onClick={this.props.togglePlaying}>
-						<i className="fas fa-music" />
+						{icon}
 					</div>
 					<div className="title">{song.title}</div>
 				</div>

@@ -17,7 +17,9 @@ const CategoryItem = props => {
 
 	return (
 		<Link to={to} style={{ textDecoration: "none" }}>
-			<div className="category-item">{displayText}</div>
+			<div className="category-item-wrapper">
+				<div className="category-item">{displayText}</div>
+			</div>
 		</Link>
 	);
 };

@@ -28,6 +28,13 @@
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 40px;
   // margin-left: 15px;
+  // grid-template-columns: repeat(4, minmax(150px, 1fr));
+  // grid-column-gap: 40px;
+  // grid-row-gap: 6px;
+}
+
+.category-item-wrapper {
+  width: 100px;
 }
 
 .category-item {

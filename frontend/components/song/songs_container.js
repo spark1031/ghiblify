@@ -46,7 +46,7 @@
 import {
   connect
 } from 'react-redux';
-import SongList from './song_list';
+import SongListContainer from './song_list_container';
 import {
   addSongToPlaylist,
   removeSongFromPlaylist
@@ -97,4 +97,4 @@ const mergeProps = (connectedProps, connectedDispatch) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(loader(SongList));
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(loader(SongListContainer));

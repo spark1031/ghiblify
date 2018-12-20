@@ -10,7 +10,9 @@ class SongList extends React.Component {
 			addSongToPlaylist,
 			removeSongFromPlaylist,
 			openModal,
-			currentUserId
+			currentUserId,
+			isPlaying, //is the collection playing
+			currentSongIndex
 		} = this.props;
 
 		if (songsArr) {
@@ -23,6 +25,10 @@ class SongList extends React.Component {
 					typeObject={typeObject}
 					type={type}
 					currentUserId={currentUserId}
+					togglePlaying={() => {
+						this.props.togglePlaying(song, i, type, typeObject, songsArr)
+					}}
+					isPlaying={isPlaying && (i === currentSongIndex)}
 				/>
 			));
 			return <div className="song-list">{songs}</div>;
@@ -33,3 +39,9 @@ class SongList extends React.Component {
 }
 
 export default SongList;
+
+// this song, at this index, for this album/playlist/songindexlist
+
+// this.props.togglePlaying = (song, index, type, typeObject, songsArr) => {
+
+// }
