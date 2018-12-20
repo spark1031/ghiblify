@@ -27,19 +27,24 @@ import TotoroLogo from "../navigation/totoro_logo";
 class Sidebar extends React.Component {
 	render() {
 		let links = this.props.sidebarItemInfos.map((item, i) => (
-			<SidebarItem key={i} itemInfo={item} pathname={this.props.location.pathname} />
+			<SidebarItem
+				key={i}
+				itemInfo={item}
+				pathname={this.props.location.pathname}
+			/>
 		));
 
 		return (
 			<div className="sidebar-main">
 				<div className="sidebar-main-links">
-					<Link to="/browse/featured" style={{ textDecoration: "none" }}>
+					<Link to="/browse/playlists" style={{ textDecoration: "none" }}>
 						<div className="sidebar-main-logo">
 							<TotoroLogo />
 							<div className="sidebar-main-logo-name">Ghiblify</div>
 						</div>
 					</Link>
 					{links}
+					<div className="sidebar-spacer" />
 					<LogoutButtonContainer />
 				</div>
 			</div>

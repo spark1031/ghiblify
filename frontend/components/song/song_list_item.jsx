@@ -84,8 +84,8 @@ class SongListItem extends React.Component {
 						Remove from Current Playlist
 					</div>
 				) : (
-						""
-					)}
+					""
+				)}
 			</div>
 		);
 
@@ -108,14 +108,15 @@ class SongListItem extends React.Component {
 		}
 		const duration = `${minutes}:${seconds}`;
 
-
 		let icon = <i className="fas fa-music" />;
+		let songListClass = "song-list-item";
 		if (isPlaying) {
-			icon = <i className="fas fa-pause"></i>;
+			icon = <i className="fas fa-pause" />;
+			songListClass = "song-list-item-green";
 		}
 		return (
 			<div
-				className="song-list-item"
+				className={songListClass}
 				onMouseEnter={this.toggleHover(true)}
 				onMouseLeave={this.toggleHover(false)}
 			>

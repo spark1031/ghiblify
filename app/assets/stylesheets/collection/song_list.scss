@@ -1,5 +1,6 @@
 .song-list {
   margin-top: 35px;
+  margin-bottom: 30px;
 
   .song-list-item {
     height: 45px;
@@ -26,6 +27,7 @@
       }
     }
 
+
     .duration {
       margin-right: 15px;
       display: flex;
@@ -43,5 +45,60 @@
 
   .song-list-item:hover {
     background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+
+// .song-list-item-green {
+//   height: 45px;
+//   width: 100%;
+//   background-color: transparent;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   color: #1DB954;
+//   font-family: Circular;
+//   font-size: 14px;
+//   letter-spacing: 0.5px;
+// }
+
+.song-list-item-green {
+  height: 45px;
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #1DB954;
+  font-family: Circular Medium;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+
+  .icon-title {
+    display: flex;
+
+    .musical-note-icon {
+      margin-left: 10px;
+      color: #1DB954;
+    }
+
+    .title {
+      padding-left: 10px;
+    }
+  }
+
+
+  .duration {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    color: #1DB954;
+
+    .more {
+      margin-right: 15px;
+      font-size: 8px;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
   }
 }

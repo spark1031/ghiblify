@@ -14,24 +14,51 @@ class SearchResults extends React.Component {
 
 	render() {
 		const { playlists, songs, albums, artists, query } = this.props.searches;
+		let playlistResults;
+		playlists
+			? (playlistResults = playlists.map(playlist => (
+					<div>{playlist.name}</div>
+			  )))
+			: (playlistResults = null);
+
+		let songResults;
+		songs
+			? (songResults = songs.map(song => <div>{song.title}</div>))
+			: (songResults = null);
+
+		let albumResults;
+		albums
+			? (albumResults = albums.map(album => <div>{album.title}</div>))
+			: (albumResults = null);
+
+		let artistResults;
+		artists
+			? (artistResults = artists.map(artist => <div>{artist.name}</div>))
+			: (artistResults = null);
+
+		// console.warn(playlistResults);
 
 		let allResults = () => (
 			<div className="all-results">
 				<div className="category">
 					<div className="header">Playlists</div>
-					<PlaylistResults playlists={playlists} />
+					{playlistResults}
+					{/* <PlaylistResults playlists={playlists} /> */}
 				</div>
 				<div className="category">
 					<div className="header">Albums</div>
-					<AlbumResults albums={albums} />
+					{albumResults}
+					{/* <AlbumResults albums={albums} /> */}
 				</div>
 				<div className="category">
 					<div className="header">Artists</div>
-					<ArtistResults artists={artists} />
+					{artistResults}
+					{/* <ArtistResults artists={artists} /> */}
 				</div>
 				<div className="category">
 					<div className="header">Songs</div>
-					<SongResults songs={songs} />
+					{songResults}
+					{/* <SongResults songs={songs} /> */}
 				</div>
 			</div>
 		);
@@ -41,10 +68,7 @@ class SearchResults extends React.Component {
 				<div className="music-index">
 					<div className="music-index-wrapper">
 						{" "}
-						<Route
-							path={`/search/results/${query}`}
-							component={allResults}
-						/>
+						<Route path={`/search/results/${query}`} component={allResults} />
 					</div>{" "}
 				</div>{" "}
 			</main>

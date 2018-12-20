@@ -49,6 +49,7 @@ const mergeProps = (connectedState, connectedDispatch) => {
       connectedDispatch.updateCurrentPlayingPlaylist(trackList, playList);
     }
   };
+
   return {
     initialWrappedProps: {
       collectionItemInfos: _.compact(connectedState.playlists.map(playlist => convertPlaylistToCollectionItemInfo(playlist, connectedState.currentPlayingPlaylist, updateCurrentPlayingPlaylist, connectedState.isPlaying))),

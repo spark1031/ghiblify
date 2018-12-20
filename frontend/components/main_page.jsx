@@ -27,7 +27,7 @@ const MainPage = () => {
 			displayText: "Search"
 		},
 		{
-			to: "/browse/featured",
+			to: "/browse/playlists",
 			icon: <HomeIcon />,
 			displayText: "Home"
 		},

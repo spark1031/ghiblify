@@ -57,12 +57,20 @@ import {
 import {
   openModal
 } from '../../actions/modal_actions';
+
+import {
+  updateCurrentPlayingSongList,
+  toggleIsPlaying
+} from '../../actions/music_player_actions';
+
 import * as _ from 'lodash';
 import loader from '../hocs/loader';
 
 
 const mapStateToProps = (state) => {
   const songs = state.entities.songs;
+  const musicPlayer = state.ui.musicPlayer;
+
   if (_.isEmpty(songs)) {
     return {
       songsArr: undefined

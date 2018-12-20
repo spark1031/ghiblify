@@ -24,7 +24,6 @@ const mapStateToProps = (state, ownProps) => {
   const collectionObject = ownProps.typeObject;
 
 
-
   let collectionPlaying = false;
   if (musicPlayer.isPlaying && (collectionType === "playlist") && musicPlayer.currentPlayingPlaylist && (musicPlayer.currentPlayingPlaylist.id === collectionObject.id)) {
     collectionPlaying = true;

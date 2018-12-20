@@ -58,10 +58,10 @@ class Search extends React.Component {
 
 	render() {
 		let results;
+
 		this.state.query.length === 0
 			? (results = this.renderNullResults())
 			: (results = this.renderResults());
-
 		return (
 			<div className="search">
 				<div className="search-bar">

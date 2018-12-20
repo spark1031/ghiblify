@@ -2,6 +2,7 @@ import React from "react";
 // import ReactPlayer from "react-player";
 import MyPlayer from "./my_player";
 import PlayingSongInfoContainer from "./playing_song_info_container";
+import Duration from './duration';
 
 class MusicPlayer extends React.Component {
 	constructor(props) {
@@ -48,6 +49,7 @@ class MusicPlayer extends React.Component {
 			this.setState({
 				progress: newProgress
 			});
+			//PUT WEBKIT JAVASCRIPT LOGIC HERE (THEN ADD CSS)
 		};
 	}
 
@@ -111,12 +113,12 @@ class MusicPlayer extends React.Component {
 			volume < 0.01 ? volumeOff : volume < 0.6 ? volumeDown : volumeUp;
 
 		// Really fine tuning on the overlay div
-		let seekStyle =
-			progress < 0.001
-				? { width: "0" }
-				: {
-					width: `${progress * 100 + 0.5 - progress * 0.5}%`
-				};
+		// let seekStyle =
+		// 	progress < 0.001
+		// 		? { width: "0" }
+		// 		: {
+		// 			width: `${progress * 100 + 0.5 - progress * 0.5}%`
+		// 		};
 
 		// let volumeStyle =
 		//   volume < 0.001
@@ -134,20 +136,23 @@ class MusicPlayer extends React.Component {
 					</div> */}
 					<div className="play-bar col-5-11">
 						<div className="play-button">
-							<button>{shuffleIcon}</button>
+							<div className="play-button-inner">
+								<button>{shuffleIcon}</button>
 
-							<button onClick={this.props.onPrevSong}>{prevIcon}</button>
+								<button onClick={this.props.onPrevSong}>{prevIcon}</button>
 
-							<button
-								className="play-pause"
-								onClick={this.props.onTogglePlaying}
-							>
-								{isPlaying ? pauseIcon : playIcon}
-							</button>
+								<button
+									className="play-pause"
+									onClick={this.props.onTogglePlaying}
+								>
+									{isPlaying ? pauseIcon : playIcon}
+								</button>
 
-							<button onClick={this.props.onNextSong}>{nextIcon}</button>
+								<button onClick={this.props.onNextSong}>{nextIcon}</button>
 
-							<button className="loop-button">{loopIcon}</button>
+								<button className="loop-button">{loopIcon}</button>
+							</div>
+
 						</div>
 						{/* progress bar BELOW */}
 						<div className="progress-bar">
@@ -166,10 +171,10 @@ class MusicPlayer extends React.Component {
 
 							<div className="progress-bar-wrapper">
 								<div className="progress-bar-with-duration">
-									{/* <Duration seconds={duration * played} /> */}
+									{/* <Duration seconds={isPlaying ? currentSong.duration * progress : null} /> */}
 									<div className="overlay-wrapper">
-										<div className="played" style={seekStyle} />
-										{/* <div className="played" /> */}
+										{/* <div className="played" style={seekStyle} /> */}
+										<div className="played" />
 										<div className="player-underlay" />
 										<div className="seek-slider-wrapper">
 											<input
@@ -186,7 +191,7 @@ class MusicPlayer extends React.Component {
 										</div>
 									</div>
 
-									{/* <Duration seconds={duration} /> */}
+									{/* <Duration seconds={isPlaying ? currentSong.duration : null} /> */}
 								</div>
 							</div>
 						</div>

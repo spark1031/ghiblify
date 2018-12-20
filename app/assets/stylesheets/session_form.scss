@@ -3,6 +3,9 @@
   flex-direction: column;
   align-items: center;
   padding-bottom: 150px;
+  background-image: url("https://data.whicdn.com/images/187654805/original.gif");
+  background-size: cover;
+  height: 100vh;
 }
 
 .session-nav {
@@ -108,7 +111,7 @@
 }
 
 .signup-section Link {
-  border: rgb(112, 114, 113);
+  border: white;
 }
 
 .signup-section-button {
@@ -118,7 +121,7 @@
   text-decoration: none;
   text-align: center;
   letter-spacing: 2px;
-  background-color: white;
+  background-color: transparent;
   border: 2px solid rgb(112, 114, 113);
   padding: 12px;
   padding-top: 15px;
