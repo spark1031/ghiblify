@@ -6,7 +6,8 @@ class Api::PlaylistsController < ApplicationController
       "https://s3.amazonaws.com/ghiblify-resources/Other/pink_playlist_default.jpg",
       "https://s3.amazonaws.com/ghiblify-resources/Other/green_playlist_default.jpg",
       "https://s3.amazonaws.com/ghiblify-resources/Other/grey_playlist_default.jpg",
-      "https://s3.amazonaws.com/ghiblify-resources/Other/red_playlist_default.jpg"
+      "https://s3.amazonaws.com/ghiblify-resources/Other/red_playlist_default.jpg",
+      "https://s3.amazonaws.com/ghiblify-resources/Other/black_playlist_default.png"
     ]
     index = rand(0...playlist_covers.length)
     cover_file = playlist_covers[index]

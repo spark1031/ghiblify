@@ -253,8 +253,12 @@ playlist3 = Playlist.create!(name: "Top 2018", creator_id: user2.id)
 playlist3.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/green_playlist_default.jpg'), filename: "green_playlist.jpg"})
 playlist4 = Playlist.create!(name: "Totoro Faves", creator_id: demo.id)
 playlist4.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/pink_playlist_default.jpg'), filename: "pink_playlist.jpg"})
-playlist5 = Playlist.create!(name: "Best of a/A", creator_id: user5.id)
-playlist5.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/grey_playlist_default.jpg'), filename: "grey_playlist.jpg"})
+playlist5 = Playlist.create!(name: "No Face's Sombre Songs", creator_id: user5.id)
+playlist5.cover_url.attach({io: EzDownload.open("https://s3.amazonaws.com/ghiblify-resources/Other/black_playlist_default.png"), filename: "black_playlist.jpg"})
+playlist6 = Playlist.create!(name: "Best of a/A", creator_id: user3.id)
+playlist6.cover_url.attach({io: EzDownload.open('https://s3.amazonaws.com/ghiblify-resources/Other/grey_playlist_default.jpg'), filename: "grey_playlist.jpg"})
+
+
 
 
 ##playlist songs REAL
@@ -281,17 +285,21 @@ playlist_song5 = PlaylistSong.create!(song: song25, playlist: playlist4)
 playlist_song6 = PlaylistSong.create!(song: song36, playlist: playlist4)
 playlist_song7 = PlaylistSong.create!(song: song33, playlist: playlist4)
 
-playlist_song20 = PlaylistSong.create!(song: song13, playlist: playlist5)
-playlist_song21 = PlaylistSong.create!(song: song23, playlist: playlist5)
-playlist_song22 = PlaylistSong.create!(song: song17, playlist: playlist5)
-playlist_song23 = PlaylistSong.create!(song: song5, playlist: playlist5)
+playlist_song20 = PlaylistSong.create!(song: song57, playlist: playlist5)
+playlist_song21 = PlaylistSong.create!(song: song2, playlist: playlist5)
+playlist_song22 = PlaylistSong.create!(song: song50, playlist: playlist5)
+playlist_song23 = PlaylistSong.create!(song: song4, playlist: playlist5)
 
 playlist_song24 = PlaylistSong.create!(song: song57, playlist: playlist1)
 playlist_song25 = PlaylistSong.create!(song: song46, playlist: playlist2)
 playlist_song26 = PlaylistSong.create!(song: song49, playlist: playlist3)
-playlist_song27 = PlaylistSong.create!(song: song51, playlist: playlist3)
+playlist_song27 = PlaylistSong.create!(song: song16, playlist: playlist5)
 playlist_song28 = PlaylistSong.create!(song: song9, playlist: playlist4)
-playlist_song29 = PlaylistSong.create!(song: song56, playlist: playlist5)
+playlist_song29 = PlaylistSong.create!(song: song39, playlist: playlist5)
+
+playlist_song30 = PlaylistSong.create!(song: song52, playlist: playlist6)
+playlist_song31 = PlaylistSong.create!(song: song7, playlist: playlist6)
+playlist_song32 = PlaylistSong.create!(song: song37, playlist: playlist6)
 
 
 
