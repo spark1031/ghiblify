@@ -17,6 +17,8 @@
   text-align: center;
 }
 
+
+
 // .category-selector-main {
 //   flex: 3;
 //   display: inblock;
@@ -37,11 +39,19 @@
   width: 100px;
 }
 
-.category-item {
+.category-item-link {
   color: #A8A2A3;
   font-size: 12px;
   letter-spacing: 2px;
-  // padding: 0px 10px 0px 10px;
+}
+
+.category-item-link.active {
+  color: white;
+  letter-spacing: 2.5px;
+  // border-bottom: 1px solid white;
+}
+
+.category-item {
   -webkit-transition: color 0.3s ease-out;
   -moz-transition: color 0.3s ease-out;
   -o-transition: color 0.3s ease-out;
@@ -51,6 +61,7 @@
 .category-item:hover {
   color: white;
 }
+
 
 .topbar-button-wrapper {
   flex: 1;

@@ -37,10 +37,11 @@ export const addSongToPlaylist = (songId, playlistId) => dispatch => (
   PlaylistSongApiUtil.addSongToPlaylist(songId, playlistId)
   .then(payload => {
     dispatch(receivePlaylistSong(payload.playlistSongs));
-    dispatch(receiveOnePlaylist(payload.playlsts));
+    dispatch(receiveOnePlaylist(payload.playlists));
     dispatch(receiveOneSong(payload.songs));
     dispatch(receiveOneAlbum(payload.albums));
     dispatch(receiveOneArtist(payload.artists));
+    // dispatch(updateCurrentPlayingPlaylist(payload.songs, payload.playlists, null));
   })
 );
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import LogoutButtonContainer from "../_button/logout_button_container";
 import SearchIcon from "./search_icon";
 import TotoroLogo from "../navigation/totoro_logo";
@@ -45,6 +45,14 @@ class Sidebar extends React.Component {
 					</Link>
 					{links}
 					<div className="sidebar-spacer" />
+					<div className="sidebar-current-user">
+						<div className="user-icon">
+							<i className="fas fa-paw" />
+						</div>
+
+						<div className="username">{this.props.currentUser.username}</div>
+						{/* <div className="username">totoro</div> */}
+					</div>
 					<LogoutButtonContainer />
 				</div>
 			</div>
@@ -60,12 +68,16 @@ const SidebarItem = props => {
 	// 	sidebarClass = "sidebar-item-highlighted"
 	// }
 	return (
-		<Link to={to} style={{ textDecoration: "none" }}>
+		<NavLink
+			className="sidebar-item-navlink"
+			to={to}
+			style={{ textDecoration: "none" }}
+		>
 			<div className="sidebar-item">
 				{icon}
 				<div className="sidebar-item-text">{displayText}</div>
 			</div>
-		</Link>
+		</NavLink>
 	);
 };
 

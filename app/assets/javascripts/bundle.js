@@ -484,10 +484,10 @@ var addSongToPlaylist = function addSongToPlaylist(songId, playlistId) {
   return function (dispatch) {
     return _util_playlist_song_api_util__WEBPACK_IMPORTED_MODULE_0__["addSongToPlaylist"](songId, playlistId).then(function (payload) {
       dispatch(receivePlaylistSong(payload.playlistSongs));
-      dispatch(Object(_playlist_actions__WEBPACK_IMPORTED_MODULE_4__["receiveOnePlaylist"])(payload.playlsts));
+      dispatch(Object(_playlist_actions__WEBPACK_IMPORTED_MODULE_4__["receiveOnePlaylist"])(payload.playlists));
       dispatch(Object(_song_actions__WEBPACK_IMPORTED_MODULE_1__["receiveOneSong"])(payload.songs));
       dispatch(Object(_album_actions__WEBPACK_IMPORTED_MODULE_2__["receiveOneAlbum"])(payload.albums));
-      dispatch(Object(_artist_actions__WEBPACK_IMPORTED_MODULE_3__["receiveOneArtist"])(payload.artists));
+      dispatch(Object(_artist_actions__WEBPACK_IMPORTED_MODULE_3__["receiveOneArtist"])(payload.artists)); // dispatch(updateCurrentPlayingPlaylist(payload.songs, payload.playlists, null));
     });
   };
 };
@@ -3915,7 +3915,8 @@ var CategoryItem = function CategoryItem(props) {
   var itemInfo = props.itemInfo;
   var to = itemInfo.to,
       displayText = itemInfo.displayText;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    className: "category-item-link",
     to: to,
     style: {
       textDecoration: "none"
@@ -4114,7 +4115,15 @@ function (_React$Component) {
         className: "sidebar-main-logo-name"
       }, "Ghiblify"))), links, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidebar-spacer"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_button_logout_button_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidebar-current-user"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "user-icon"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-paw"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "username"
+      }, this.props.currentUser.username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_button_logout_button_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
     }
   }]);
 
@@ -4131,7 +4140,8 @@ var SidebarItem = function SidebarItem(props) {
   // 	sidebarClass = "sidebar-item-highlighted"
   // }
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    className: "sidebar-item-navlink",
     to: to,
     style: {
       textDecoration: "none"
@@ -4164,8 +4174,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var currentUser = state.entities.users[state.session.id]; // let user;
+  // currentUser ? user = currentUser : user = undefined;
+
   return {
-    sidebarItemInfos: ownProps.sidebarItemInfos
+    sidebarItemInfos: ownProps.sidebarItemInfos,
+    currentUser: currentUser
   };
 };
 
@@ -6070,15 +6084,10 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 var mapStateToProps = function mapStateToProps(state) {
   var songs = state.entities.songs;
   var musicPlayer = state.ui.musicPlayer;
-
-  if (lodash__WEBPACK_IMPORTED_MODULE_6__["isEmpty"](songs)) {
-    return {
-      songsArr: undefined
-    };
-  }
-
+  var songsArr;
+  lodash__WEBPACK_IMPORTED_MODULE_6__["isEmpty"](songs) ? songsArr = undefined : songsArr = Object.values(songs);
   return {
-    songsArr: Object.values(songs)
+    songsArr: songsArr
   };
 };
 
@@ -6368,6 +6377,22 @@ var musicPlayerReducer = function musicPlayerReducer() {
       };
 
     case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_CURRENT_PLAYING_PLAYLIST"]:
+      // if (!state.currentPlayingPlaylist) {
+      //   return state;
+      // } else if (state.currentPlayingPlaylist && action.currentSongIndex === null) {
+      //   return {
+      //     currentPlayingPlaylist: action.playlist,
+      //     trackList: state.trackList.push(action.trackList)
+      //   };
+      // } else {
+      //   return {
+      //     currentSongIndex: action.currentSongIndex,
+      //     currentPlayingAlbum: null,
+      //     currentPlayingPlaylist: action.playlist,
+      //     trackList: action.trackList,
+      //     isPlaying: true
+      //   };
+      // }
       return {
         currentSongIndex: action.currentSongIndex,
         currentPlayingAlbum: null,
@@ -6376,7 +6401,7 @@ var musicPlayerReducer = function musicPlayerReducer() {
         isPlaying: true
       };
 
-    case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_CURRENT_PLAYING_SONGLIST"]:
+    case _actions_music_player_actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_CURRENT_PLAYING_SONG_LIST"]:
       return {
         currentSongIndex: action.currentSongIndex,
         currentPlayingAlbum: null,

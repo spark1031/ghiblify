@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 class CategorySelector extends React.Component {
 	render() {
@@ -16,11 +16,15 @@ const CategoryItem = props => {
 	const { to, displayText } = itemInfo;
 
 	return (
-		<Link to={to} style={{ textDecoration: "none" }}>
+		<NavLink
+			className="category-item-link"
+			to={to}
+			style={{ textDecoration: "none" }}
+		>
 			<div className="category-item-wrapper">
 				<div className="category-item">{displayText}</div>
 			</div>
-		</Link>
+		</NavLink>
 	);
 };
 

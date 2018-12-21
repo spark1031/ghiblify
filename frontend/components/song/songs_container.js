@@ -70,14 +70,11 @@ import loader from '../hocs/loader';
 const mapStateToProps = (state) => {
   const songs = state.entities.songs;
   const musicPlayer = state.ui.musicPlayer;
+  let songsArr;
+  _.isEmpty(songs) ? songsArr = undefined : songsArr = Object.values(songs);
 
-  if (_.isEmpty(songs)) {
-    return {
-      songsArr: undefined
-    };
-  }
   return {
-    songsArr: Object.values(songs)
+    songsArr
   };
 };
 

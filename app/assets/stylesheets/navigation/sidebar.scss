@@ -16,14 +16,43 @@
 }
 
 .sidebar-spacer {
-  height: 52%;
+  height: 47%;
+}
+
+.sidebar-current-user {
+  color: #b3b3b3;
+  font-family: Circular Medium;
+  font-size: 17px;
+  height: 40px;
+  display: flex;
   border-bottom: 1px solid #b3b3b3;
+  padding-left: 38px;
+  align-items: center;
+
+
+  .user-icon {
+    font-size: 20px;
+    padding-right: 10px;
+  }
+}
+
+.sidebar-current-user:hover {
+  color: white;
+}
+
+.sidebar-item-navlink {
+  color: #b3b3b3;
+  letter-spacing: 0.4px;
+}
+
+.sidebar-item-navlink.active {
+  color: white;
+  letter-spacing: 2px;
 }
 
 .sidebar-item {
   display: flex;
   align-items: center;
-  color: #b3b3b3;
   padding-bottom: 16px;
 }
 
@@ -43,7 +72,7 @@
 
 .sidebar-item-text {
   font-size: 14px;
-  letter-spacing: 0.4px;
+
   padding-left: 14px;
 }
 

@@ -1,7 +1,7 @@
 import {
   UPDATE_CURRENT_PLAYING_ALBUM,
   UPDATE_CURRENT_PLAYING_PLAYLIST,
-  UPDATE_CURRENT_PLAYING_SONGLIST,
+  UPDATE_CURRENT_PLAYING_SONG_LIST,
   TOGGLE_IS_PLAYING,
   PLAY_NEXT_SONG,
   PLAY_PREVIOUS_SONG
@@ -29,6 +29,22 @@ const musicPlayerReducer = (state = _initialPlayer, action) => {
         isPlaying: true
       };
     case UPDATE_CURRENT_PLAYING_PLAYLIST:
+      // if (!state.currentPlayingPlaylist) {
+      //   return state;
+      // } else if (state.currentPlayingPlaylist && action.currentSongIndex === null) {
+      //   return {
+      //     currentPlayingPlaylist: action.playlist,
+      //     trackList: state.trackList.push(action.trackList)
+      //   };
+      // } else {
+      //   return {
+      //     currentSongIndex: action.currentSongIndex,
+      //     currentPlayingAlbum: null,
+      //     currentPlayingPlaylist: action.playlist,
+      //     trackList: action.trackList,
+      //     isPlaying: true
+      //   };
+      // }
       return {
         currentSongIndex: action.currentSongIndex,
         currentPlayingAlbum: null,
@@ -36,7 +52,8 @@ const musicPlayerReducer = (state = _initialPlayer, action) => {
         trackList: action.trackList,
         isPlaying: true
       };
-    case UPDATE_CURRENT_PLAYING_SONGLIST:
+
+    case UPDATE_CURRENT_PLAYING_SONG_LIST:
       return {
         currentSongIndex: action.currentSongIndex,
         currentPlayingAlbum: null,
