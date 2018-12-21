@@ -2,7 +2,7 @@ import React from "react";
 // import ReactPlayer from "react-player";
 import MyPlayer from "./my_player";
 import PlayingSongInfoContainer from "./playing_song_info_container";
-import Duration from './duration';
+import Duration from "./duration";
 
 class MusicPlayer extends React.Component {
 	constructor(props) {
@@ -44,7 +44,8 @@ class MusicPlayer extends React.Component {
 
 	onProgressSliderChange() {
 		return event => {
-			const newProgress = (event.target.value * this.props.currentSong.duration) / 100;
+			const newProgress =
+				(event.target.value * this.props.currentSong.duration) / 100;
 			this.player.currentTime = newProgress;
 			this.setState({
 				progress: newProgress
@@ -152,7 +153,6 @@ class MusicPlayer extends React.Component {
 
 								<button className="loop-button">{loopIcon}</button>
 							</div>
-
 						</div>
 						{/* progress bar BELOW */}
 						<div className="progress-bar">
@@ -171,7 +171,9 @@ class MusicPlayer extends React.Component {
 
 							<div className="progress-bar-wrapper">
 								<div className="progress-bar-with-duration">
-									{/* <Duration seconds={isPlaying ? currentSong.duration * progress : null} /> */}
+									<Duration
+										seconds={currentSong && progress ? progress : null}
+									/>
 									<div className="overlay-wrapper">
 										{/* <div className="played" style={seekStyle} /> */}
 										<div className="played" />
@@ -183,7 +185,11 @@ class MusicPlayer extends React.Component {
 												type="range"
 												min={0}
 												max={100}
-												value={isSongLoaded ? (progress / currentSong.duration) * 100 : 0}
+												value={
+													isSongLoaded
+														? (progress / currentSong.duration) * 100
+														: 0
+												}
 												onChange={this.onProgressSliderChange()}
 												onMouseDown={this.onSeekBegin()}
 												onMouseUp={this.onSeekEnd()}
@@ -191,7 +197,9 @@ class MusicPlayer extends React.Component {
 										</div>
 									</div>
 
-									{/* <Duration seconds={isPlaying ? currentSong.duration : null} /> */}
+									<Duration
+										seconds={currentSong ? currentSong.duration : null}
+									/>
 								</div>
 							</div>
 						</div>

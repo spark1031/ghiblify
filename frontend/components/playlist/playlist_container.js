@@ -22,7 +22,7 @@ const mapStateToProps = (state, ownProps) => {
   const musicPlayer = state.ui.musicPlayer;
   let playlists = hydratedPlaylistsSelector(state.entities) || [];
   if (ownProps.playlists) {
-    playlists = ownProps.playlists;
+    playlists = hydratedPlaylistsSelector(state.entities, ownProps.playlists) || [];
   }
   return {
     playlists,

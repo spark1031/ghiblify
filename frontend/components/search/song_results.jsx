@@ -1,5 +1,5 @@
 import React from "react";
-// import SongsListContainer?
+import SongsContainer from "../song/songs_container";
 
 class SongResults extends React.Component {
 	constructor(props) {
@@ -8,8 +8,7 @@ class SongResults extends React.Component {
 
 	render() {
 		const { songs } = this.props;
-		let songResults = songs.map(song => <div>{song.title}</div>);
-		return <div>{songResults}</div>;
+		return <SongsContainer songs={songs} />;
 	}
 }
 

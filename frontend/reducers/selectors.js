@@ -1,11 +1,13 @@
 import * as _ from 'lodash';
 
-export const hydratedAlbumsSelector = (entities) => {
-  const albums = entities.albums;
+export const hydratedAlbumsSelector = (entities, albums = entities.albums) => {
+  // const albums = entities.albums;
+
   const artists = entities.artists;
   if (_.isEmpty(albums) || _.isEmpty(artists)) {
     return undefined;
   }
+
   const result = Object.values(albums).map(album => {
     const songsArr = albumSongSelector(album.id, entities);
     const artist = artists[album.artistId];
@@ -94,8 +96,8 @@ export const hydratedSinglePlaylistSelector = (entities, playlistId) => {
 }
 
 //converts creator_id to user's name
-export const hydratedPlaylistsSelector = (entities) => {
-  const playlists = entities.playlists;
+export const hydratedPlaylistsSelector = (entities, playlists = entities.playlists) => {
+  // const playlists = entities.playlists;
   const users = entities.users;
 
   if (_.isEmpty(playlists) || _.isEmpty(users)) {

@@ -67,8 +67,11 @@ import * as _ from 'lodash';
 import loader from '../hocs/loader';
 
 
-const mapStateToProps = (state) => {
-  const songs = state.entities.songs;
+const mapStateToProps = (state, ownProps) => {
+  let songs = state.entities.songs;
+  if (ownProps.songs) {
+    songs = ownProps.songs;
+  }
   const musicPlayer = state.ui.musicPlayer;
   let songsArr;
   _.isEmpty(songs) ? songsArr = undefined : songsArr = Object.values(songs);

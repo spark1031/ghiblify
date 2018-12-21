@@ -1,0 +1,35 @@
+.all-results {
+  margin-left: 20px;
+  margin-top: 20px;
+
+  .all-results-header {
+    text-align: center;
+    font-family: Circular Bold;
+    color: white;
+    font-size: 50px;
+    margin-bottom: 40px;
+  }
+
+  .category {
+    margin-left: 20px;
+
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+
+    .header {
+      font-family: Circular Bold;
+      color: white;
+      font-size: 30px;
+      margin-left: 50px;
+    }
+
+    .song-results-listing {
+      margin-top: -20px;
+      margin-left: 40px;
+      margin-bottom: 80px;
+      width: 80%;
+
+    }
+  }
+}

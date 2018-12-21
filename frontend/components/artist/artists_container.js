@@ -11,8 +11,13 @@ import {
 // } from '../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => {
+  let artists = Object.values(state.entities.artists);
+  if (ownProps.artists) {
+    artists = ownProps.artists;
+  }
+
   return {
-    artists: Object.values(state.entities.artists)
+    artists
   };
 };
 

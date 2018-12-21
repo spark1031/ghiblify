@@ -21,7 +21,7 @@ const mapStateToProps = (state, ownProps) => {
   const musicPlayer = state.ui.musicPlayer;
   let albums = hydratedAlbumsSelector(state.entities) || [];
   if (ownProps.albums) {
-    albums = ownProps.albums;
+    albums = hydratedAlbumsSelector(state.entities, ownProps.albums) || [];
   }
   return {
     albums,

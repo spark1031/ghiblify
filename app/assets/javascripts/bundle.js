@@ -1150,7 +1150,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var albums = Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["hydratedAlbumsSelector"])(state.entities) || [];
 
   if (ownProps.albums) {
-    albums = ownProps.albums;
+    albums = Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["hydratedAlbumsSelector"])(state.entities, ownProps.albums) || [];
   }
 
   return {
@@ -1248,8 +1248,14 @@ __webpack_require__.r(__webpack_exports__);
 // } from '../../reducers/selectors';
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var artists = Object.values(state.entities.artists);
+
+  if (ownProps.artists) {
+    artists = ownProps.artists;
+  }
+
   return {
-    artists: Object.values(state.entities.artists)
+    artists: artists
   };
 }; //CAUSES ISSUES!! (probably with loader/fetching) wanted to do this to implement search filtering!
 // const mapStateToProps = (state, ownProps) => {
@@ -3067,14 +3073,17 @@ var Duration = function Duration(_ref) {
   var seconds = _ref.seconds;
 
   if (seconds === null) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "time-null"
+    }, "0:00");
   } else {
-    // return (
-    //   <time dateTime={Math.round(seconds)}>
-    //     {parseDuration(seconds)}
-    //   </time>
-    // );
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, seconds);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("time", {
+      dateTime: Math.round(seconds)
+    }, parseDuration(seconds)); // return (
+    //   <div>
+    //     {seconds}
+    //   </div>
+    // )
   }
 };
 
@@ -3092,7 +3101,7 @@ var parseDuration = function parseDuration(seconds) {
 };
 
 var pad = function pad(string) {
-  return ('0' + string).slice(-2);
+  return ("0" + string).slice(-2);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Duration);
@@ -3350,7 +3359,9 @@ function (_React$Component) {
         className: "progress-bar-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "progress-bar-with-duration"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_duration__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        seconds: currentSong && progress ? progress : null
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "overlay-wrapper"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "played"
@@ -3368,7 +3379,9 @@ function (_React$Component) {
         onChange: this.onProgressSliderChange(),
         onMouseDown: this.onSeekBegin(),
         onMouseUp: this.onSeekEnd()
-      }))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_duration__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        seconds: currentSong ? currentSong.duration : null
+      }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "volume-bar col-3-11 "
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "mute",
@@ -4398,7 +4411,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   var playlists = Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["hydratedPlaylistsSelector"])(state.entities) || [];
 
   if (ownProps.playlists) {
-    playlists = ownProps.playlists;
+    playlists = Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["hydratedPlaylistsSelector"])(state.entities, ownProps.playlists) || [];
   }
 
   return {
@@ -4820,7 +4833,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var _search_results__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./search_results */ "./frontend/components/search/search_results.js");
+/* harmony import */ var _search_results__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./search_results */ "./frontend/components/search/search_results.jsx");
 /* harmony import */ var _actions_search_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/search_actions */ "./frontend/actions/search_actions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -4946,10 +4959,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
-/***/ "./frontend/components/search/search_results.js":
-/*!******************************************************!*\
-  !*** ./frontend/components/search/search_results.js ***!
-  \******************************************************/
+/***/ "./frontend/components/search/search_results.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/search/search_results.jsx ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5001,6 +5014,19 @@ function (_React$Component) {
   }
 
   _createClass(SearchResults, [{
+    key: "objectExtractor",
+    value: function objectExtractor(resultsArray) {
+      if (resultsArray === undefined) return [];
+      var formattedResult = resultsArray.map(function (result) {
+        return Object.values(result)[0];
+      });
+      return formattedResult;
+    } // resultsComponentFormatter(formattedResult, type) {
+    // 	if (formattedResult.length > 0) {
+    // 	}
+    // }
+
+  }, {
     key: "render",
     value: function render() {
       var _this$props$searches = this.props.searches,
@@ -5009,43 +5035,57 @@ function (_React$Component) {
           albums = _this$props$searches.albums,
           artists = _this$props$searches.artists,
           query = _this$props$searches.query;
+      var formattedPlaylistsArray = this.objectExtractor(playlists);
+      var formattedSongsArray = this.objectExtractor(songs);
+      var formattedAlbumsArray = this.objectExtractor(albums);
+      var formattedArtistsArray = this.objectExtractor(artists);
       var playlistResults;
-      playlists ? playlistResults = playlists.map(function (playlist) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, playlist.name);
-      }) : playlistResults = null;
-      var songResults;
-      songs ? songResults = songs.map(function (song) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, song.title);
-      }) : songResults = null;
+      formattedPlaylistsArray.length > 0 ? playlistResults = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "category"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header"
+      }, "Playlists"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "grid-results"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_playlist_results__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        playlists: formattedPlaylistsArray
+      }))) : playlistResults = null;
       var albumResults;
-      albums ? albumResults = albums.map(function (album) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, album.title);
-      }) : albumResults = null;
+      formattedAlbumsArray.length > 0 ? albumResults = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "category"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header"
+      }, "Albums"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "grid-results"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_album_results__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        albums: formattedAlbumsArray
+      }))) : albumResults = null;
       var artistResults;
-      artists ? artistResults = artists.map(function (artist) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, artist.name);
-      }) : artistResults = null; // console.warn(playlistResults);
+      formattedArtistsArray.length > 0 ? artistResults = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "category"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header"
+      }, "Artists"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "grid-results"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_artist_results__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        artists: formattedArtistsArray
+      }))) : artistResults = null;
+      var songResults;
+      formattedSongsArray.length > 0 ? songResults = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "category"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header"
+      }, "Songs"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "song-results-listing"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_song_results__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        songs: formattedSongsArray
+      }))) : songResults = null;
 
       var allResults = function allResults() {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "all-results"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "category"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "header"
-        }, "Playlists"), playlistResults), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "category"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "header"
-        }, "Albums"), albumResults), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "category"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "header"
-        }, "Artists"), artistResults), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "category"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "header"
-        }, "Songs"), songResults));
+          className: "all-results-header"
+        }, "Search Results"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, songResults, playlistResults, albumResults, artistResults));
       };
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
@@ -5070,7 +5110,27 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, null)(SearchResults)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, null)(SearchResults))); // let playlistResults;
+// // console.warn(playlists);
+// playlists
+// 	? (playlistResults = playlists.map(playlist => {
+// 			console.warn(playlist);
+// 			return <div>{Object.values(playlist)[0].name}</div>;
+// 	  }))
+// 	: (playlistResults = null);
+// let songResults;
+// songs
+// 	? (songResults = songs.map(song => <div>{song.title}</div>))
+// 	: (songResults = null);
+// let albumResults;
+// albums
+// 	? (albumResults = albums.map(album => <div>{album.title}</div>))
+// 	: (albumResults = null);
+// let artistResults;
+// artists
+// 	? (artistResults = artists.map(artist => <div>{artist.name}</div>))
+// 	: (artistResults = null);
+// console.warn(playlistResults);
 
 /***/ }),
 
@@ -5085,6 +5145,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _song_songs_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../song/songs_container */ "./frontend/components/song/songs_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5103,7 +5164,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
- // import SongsListContainer?
+
+
 
 var SongResults =
 /*#__PURE__*/
@@ -5120,10 +5182,9 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var songs = this.props.songs;
-      var songResults = songs.map(function (song) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, song.title);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_song_songs_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        songs: songs
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, songResults);
     }
   }]);
 
@@ -6081,8 +6142,13 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   var songs = state.entities.songs;
+
+  if (ownProps.songs) {
+    songs = ownProps.songs;
+  }
+
   var musicPlayer = state.ui.musicPlayer;
   var songsArr;
   lodash__WEBPACK_IMPORTED_MODULE_6__["isEmpty"](songs) ? songsArr = undefined : songsArr = Object.values(songs);
@@ -6615,7 +6681,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var hydratedAlbumsSelector = function hydratedAlbumsSelector(entities) {
-  var albums = entities.albums;
+  var albums = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : entities.albums;
+  // const albums = entities.albums;
   var artists = entities.artists;
 
   if (lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"](albums) || lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"](artists)) {
@@ -6705,7 +6772,8 @@ var hydratedSinglePlaylistSelector = function hydratedSinglePlaylistSelector(ent
 }; //converts creator_id to user's name
 
 var hydratedPlaylistsSelector = function hydratedPlaylistsSelector(entities) {
-  var playlists = entities.playlists;
+  var playlists = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : entities.playlists;
+  // const playlists = entities.playlists;
   var users = entities.users;
 
   if (lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"](playlists) || lodash__WEBPACK_IMPORTED_MODULE_0__["isEmpty"](users)) {
