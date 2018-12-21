@@ -26,9 +26,9 @@ class SongList extends React.Component {
 					type={type}
 					currentUserId={currentUserId}
 					togglePlaying={() => {
-						this.props.togglePlaying(song, i, type, typeObject, songsArr)
+						this.props.togglePlaying(song, i, type, typeObject, songsArr);
 					}}
-					isPlaying={isPlaying && (i === currentSongIndex)}
+					isPlaying={isPlaying && i === currentSongIndex}
 				/>
 			));
 			return <div className="song-list">{songs}</div>;
