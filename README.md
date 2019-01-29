@@ -13,19 +13,105 @@ This project was built over the course of 10 days, and more features will contin
 ---
 
 ## Technologies
+*React* | *Redux* | *Ruby on Rails* | *PostgreSQL* | *Amazon S3* 
 
-This project's backend was built using Ruby on Rails in combination with PostgreSQL and Amazon S3. The majority of images and music files were uploaded to S3 via Rails ActiveStorage to ensure high performance scalability as the number of files increased over time. On the frontend, React/Redux were used to create a single-page application with seamless navigation and dynamic updating.
+This project's backend was built using **Ruby on Rails** in combination with **PostgreSQL** and **Amazon S3**. The majority of images and music files were uploaded to S3 via Rails ActiveStorage to ensure high performance scalability as the number of files increased over time. On the frontend, **React/Redux** were used to create a single-page application with seamless navigation and dynamic updating.
 
 ---
 
 ## Features
 
-- Users can browse a collection of artists, albums, songs, and playlists
-- Users can save songs and albums, and follow artists and playlists, and view them in their library
-- Users can create and delete their own playlists, and add/remove songs from them
-- Users can search the entire collection for other users, songs, albums, artists, and playlists
-- Users can follow and be followed by other users
-- Users can play music continuously
+### Browse: 
+*Users can browse song, album, artist, and playlist collections*
+
+React was used to create a general Collection component to ensure uniform displays for all collection types. This strategy also cut out a significant number of lines of code by preventing the need to repeat code for each collection type. 
+
+```javascript
+class Collection extends React.Compnent {
+  render() {
+    let { title, collectionItemInfos, songId } = this.props;
+    let collectionTitle;
+    if(title) {
+      collectionTitle = <div className="title">{title}</div>;
+    } else {
+      collectionTitle = null;
+    }
+    let items = collectionItemInfos.map((itemInfo, i) => (
+      <CollectionItem key={i} {...itemInfo} />
+    ));
+    return (
+      <div className="collection">
+        {collectionTitle}
+        <div className="collection-items-wrapper">
+          <div className="item-grid">{items}</div>
+        </div>
+      </div>
+    );
+  }
+}
+```
+
+### Playlist Creation: 
+*Users can create and delete their own playlists, and can add/remove songs from their playlists*
+
+Custom modal components were used to implement this feature. Based on user input, the appropriate AJAX request was sent to the Rails backend and upon closing the modal, the playlist immediately displayed any updates, such as adding/removing a song. 
+
+### Music Player: 
+*Users can play music continuously while navigating the site*
+
+React was used to create the music player at the bottom of the application and Redux was used to store a music player slice of state to keep track of which songs were currently playing and which songs were queued to play next. The player controls were first implemented using a combination of HTML5 Audio Controls and custom event listeners and then subsequently integrated with the rest of the application.
+
+```javascript
+class MyPlayer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.audio = new Audio(props.url);
+    this.audio.addEventListener("ended", props.onEnded);
+    this.audio.addEventListener("loadeddata", props.onLoaded);
+    this.audio.addEventListener("timeupdate", () => {
+      const playedSeconds = this.audio.currentTime;
+      props.onProgress({
+        playedSeconds: playedSeconds
+      });
+    });
+    console.log(props);
+    props.playerRef(this.audio);
+    if (props.playing) {
+      this.audio.autoplay = true;
+    }
+  }
+
+  componentWillUnmount() {
+    this.audio.pause();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.url !== this.props.url) {
+      this.audio.src = nextProps.url;
+      if (nextProps.playing) {
+        this.audio.autoplay = true;
+      }
+    }
+    if (nextProps.playing !== this.props.playing) {
+      if (nextProps.playing) {
+        this.audio.play();
+      } else {
+        this.audio.pause();
+      }
+    }
+    this.audio.muted = nextProps.muted;
+    this.audio.volume = nextProps.volume;
+  }
+  render() {
+    return <div />;
+  }
+}
+```
+
+
+
+### Search:
+*Users can search for specific songs, albums, artists, and playlists*
 
 ---
 
