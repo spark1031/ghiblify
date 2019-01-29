@@ -116,6 +116,8 @@ class MyPlayer extends React.Component {
 
 To create a dynamic searching feature, this project capitalized on React's re-rendering on state change functionality. Following a 0.5 second delay, the user input search query was updated and sent as part of the AJAX request. This meant the search results would change in real-time as the user typed their search query, creating the illusion of a dynamically updating search feature.
 
+![search](https://media.giphy.com/media/37q3YXy7fq8nvapbMS/source.gif)
+
 ```javascript
 handleChange(e) {
   clearTimeout(this.timer);
