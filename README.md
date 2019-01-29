@@ -1,4 +1,4 @@
-![splash](https://media.giphy.com/media/3XEHivOvwEPPXYvV9m/source.gif)
+![splash](https://media.giphy.com/media/3GnijLfmcNQYql9qP8/source.gif)
 
 # Ghiblify
 
