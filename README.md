@@ -20,9 +20,9 @@ This project's backend was built using **Ruby on Rails** in combination with **P
 ---
 
 ## Features
-Browse | Playlist Creation | Music Player | Search
+[Browse](#browse) | [Playlist Creation](#playlist-creation) | [Music Player](#music-player) | [Search](#search)
 
-### 1) Browse: 
+### Browse: 
 *Users can browse song, album, artist, and playlist collections*
 
 React was used to create a general Collection component to ensure uniform displays for all collection types. This strategy also cut out a significant number of lines of code by preventing the need to repeat code for each collection type. 
@@ -52,14 +52,14 @@ class Collection extends React.Compnent {
 }
 ```
 
-### 2) Playlist Creation: 
+### Playlist Creation: 
 *Users can create and delete their own playlists, and can add/remove songs from their playlists*
 
 Custom modal components were used to implement this feature. Based on user input, the appropriate AJAX request was sent to the Rails backend and upon closing the modal, the playlist immediately displayed any updates, such as adding/removing a song. 
 
 ![playlist-crud](https://s2.gifyu.com/images/ghiblifyplaylist.gif)
 
-### 3) Music Player: 
+### Music Player: 
 *Users can play music continuously while navigating the site*
 
 React was used to create the music player at the bottom of the application and Redux was used to store a music player slice of state to keep track of which songs were currently playing and which songs were queued to play next. The player controls were first implemented using a combination of HTML5 Audio Controls and custom event listeners and then subsequently integrated with the rest of the application.
@@ -111,7 +111,7 @@ class MyPlayer extends React.Component {
 }
 ```
 
-### 4) Search:
+### Search:
 *Users can search for specific songs, albums, artists, and playlists*
 
 To create a dynamic searching feature, this project capitalized on React's re-rendering on state change functionality. Following a 0.5 second delay, the user input search query was updated and sent as part of the AJAX request. This meant the search results would change in real-time as the user typed their search query, creating the illusion of a dynamically updating search feature.
@@ -136,17 +136,3 @@ triggerChange() {
     );
 }
 ```
-
----
-
-
----
-
-## Future plans
-
-Some features I would like to add in the future are
-
-- the ability to edit playlist information
-- a user show page (for other users) with more information (currently it only displays their username)
-- the ability to add single songs to the queue
-- a suggested/explore feature taking a user's preferences into account
